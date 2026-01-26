@@ -1,26 +1,137 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
+
+@theme {
+  /* Define your custom colors here */
+  --color-primary: #0072E9;
+  --color-secondary: #012652;
+  --color-accent: #26363E;
+  --color-text: #12191D;
+  --color-background: #F4F4F4;
+  --color-gray-blue: #7C98A9;
+
+  /* Optional: Add custom fonts or other theme settings if needed */
+  /* --font-sans: 'Inter', sans-serif; */
+}
+
+/* Reset and base styles */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  background-color: var(--color-background);
+  color: var(--color-text);
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
 }
+
+/* 3D Card Flip Utilities */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+/* Animated Line */
+@keyframes slideIn {
+  0%, 100% {
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(100%);
+  }
+}
+
+/* Better Marquee Animation */
+@keyframes marquee-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-100% - 1.5rem)); /* -100% of one set + gap */
+  }
+}
+
+.animate-marquee-scroll {
+  animation: marquee-scroll 30s linear infinite;
+}
+
+.animate-marquee-scroll:hover {
+  animation-play-state: paused;
+}
+
+
+/* animations for hero section  */
+/* Subtle bubble animations - Add to globals.css */
+
+@keyframes blob {
+  0%, 100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    transform: translate(20px, -30px) scale(1.05);
+  }
+  66% {
+    transform: translate(-15px, 15px) scale(0.95);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+.animate-blob {
+  animation: blob 10s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-3000 {
+  animation-delay: 3s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
+}
+
+/* mobile menu animation  */
+/* Mobile menu slide animation */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-down {
+  animation: slideDown 0.2s ease-out;
+}
+
