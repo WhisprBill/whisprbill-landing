@@ -10,6 +10,7 @@ import Pricing from "./components/Pricing";
 import ChatWidget from "./components/ChatWidget";
 import PrivacySecurity from "./components/PrivacySecurity";
 import UpcomingFeatures from "./components/UpcomingFeatures";
+import ComingSoonModal from "./components/ComingSoonModal";
 
 export default function Home() {
   return (
@@ -22,6 +23,7 @@ export default function Home() {
       <PrivacySecurity />
       <UpcomingFeatures />
       <Pricing />
+      <ComingSoonModal />
       <DemoForm />
       <Testimonials />
       <Footer />
