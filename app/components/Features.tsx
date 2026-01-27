@@ -130,9 +130,9 @@ export default function Features() {
             >
               {/* Text Content */}
               <div className="flex-1 space-y-4 sm:space-y-6 lg:space-y-8 text-center lg:text-left">
-                <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-primary/10 rounded-xl sm:rounded-2xl flex items-center justify-center text-2xl sm:text-3xl mx-auto lg:mx-0 shadow-sm text-primary">
+                {/* <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-primary/10 rounded-xl sm:rounded-2xl flex items-center justify-center text-2xl sm:text-3xl mx-auto lg:mx-0 shadow-sm text-primary">
                   {feature.icon}
-                </div>
+                </div> */}
                 <div>
                   <h4 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-text mb-3 sm:mb-4 px-4 sm:px-0">
                     {feature.title}

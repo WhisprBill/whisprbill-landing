@@ -2,6 +2,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 
 export default function Navbar() {
@@ -25,12 +26,26 @@ export default function Navbar() {
       </div>
 
       <div className="max-w-7xl mx-auto flex justify-between items-center relative z-10">
-        {/* Logo */}
+        {/* Logo + Brand */}
         <Link
           href="/"
-          className="font-bold text-xl sm:text-2xl tracking-tight text-text"
+          className="flex items-center gap-2 sm:gap-3 group"
         >
-          Whispr<span className="text-primary">Bill</span>
+          {/* Logo Image */}
+          <div className="relative w-8 h-8 sm:w-10 sm:h-10 flex-shrink-0 transition-transform duration-300 group-hover:scale-110">
+            <Image
+              src="/icon.svg"
+              alt="WhisprBill Logo"
+              fill
+              className="object-contain"
+              priority
+            />
+          </div>
+          
+          {/* Brand Text */}
+          <span className="font-bold text-xl sm:text-2xl tracking-tight text-text">
+            Whispr<span className="text-primary">Bill</span>
+          </span>
         </Link>
 
         {/* Desktop Navigation Links */}

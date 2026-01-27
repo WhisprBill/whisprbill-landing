@@ -2,6 +2,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Footer() {
   const scrollToSection = (sectionId: string) => {
@@ -19,9 +20,24 @@ export default function Footer() {
           
           {/* Brand Column */}
           <div className="space-y-4 sm:space-y-6">
-            <h2 className="text-xl sm:text-2xl font-bold tracking-tight">
-              Whispr<span className="text-primary">Bill</span>
-            </h2>
+            {/* Logo + Brand */}
+            <Link href="/" className="flex items-center gap-2.5 group inline-flex">
+              {/* Logo Image */}
+              <div className="relative w-8 h-8 sm:w-9 sm:h-9 flex-shrink-0 transition-transform duration-300 group-hover:scale-110">
+                <Image
+                  src="/icon.svg"
+                  alt="WhisprBill Logo"
+                  fill
+                  className="object-contain"
+                />
+              </div>
+              
+              {/* Brand Text */}
+              <h2 className="text-xl sm:text-2xl font-bold tracking-tight">
+                Whispr<span className="text-primary">Bill</span>
+              </h2>
+            </Link>
+
             <p className="text-gray-400 text-xs sm:text-sm leading-relaxed max-w-xs">
               AI-powered invoicing and inventory management for modern businesses. 
               Simplify your operations today.

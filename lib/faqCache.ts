@@ -11,103 +11,127 @@ export interface CachedFAQ {
 export const FAQ_CACHE: CachedFAQ[] = [
   {
     question: "How much does WhisprBill cost?",
-    keywords: ["price", "cost", "pricing", "how much", "expensive"],
-    answer: `We have 4 plans to fit every business:
-    
-🆓 **Free**: ${PRODUCT_DATA.pricing.free.price} - Perfect for testing (5 AI invoices/month)
-💼 **Basic**: ${PRODUCT_DATA.pricing.basic.price}/month - For small businesses (20 AI invoices/month)
-🚀 **Pro**: ${PRODUCT_DATA.pricing.pro.price}/month - Best for growing teams (50 AI invoices/month, unlimited features)
-👑 **Enterprise**: Custom pricing - For large organizations with advanced needs
+    keywords: ["price", "cost", "pricing", "how much", "expensive", "plans"],
+    answer: `Currently, we offer a **Free plan** that's available forever:
 
-Want to see the full comparison? [View Pricing](#pricing)`,
+🆓 **Free Plan**: ${PRODUCT_DATA.pricing.free.price}
+- ${PRODUCT_DATA.pricing.free.aiInvoices} AI invoices/month
+- ${PRODUCT_DATA.pricing.free.manualInvoices} manual invoices
+- ${PRODUCT_DATA.pricing.free.customers} customers
+- ${PRODUCT_DATA.pricing.free.inventory} inventory items
+- Multi-company support
+
+💼 **Paid plans** with additional features (higher AI invoice limits, advanced capabilities) are coming soon! 
+
+Want to be notified when we launch? [Join Waitlist](#) or [Start Free Now](#)`,
   },
   {
     question: "Is there a free trial?",
     keywords: ["free trial", "trial", "test", "try before"],
-    answer: `Yes! Our Free plan is available forever - no credit card required. You get 5 AI-generated invoices per month to test the platform. 
+    answer: `Yes! Our **Free plan is available forever** - no credit card required, no time limit.
+
+You get ${PRODUCT_DATA.pricing.free.aiInvoices} AI invoices per month and unlimited manual invoices to fully test the platform.
 
 Ready to start? [Sign Up Free](#)`,
   },
   {
     question: "What's included in the free plan?",
-    keywords: ["free plan", "free tier", "what free"],
+    keywords: ["free plan", "free tier", "what free", "free features"],
     answer: `The Free plan includes:
-✓ 5 AI invoices + 5 manual invoices/month
+✓ ${PRODUCT_DATA.pricing.free.aiInvoices} AI invoices per month
+✓ ${PRODUCT_DATA.pricing.free.manualInvoices} manual invoices
 ✓ ${PRODUCT_DATA.pricing.free.customers} customers
 ✓ ${PRODUCT_DATA.pricing.free.inventory} inventory items
-✓ GST-compliant invoicing
-✓ 1 invoice template
+✓ GST-compliant invoicing (auto CGST/SGST/IGST)
+✓ Multi-company support (manage multiple businesses)
+✓ Product variants & multi-tier pricing
+✓ Bulk CSV import
+✓ Professional invoice templates
 
-Perfect for freelancers and small projects! [Start Free](#)`,
+Perfect for small businesses and freelancers! [Start Free](#)`,
   },
   {
     question: "Does it support GST invoicing?",
-    keywords: ["gst", "tax", "cgst", "sgst", "igst", "compliant", "gst compliance"],
-    answer: `Yes! All plans (including Free) are 100% GST compliant. We auto-calculate CGST, SGST, and IGST based on your location and customer location. 
+    keywords: ["gst", "tax", "cgst", "sgst", "igst", "compliant", "gst compliance", "hsn"],
+    answer: `Yes! All plans (including Free) are 100% GST compliant. 
 
-Export GSTR-1 reports with one click. 🇮🇳`,
+✓ Auto-calculate CGST/SGST for intra-state transactions
+✓ Auto-calculate IGST for inter-state transactions  
+✓ HSN code support for proper classification
+✓ Tax Invoice & Bill of Supply formats
+
+Coming soon: GSTR-1 reports, E-invoicing, E-way bills 🇮🇳`,
   },
   {
     question: "Can I use voice commands?",
-    keywords: ["voice", "speak", "talk", "voice command", "speech"],
-    answer: `Voice commands are available on the **Pro plan** (${PRODUCT_DATA.pricing.pro.price}/month) and above. 
+    keywords: ["voice", "speak", "talk", "voice command", "speech", "audio"],
+    answer: `Voice commands are **coming soon**! We're actively developing this feature so you can create invoices by speaking.
 
-Just say "Create invoice for ABC Ltd for ₹50,000" and it's done! 🎤 [Upgrade to Pro](#pricing)`,
+Currently available: AI chat interface (type your request naturally) 💬
+
+Want updates on voice features? [Join Waitlist](#)`,
   },
   {
     question: "How many invoices can I create?",
-    keywords: ["how many invoice", "invoice limit", "number of invoice"],
-    answer: `It depends on your plan:
-- **Free**: 5 AI + 5 manual/month
-- **Basic**: 20 AI + unlimited manual
-- **Pro**: 50 AI + unlimited manual
-- **Enterprise**: 100 AI + unlimited manual
+    keywords: ["how many invoice", "invoice limit", "number of invoice", "invoice quota"],
+    answer: `On the **Free plan**:
+- ${PRODUCT_DATA.pricing.free.aiInvoices} AI-generated invoices per month
+- ${PRODUCT_DATA.pricing.free.manualInvoices} manual invoices (create as many as you want!)
 
-Need more? [Compare Plans](#pricing)`,
+Paid plans with higher AI invoice limits are coming soon. [Join Waitlist](#pricing)`,
   },
   {
     question: "Can I import my existing customer data?",
-    keywords: ["import", "csv", "excel", "bulk upload", "migrate", "transfer"],
-    answer: `Yes! Bulk CSV/Excel import is available on **Basic plan** and above. Upload thousands of customers and inventory items in seconds. 
+    keywords: ["import", "csv", "excel", "bulk upload", "migrate", "transfer", "export data"],
+    answer: `Yes! Bulk CSV/Excel import is available on all plans (including Free). 
 
-We auto-map fields to make migration seamless. 📂 [Learn More](#features)`,
+Upload thousands of customers and inventory items in seconds. We auto-map fields to make migration seamless. 📂
+
+You can also export your data anytime - no lock-in! [Learn More](#features)`,
   },
   {
     question: "Does it work on mobile?",
-    keywords: ["mobile", "phone", "android", "ios", "iphone", "app"],
-    answer: `Yes! WhisprBill is fully responsive and works on mobile browsers (iOS & Android). A dedicated mobile app is coming soon. 📱
+    keywords: ["mobile", "phone", "android", "ios", "iphone", "app", "responsive"],
+    answer: `Yes! WhisprBill works perfectly on mobile browsers (iOS & Android). The interface is fully responsive.
 
-Access your invoices anytime, anywhere!`,
+📱 Native mobile apps for iOS/Android are coming soon!
+
+Access your invoices anytime, anywhere via your mobile browser.`,
   },
   {
     question: "How much time will I save?",
-    keywords: ["time save", "faster", "efficiency", "quick"],
-    answer: `Our customers save an average of **3+ hours per day** on invoicing tasks. 
+    keywords: ["time save", "faster", "efficiency", "quick", "speed"],
+    answer: `Our customers save an average of **3+ hours per day** on invoicing tasks.
 
-With AI chat, create invoices in 30 seconds vs 5-10 minutes manually. That's 90% faster! ⚡ [Try It Free](#)`,
+With AI chat, create invoices in 30 seconds vs 5-10 minutes manually. That's 90% faster! ⚡ 
+
+Plus: No accounting knowledge needed. [Try It Free](#)`,
   },
   {
     question: "Is my data secure?",
     keywords: ["secure", "security", "safe", "privacy", "encryption", "data protection"],
     answer: `Absolutely! Your data security is our top priority:
 
-🔒 **Encryption**: AES-256 at rest, TLS 1.3 in transit
-☁️ **Cloud Backup**: Daily automated backups with 99.9% uptime
-🔐 **Access Control**: Role-based permissions (Pro+ plans)
-🇮🇳 **India Data Residency**: All data stored on Indian servers
-✅ **GST Compliance**: Follows GSTN security standards
+🔒 **Privacy-First AI**: Your customer names, amounts, and sensitive data NEVER go to the AI. We use PII masking - the AI only sees intent, not your actual data.
 
-We never share your data with third parties. Your invoices, customers, and financial data stay 100% private. [Learn More](#security)`,
+🧮 **Deterministic Backend**: All GST calculations run on our secure backend using rule-based logic (not AI)
+
+🇮🇳 **India-Based Servers**: Your data stays in India
+
+✓ **Encrypted**: Data encrypted in transit and at rest
+
+🚫 **No AI Training**: We never use your invoices to train AI models
+
+Your business data is 100% yours. We never sell or share it. [Learn More](#security)`,
   },
   {
     question: "Where is my data stored?",
     keywords: ["where data", "server location", "data center", "india server", "data residency", "data storage"],
-    answer: `All your data is stored on secure cloud servers located in **India** (Mumbai region). 
+    answer: `All your data is stored on secure servers located in **India**.
 
 This ensures:
-✓ Faster access for Indian businesses
 ✓ Compliance with Indian data protection laws
-✓ Lower latency for GST portal sync
+✓ Faster access for Indian businesses
 ✓ Your data never leaves India
 
 Your business data stays local, safe, and accessible 24/7. 🇮🇳`,
@@ -115,72 +139,84 @@ Your business data stays local, safe, and accessible 24/7. 🇮🇳`,
   {
     question: "Who can access my invoice data?",
     keywords: ["who access", "data access", "privacy", "confidential", "see my data", "who sees"],
-    answer: `**Only you and your authorized team members** can access your data.
+    answer: `**Only you** can access your data (and anyone you share your login with).
 
-🔐 **Single User** (Free/Basic): Only you
-👥 **Multi-User** (Pro/Enterprise): You + your invited team (role-based access)
+🔐 You can login from multiple devices simultaneously (e.g., office computer + laptop + mobile)
 
-WhisprBill employees **cannot** view your invoices or customer data. We use zero-knowledge architecture where data is encrypted with your credentials.
+🚫 WhisprBill employees **cannot** view your invoices or customer data
 
-Government agencies can only access your GST returns (as required by law), not your raw invoice data. [Privacy Policy](#privacy)`,
+🤖 The AI **never sees** your actual customer names, amounts, or sensitive details (we use PII masking)
+
+Your data is 100% private. [Privacy Policy](#privacy)`,
   },
   {
-    question: "What happens if WhisprBill shuts down?",
-    keywords: ["shut down", "bankruptcy", "company close", "data export", "backup", "goes out of business"],
-    answer: `You can **export all your data anytime** in CSV/Excel format - no lock-in!
+    question: "Can I delete all my data?",
+    keywords: ["delete data", "remove data", "erase data", "data deletion", "right to be forgotten", "account deletion"],
+    answer: `Yes! You have full control over your data. You can:
 
-📥 **Export Options:**
-- Invoices (PDF + data)
-- Customer list
-- Inventory database
-- GST reports
+✓ Delete individual invoices/customers anytime
+✓ Export all data before deletion (CSV/Excel/PDF)
+✓ Request complete account deletion
 
-Even if we shut down (we won't! 😊), you get 90 days notice to export everything. Your data is yours, always. [Export Guide](#)`,
+You can export your data anytime - no lock-in! [Account Settings](#)`,
   },
   {
     question: "What documents do I need to get started?",
-    keywords: ["documents", "requirements", "need to start", "setup", "getting started"],
+    keywords: ["documents", "requirements", "need to start", "setup", "getting started", "onboarding"],
     answer: `To get started, you'll need:
-1. Business GSTIN (for GST invoicing)
-2. Company logo (optional)
-3. Existing data (optional - CSV/Excel for import)
+
+1. **Business GSTIN** (for GST invoicing)
+2. **Company logo** (optional - for branded invoices)
+3. **Existing data** (optional - CSV/Excel for bulk import)
 
 Setup takes under 10 minutes! [Start Now](#)`,
   },
   {
     question: "Can multiple team members use the same account?",
-    keywords: ["team", "multiple user", "collaboration", "team member"],
-    answer: `Yes! Multi-user access is available on:
-- **Pro**: Up to 5 team members
-- **Enterprise**: Unlimited users with role-based permissions
+    keywords: ["team", "multiple user", "collaboration", "team member", "multi user", "shared access"],
+    answer: `Currently, you can **login from multiple devices** simultaneously (e.g., multiple computers, mobile, tablet) using the same account.
 
-Basic and Free plans are single-user only. [Compare Plans](#pricing)`,
+**Dedicated multi-user access** with role-based permissions is coming in future paid plans.
+
+**Multi-company support** is available now - manage multiple businesses from one account! 🏢`,
   },
   {
     question: "Do you have an API?",
-    keywords: ["api", "integration", "webhook", "developer"],
-    answer: `Yes! API access is included in the **Pro plan** (${PRODUCT_DATA.pricing.pro.price}/month) and above. 
+    keywords: ["api", "integration", "webhook", "developer", "rest api"],
+    answer: `API access is not available yet, but it's on our roadmap for future paid plans.
 
-Integrate with your existing systems using our REST API + webhooks. 🔌 [View API Docs](#)`,
+Currently available: CSV/Excel import/export for data integration. 🔌
+
+Want to be notified when API access launches? [Join Waitlist](#)`,
   },
   {
-    question: "What's the difference between Basic and Pro?",
-    keywords: ["basic vs pro", "difference basic pro", "compare basic pro"],
-    answer: `Main differences:
+    question: "Can I manage multiple businesses?",
+    keywords: ["multiple business", "multi company", "different company", "separate business", "franchise"],
+    answer: `Yes! **Multi-company support** is available on all plans (including Free).
 
-**Basic (${PRODUCT_DATA.pricing.basic.price}/month)**: 
-- 20 AI invoices/month
-- 500 inventory items
-- 1 user
+Manage multiple businesses from one account:
+✓ Each company has its own customers, inventory, and invoices
+✓ Switch between companies in one click
+✓ Separate branding per company
+✓ Data never mixes between companies
 
-**Pro (${PRODUCT_DATA.pricing.pro.price}/month)**:
-- 50 AI invoices/month
-- Unlimited inventory
-- 5 team members
-- Voice commands, API, multi-currency
-- No watermark
+Perfect for franchise owners, multi-brand entrepreneurs, or accountants managing multiple clients! 🏢 [Learn More](#features)`,
+  },
+  {
+    question: "What invoice types do you support?",
+    keywords: ["invoice type", "bill type", "document type", "tax invoice", "quotation", "purchase order"],
+    answer: `Currently available:
+✓ **Tax Invoice** (GST-compliant)
+✓ **Bill of Supply** (for unregistered businesses)
+✓ **Quotation** (price estimates)
+✓ **Purchase Order** (order documents)
 
-[See Full Comparison](#pricing)`,
+Coming soon:
+- Credit/Debit Notes
+- Delivery Challan
+- Proforma Invoice
+
+[Start Creating Invoices](#)`,
   },
   {
     question: "Why choose WhisprBill over other invoicing software?",
@@ -191,50 +227,71 @@ Integrate with your existing systems using our REST API + webhooks. 🔌 [View A
       "vs tally",
       "vs quickbooks",
       "competitor",
+      "comparison",
     ],
     answer: `WhisprBill stands out because:
-🤖 **AI-First**: Create invoices by chatting (no forms)
+
+🤖 **AI-First**: Create invoices by chatting (no complex forms)
 🇮🇳 **India-Focused**: Built-in GST compliance
 ⚡ **Faster**: 30 seconds vs 5-10 minutes
-📊 **Smart Analytics**: Auto-generated insights
+🆓 **Unlimited**: Even the Free plan has unlimited customers & inventory
+🏢 **Multi-Company**: Manage multiple businesses from one account
 
-Traditional tools require accounting knowledge. We don't. [Try Free](#)`,
+Traditional tools charge per contact or have strict limits. We don't. [Try Free](#)`,
   },
   {
     question: "Do you sell my data to third parties?",
     keywords: ["sell data", "third party", "share data", "data sharing", "privacy policy"],
-    answer: `**Absolutely not!** We never sell, rent, or share your data with third parties. 
+    answer: `**Absolutely not!** We never sell, rent, or share your data with third parties.
 
 Your invoices, customer information, and business data are:
 ✓ 100% confidential
-✓ Only accessible to you and your team
+✓ Only accessible to you
 ✓ Never used for marketing or advertising
 ✓ Never shared with external companies
+✓ Never used to train AI models
 
 Your privacy is non-negotiable. 🔒 [Privacy Policy](#privacy)`,
   },
   {
-    question: "What happens if you get hacked?",
-    keywords: ["hacked", "data breach", "security breach", "cyber attack", "hack"],
-    answer: `We have multiple security layers to prevent breaches:
+    question: "How does the AI work without seeing my data?",
+    keywords: ["how ai work", "ai privacy", "pii masking", "data protection", "ai security"],
+    answer: `Great question! Here's how we keep your data private:
 
-🛡️ **Prevention**: Firewall, intrusion detection, regular security audits
-🔐 **Encryption**: Even if accessed, data is encrypted (unreadable without keys)
-📢 **Response**: Immediate notification within 24 hours if breach occurs
-💾 **Recovery**: Daily backups ensure data restoration
+🎭 **PII Masking**: Customer names, amounts, and sensitive data are masked before AI processing
 
-We follow industry-standard security practices and are regularly audited. Your data safety is our top priority. 🔒`,
+🤖 **Intent-Only AI**: The AI only understands your intent ("create invoice for customer X"), not your actual data
+
+🧮 **Deterministic Backend**: All GST calculations and validations run on our secure backend using rule-based logic (not AI)
+
+Think of AI as a smart translator between you and the system - it makes the interface friendly, not risky. [Learn More](#security)`,
   },
   {
-    question: "Can I delete all my data?",
-    keywords: ["delete data", "remove data", "erase data", "data deletion", "right to be forgotten"],
-    answer: `Yes! You have full control over your data. You can:
+    question: "Can I create invoices in different languages?",
+    keywords: ["language", "hindi", "regional language", "translation", "multi language"],
+    answer: `Currently, WhisprBill is available in English.
 
-✓ Delete individual invoices/customers anytime
-✓ Export all data before deletion
-✓ Request complete account deletion (within 30 days)
+**Multi-language support** (Hindi, Tamil, Telugu, and more regional languages) is coming soon for invoice templates!
 
-Once deleted, data is permanently removed from our servers within 30 days. Backup copies are also erased. [Account Settings](#)`,
+Want updates? [Join Waitlist](#)`,
+  },
+  {
+    question: "Do you have batch tracking for pharma products?",
+    keywords: ["batch tracking", "pharma", "expiry", "fmcg", "batch number", "lot number"],
+    answer: `Batch tracking for pharma/FMCG products is **coming soon**!
+
+Currently available: Product variants (size, color, material), multi-tier pricing, unlimited inventory.
+
+Want to be notified when batch tracking launches? [Join Waitlist](#)`,
+  },
+  {
+    question: "Can I use WhatsApp to create invoices?",
+    keywords: ["whatsapp", "whatsapp integration", "chat on whatsapp", "whatsapp bot"],
+    answer: `WhatsApp-native invoicing is **coming soon**! You'll be able to chat with WhisprBot on WhatsApp to create and share invoices directly.
+
+Currently available: Web-based AI chat interface (desktop & mobile browser). 💬
+
+Want updates on WhatsApp integration? [Join Waitlist](#)`,
   },
 ];
 
