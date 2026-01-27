@@ -106,7 +106,7 @@ export default function Hero() {
           {/* ACTUAL IMAGE IMPLEMENTATION */}
           <div className="relative rounded-lg sm:rounded-xl overflow-hidden bg-gradient-to-br from-gray-50 to-blue-50/30 border border-gray-100">
             <Image
-              src="/preview-screenshot-cropped.png"
+              src="/wbill-heroimage.jpeg"
               alt="WhisprBill Dashboard Interface"
               width={1600}
               height={900}
@@ -115,22 +115,7 @@ export default function Hero() {
               className="w-full h-auto object-cover"
             />
 
-            {/* Optional: Overlay Chat Bubble - Responsive sizing and positioning */}
-            <div className="absolute bottom-3 left-3 sm:bottom-6 sm:left-6 md:bottom-8 md:left-8 lg:bottom-12 lg:left-12 max-w-[160px] sm:max-w-[200px] md:max-w-xs lg:max-w-sm animate-in fade-in slide-in-from-bottom-4 duration-1000">
-              <div className="bg-white/95 backdrop-blur-sm shadow-[0_8px_30px_rgb(0,0,0,0.12)] rounded-xl sm:rounded-2xl p-3 sm:p-4 lg:p-5 border border-gray-100">
-                <div className="flex items-center gap-2 sm:gap-3 mb-1.5 sm:mb-2">
-                  <div className="w-6 h-6 sm:w-8 sm:h-8 bg-green-100 rounded-full flex items-center justify-center text-[8px] sm:text-[10px] text-green-700 font-bold">
-                    AI
-                  </div>
-                  <span className="text-xs sm:text-sm font-semibold text-gray-500">
-                    Whispr Assistant
-                  </span>
-                </div>
-                <p className="text-xs sm:text-sm md:text-base text-gray-800 font-medium leading-snug">
-                  "I've created the invoice for Client X. Ready to send?"
-                </p>
-              </div>
-            </div>
+          
           </div>
         </div>
       </div>
