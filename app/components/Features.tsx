@@ -463,7 +463,7 @@ export default function Features() {
                   href="/app/signup"
                   className="flex-1 px-6 py-3 bg-primary text-white font-bold rounded-xl hover:bg-blue-600 transition-colors text-center shadow-lg shadow-blue-200 text-sm sm:text-base"
                 >
-                  Start Free Trial
+                  Start Free Trial Now
                 </a>
               </div>
             </div>
