@@ -1,4 +1,3 @@
-// app/components/Hero.tsx
 "use client";
 
 import Image from "next/image";
@@ -6,116 +5,104 @@ import Link from "next/link";
 
 export default function Hero() {
   const scrollToDemo = () => {
-    document.getElementById("demo-form")?.scrollIntoView({ 
-      behavior: "smooth" 
-    });
+    document.getElementById("demo-form")?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
-    <section className="relative pt-8 sm:pt-12 pb-8 sm:pb-12 lg:pt-16 lg:pb-20 overflow-hidden bg-white">
-      {/* Enhanced Background Gradient Mesh - Extended upward to blend with Navbar */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {/* Top gradient - Extended higher to reach Navbar */}
-        <div className="absolute -top-32 left-0 right-0 h-[900px] bg-gradient-to-br from-blue-100 via-purple-100 to-transparent animate-pulse" />
-        
-        {/* Radial gradient - Center glow with slow float - Responsive sizing */}
-        <div className="absolute top-20 left-1/2 -translate-x-1/2 w-[600px] sm:w-[800px] lg:w-[1000px] h-[400px] sm:h-[500px] lg:h-[600px] bg-blue-200/40 rounded-full blur-3xl animate-float" />
-        
-        {/* Accent blobs - Decorative colored circles with animations - Hidden on small mobile */}
-        <div className="hidden sm:block absolute top-40 right-10 lg:right-20 w-64 sm:w-80 lg:w-96 h-64 sm:h-80 lg:h-96 bg-primary/20 rounded-full blur-3xl animate-blob" />
-        <div className="hidden sm:block absolute top-60 left-5 lg:left-10 w-56 sm:w-72 lg:w-80 h-56 sm:h-72 lg:h-80 bg-purple-300/30 rounded-full blur-3xl animate-blob animation-delay-2000" />
+    <section className="relative overflow-hidden bg-background pb-12 pt-28 sm:pb-16 sm:pt-32 lg:pb-20 lg:pt-36">
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-[62%] bg-gradient-to-br from-secondary via-blue-950 to-primary" />
+      <div className="pointer-events-none absolute inset-x-0 top-[50%] h-40 bg-gradient-to-b from-transparent to-background" />
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute -top-16 left-[-6rem] h-72 w-72 rounded-full bg-primary/15 blur-3xl animate-blob" />
+        <div className="absolute right-[-4rem] top-8 h-72 w-72 rounded-full bg-secondary/15 blur-3xl animate-blob animation-delay-2000" />
+        <div className="absolute bottom-8 left-1/3 h-52 w-52 rounded-full bg-primary/10 blur-3xl animate-float" />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 text-center">
-        {/* Headline - Optimized sizes */}
-        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-extrabold text-text tracking-tight mb-4 sm:mb-6 leading-tight">
-          WhisprBill: Invoice with a Chat. <br className="hidden sm:block" />
-          <span className="text-secondary">AI-Powered. </span>
-          <span className="text-primary">GST-Ready.</span>
-        </h1>
-
-        {/* Subheadline - Optimized sizes */}
-        <p className="text-base sm:text-lg md:text-xl text-accent/80 mb-4 sm:mb-5 max-w-2xl mx-auto leading-relaxed px-4 sm:px-0">
-          AI-Powered extensions to simplify business invoicing. Create, manage,
-          and track invoices with simple conversation.
-        </p>
-
-        {/* NEW: Invoice Types Subtext - Responsive */}
-        <div className="mb-8 sm:mb-10 px-4 sm:px-0">
-          <p className="text-xs sm:text-sm text-accent/60 mb-2 font-medium">
-            Create any invoice type:
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-blue-100">
+            <span className="h-2 w-2 rounded-full bg-primary" />
+            AI-Powered Billing Workflow
           </p>
-          <div className="flex flex-wrap justify-center items-center gap-2 sm:gap-3 max-w-2xl mx-auto">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-blue-50 text-primary text-xs sm:text-sm font-semibold rounded-full border border-blue-100">
-              <svg className="w-3 h-3 sm:w-3.5 sm:h-3.5" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
-              </svg>
-              Tax Invoice
+
+          <h1 className="mt-5 text-4xl font-extrabold leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-6xl">
+            Create invoices by chatting.
+            <span className="block bg-gradient-to-r from-blue-100 to-cyan-200 bg-clip-text text-transparent">
+              Fast, accurate, GST-ready.
             </span>
-            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-purple-50 text-purple-600 text-xs sm:text-sm font-semibold rounded-full border border-purple-100">
-              <svg className="w-3 h-3 sm:w-3.5 sm:h-3.5" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
-              </svg>
-              Bill of Supply
+          </h1>
+
+          <p className="mt-5 text-base leading-relaxed text-blue-100/90 sm:text-lg">
+            WhisprBill turns simple prompts into professional invoices, so your team can spend less time billing and more time running the business.
+          </p>
+
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-2.5">
+            <span className="rounded-full border border-white/20 bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-blue-100">
+              Invoice Types
             </span>
-            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-green-50 text-green-600 text-xs sm:text-sm font-semibold rounded-full border border-green-100">
-              <svg className="w-3 h-3 sm:w-3.5 sm:h-3.5" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
+            {[
+              "Tax Invoice",
+              "Bill of Supply",
+              "Quotation",
+              "Purchase Order",
+            ].map((item) => (
+              <span
+                key={item}
+                className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-semibold text-blue-100 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-white/40 hover:bg-white/15"
+              >
+                <span className="h-1.5 w-1.5 rounded-full bg-primary/80" />
+                {item}
+              </span>
+            ))}
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-dashed border-white/30 bg-white/10 px-3 py-1 text-xs font-semibold text-blue-100/85">
+              <svg viewBox="0 0 24 24" fill="none" className="h-3 w-3" aria-hidden="true">
+                <path d="M12 5v14M5 12h14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
               </svg>
-              Quotation
+              More soon
             </span>
-            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-orange-50 text-orange-600 text-xs sm:text-sm font-semibold rounded-full border border-orange-100">
-              <svg className="w-3 h-3 sm:w-3.5 sm:h-3.5" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
+          </div>
+
+          <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-center">
+            <Link
+              href="/app/signup"
+              className="inline-flex items-center justify-center rounded-xl bg-secondary px-7 py-3.5 text-base font-bold text-white shadow-[0_12px_28px_rgba(1,38,82,0.24)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-secondary/90"
+            >
+              Start Free Trial
+              <svg className="ml-2 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+                <path d="M5 12h14M13 6l6 6-6 6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
-              Purchase Order
-            </span>
-            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 text-gray-500 text-xs sm:text-sm font-medium rounded-full border border-gray-200">
-              <svg className="w-3 h-3 sm:w-3.5 sm:h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4"/>
-              </svg>
-              More coming soon
-            </span>
+            </Link>
+            <button
+              onClick={scrollToDemo}
+              className="inline-flex items-center justify-center rounded-xl border border-white/40 bg-white/10 px-7 py-3.5 text-base font-bold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-white/15"
+            >
+              Book a Live Demo
+            </button>
           </div>
         </div>
 
-        {/* CTA Buttons - Responsive sizing */}
-        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center mb-12 sm:mb-16 px-4 sm:px-0">
-          <Link
-            href="/app/signup"
-            className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-primary text-white text-base sm:text-lg font-bold rounded-xl shadow-lg hover:bg-blue-600 transition-all transform hover:-translate-y-1"
-          >
-            Start Free Trial
-          </Link>
-          <button 
-            onClick={scrollToDemo}
-            className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-white text-text border-2 border-gray-200 text-base sm:text-lg font-bold rounded-xl hover:border-primary hover:text-primary transition-all shadow-sm hover:shadow-md transform hover:-translate-y-0.5"
-          >
-            Request Free Demo
-          </button>
-        </div>
-      </div>
+        <div className="relative mt-10 sm:mt-12">
+          <div className="absolute -inset-4 rounded-[2rem] bg-gradient-to-r from-primary/20 via-transparent to-secondary/20 blur-2xl" />
+          <div className="relative overflow-hidden rounded-[1.75rem] border border-primary/20 bg-white/90 p-2 shadow-[0_26px_65px_rgba(1,38,82,0.18)] sm:p-3 lg:p-4">
+            <div className="absolute inset-x-0 top-0 flex items-center justify-between border-b border-slate-200 bg-white/85 px-4 py-2 backdrop-blur-sm">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.1em] text-gray-blue">
+                Product Walkthrough View
+              </p>
+              <span className="rounded-full bg-emerald-100 px-2.5 py-1 text-[11px] font-semibold text-emerald-700">
+                Live Preview
+              </span>
+            </div>
 
-      {/* Hero Image / Mockup Area - Responsive container */}
-      <div className="relative mx-auto max-w-[95%] sm:max-w-[90%] lg:max-w-[85%] xl:max-w-[90rem] px-2 sm:px-4 mt-2 z-10">
-        
-        {/* Decorative background glow behind image - Enhanced with animation */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] h-[90%] bg-gradient-to-r from-blue-400/30 via-purple-400/30 to-pink-400/30 blur-3xl rounded-[50px] -z-10 animate-pulse-slow"></div>
-
-        <div className="bg-white rounded-xl sm:rounded-2xl shadow-xl sm:shadow-2xl border border-gray-200 overflow-hidden p-1.5 sm:p-2 md:p-3 lg:p-4">
-          {/* ACTUAL IMAGE IMPLEMENTATION */}
-          <div className="relative rounded-lg sm:rounded-xl overflow-hidden bg-gradient-to-br from-gray-50 to-blue-50/30 border border-gray-100">
-            <Image
-              src="/wbill-heroimage.jpeg"
-              alt="WhisprBill Dashboard Interface"
-              width={1600}
-              height={900}
-              priority
-              quality={100}
-              className="w-full h-auto object-cover"
-            />
-
-          
+            <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white pt-10">
+              <Image
+                src="/wbill-heroimage.jpeg"
+                alt="WhisprBill full product walkthrough preview"
+                width={2200}
+                height={1200}
+                priority
+                className="h-auto w-full object-contain"
+              />
+            </div>
           </div>
         </div>
       </div>
