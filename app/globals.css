@@ -11,16 +11,14 @@
   --color-text: #12191D;
   --color-background: #F4F4F4;
   --color-gray-blue: #7C98A9;
-
-  /* Optional: Add custom fonts or other theme settings if needed */
-  /* --font-sans: 'Inter', sans-serif; */
+  --font-family-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
 /* Reset and base styles */
 :root {
   background-color: var(--color-background);
   color: var(--color-text);
-  font-family: Arial, Helvetica, sans-serif;
+  
 }
 
 body {

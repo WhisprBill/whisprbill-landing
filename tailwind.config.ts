@@ -8,6 +8,18 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      // ✅ Explicitly set to match deployed site
+      fontFamily: {
+        sans: [
+          'ui-sans-serif',
+          'system-ui',
+          'sans-serif',
+          'Apple Color Emoji',
+          'Segoe UI Emoji',
+          'Segoe UI Symbol',
+          'Noto Color Emoji'
+        ],
+      },
       colors: {
         primary: "#0072E9",
         secondary: "#012652",

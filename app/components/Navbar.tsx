@@ -1,36 +1,40 @@
-// app/components/Navbar.tsx
 "use client";
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const pathname = usePathname();
+  const isHome = pathname === "/";
+  const navLinkClass = isHome
+    ? (isScrolled ? "text-accent/80 hover:text-primary" : "text-blue-100/90 hover:text-white")
+    : "text-accent/80 hover:text-primary";
 
-  const scrollToSection = (sectionId: string) => {
-    document.getElementById(sectionId)?.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
-    setIsMobileMenuOpen(false);
-  };
+  useEffect(() => {
+    const onScroll = () => setIsScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
-    <nav className="w-full py-4 sm:py-6 px-4 sm:px-8 bg-white relative z-50">
-      {/* Matching gradient background - extends from Hero */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-0 left-0 right-0 h-[400px] bg-gradient-to-br from-blue-100 via-purple-100 to-transparent animate-pulse" />
-        <div className="absolute top-10 right-20 w-72 h-72 bg-primary/20 rounded-full blur-3xl animate-blob" />
-        <div className="absolute top-0 left-10 w-64 h-64 bg-purple-300/30 rounded-full blur-3xl animate-blob animation-delay-2000" />
-      </div>
+    <nav
+      className={`${isHome ? "fixed" : "sticky"} top-0 w-full px-4 py-4 sm:px-8 sm:py-6 z-50 transition-all duration-300 ${
+        isHome
+          ? (isScrolled
+              ? "bg-white/10 backdrop-blur-md border-b border-white/20"
+              : "bg-transparent border-b border-transparent")
+          : "bg-white/90 backdrop-blur-md border-b border-gray-200/60"
+      }`}
+    >
 
       <div className="max-w-7xl mx-auto flex justify-between items-center relative z-10">
         {/* Logo + Brand */}
-        <Link
-          href="/"
-          className="flex items-center gap-2 sm:gap-3 group"
-        >
+        <Link href="/" className="flex items-center gap-2 sm:gap-3 group">
           {/* Logo Image */}
           <div className="relative w-8 h-8 sm:w-10 sm:h-10 flex-shrink-0 transition-transform duration-300 group-hover:scale-110">
             <Image
@@ -41,45 +45,65 @@ export default function Navbar() {
               priority
             />
           </div>
-          
+
           {/* Brand Text */}
-          <span className="font-bold text-xl sm:text-2xl tracking-tight text-text">
+          <span className={`font-bold text-xl sm:text-2xl tracking-tight ${isHome && !isScrolled ? "text-white" : "text-secondary"}`}>
             Whispr<span className="text-primary">Bill</span>
           </span>
         </Link>
 
         {/* Desktop Navigation Links */}
         <div className="hidden lg:flex items-center gap-6 xl:gap-8">
-          <button
-            onClick={() => scrollToSection("features")}
-            className="text-accent/80 font-medium hover:text-primary transition-colors text-sm"
+          <Link
+            href="/features"
+            className={`font-medium transition-colors text-sm ${
+              pathname?.startsWith('/features')
+                ? 'text-primary'
+                : navLinkClass
+            }`}
           >
             Features
-          </button>
-          <button
-            onClick={() => scrollToSection("how-it-works")}
-            className="text-accent/80 font-medium hover:text-primary transition-colors text-sm"
+          </Link>
+          <Link
+            href="/how-it-works"
+            className={`font-medium transition-colors text-sm ${
+              pathname === '/how-it-works'
+                ? 'text-primary'
+                : navLinkClass
+            }`}
           >
             How It Works
-          </button>
-          <button
-            onClick={() => scrollToSection("pricing")}
-            className="text-accent/80 font-medium hover:text-primary transition-colors text-sm"
+          </Link>
+          <Link
+            href="/pricing"
+            className={`font-medium transition-colors text-sm ${
+              pathname === '/pricing'
+                ? 'text-primary'
+                : navLinkClass
+            }`}
           >
             Pricing
-          </button>
-          <button
-            onClick={() => scrollToSection("testimonials")}
-            className="text-accent/80 font-medium hover:text-primary transition-colors text-sm"
+          </Link>
+          <Link
+            href="/testimonials"
+            className={`font-medium transition-colors text-sm ${
+              pathname === '/testimonials'
+                ? 'text-primary'
+                : navLinkClass
+            }`}
           >
             Testimonials
-          </button>
-          <button
-            onClick={() => scrollToSection("demo-form")}
-            className="text-accent/80 font-medium hover:text-primary transition-colors text-sm"
+          </Link>
+          <Link
+            href="/security"
+            className={`font-medium transition-colors text-sm ${
+              pathname === '/security'
+                ? 'text-primary'
+                : navLinkClass
+            }`}
           >
-            Contact
-          </button>
+            Security
+          </Link>
         </div>
 
         {/* Desktop Auth Buttons */}
@@ -87,20 +111,32 @@ export default function Navbar() {
           {/* Login Button */}
           <Link
             href="/app/login"
-            className="relative group px-5 py-2.5 rounded-xl font-semibold text-sm transition-all duration-300
-              bg-white/60 backdrop-blur-sm border border-gray-200/50
-              hover:bg-white hover:border-primary/30 hover:shadow-lg
-              text-text hover:text-primary
-              overflow-hidden"
+            className={`relative group px-5 py-2.5 rounded-xl font-semibold text-sm transition-all duration-300
+              ${isScrolled
+                ? "bg-white/60 backdrop-blur-sm border border-gray-200/70 hover:bg-white hover:border-primary/30 text-secondary hover:text-primary"
+                : isHome
+                  ? "bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 hover:border-white/35 text-white hover:text-white"
+                  : "bg-white border border-gray-200/70 hover:bg-gray-50 hover:border-primary/30 text-secondary hover:text-primary"}
+              overflow-hidden`}
           >
             {/* Shine sweep */}
             <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
-            
+
             <span className="relative flex items-center gap-2">
               <span>Log in</span>
               {/* Arrow icon - only visible on hover */}
-              <svg className="w-0 opacity-0 group-hover:w-4 group-hover:opacity-100 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              <svg
+                className="w-0 opacity-0 group-hover:w-4 group-hover:opacity-100 transition-all duration-300"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M13 7l5 5m0 0l-5 5m5-5H6"
+                />
               </svg>
             </span>
           </Link>
@@ -117,12 +153,22 @@ export default function Navbar() {
           >
             {/* Shine sweep */}
             <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
-            
+
             <span className="relative flex items-center gap-2">
               <span>Sign up free</span>
               {/* Arrow icon - only visible on hover */}
-              <svg className="w-0 opacity-0 group-hover:w-4 group-hover:opacity-100 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              <svg
+                className="w-0 opacity-0 group-hover:w-4 group-hover:opacity-100 transition-all duration-300"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M13 7l5 5m0 0l-5 5m5-5H6"
+                />
               </svg>
             </span>
           </Link>
@@ -147,16 +193,36 @@ export default function Navbar() {
           {/* Hamburger Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="p-2 text-text hover:text-primary transition-colors"
+            className={`p-2 transition-colors ${isHome && !isScrolled ? "text-white hover:text-blue-100" : "text-secondary hover:text-primary"}`}
             aria-label="Toggle menu"
           >
             {!isMobileMenuOpen ? (
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
               </svg>
             ) : (
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
               </svg>
             )}
           </button>
@@ -168,36 +234,61 @@ export default function Navbar() {
         <div className="lg:hidden absolute top-full left-0 right-0 bg-white/95 backdrop-blur-md border-t border-gray-200 shadow-lg animate-slide-down">
           <div className="max-w-7xl mx-auto px-4 py-4 flex flex-col gap-3">
             {/* Navigation Links */}
-            <button
-              onClick={() => scrollToSection("features")}
-              className="text-left text-accent/80 font-medium hover:text-primary transition-colors py-2 px-3 rounded-lg hover:bg-gray-50"
+            <Link
+              href="/features"
+              className={`text-left font-medium transition-colors py-2 px-3 rounded-lg ${
+                pathname?.startsWith('/features')
+                  ? 'text-primary bg-primary/5'
+                  : 'text-accent/80 hover:text-primary hover:bg-gray-50'
+              }`}
+              onClick={() => setIsMobileMenuOpen(false)}
             >
               Features
-            </button>
-            <button
-              onClick={() => scrollToSection("how-it-works")}
-              className="text-left text-accent/80 font-medium hover:text-primary transition-colors py-2 px-3 rounded-lg hover:bg-gray-50"
+            </Link>
+            <Link
+              href="/how-it-works"
+              className={`text-left font-medium transition-colors py-2 px-3 rounded-lg ${
+                pathname === '/how-it-works'
+                  ? 'text-primary bg-primary/5'
+                  : 'text-accent/80 hover:text-primary hover:bg-gray-50'
+              }`}
+              onClick={() => setIsMobileMenuOpen(false)}
             >
               How It Works
-            </button>
-            <button
-              onClick={() => scrollToSection("pricing")}
-              className="text-left text-accent/80 font-medium hover:text-primary transition-colors py-2 px-3 rounded-lg hover:bg-gray-50"
+            </Link>
+            <Link
+              href="/pricing"
+              className={`text-left font-medium transition-colors py-2 px-3 rounded-lg ${
+                pathname === '/pricing'
+                  ? 'text-primary bg-primary/5'
+                  : 'text-accent/80 hover:text-primary hover:bg-gray-50'
+              }`}
+              onClick={() => setIsMobileMenuOpen(false)}
             >
               Pricing
-            </button>
-            <button
-              onClick={() => scrollToSection("testimonials")}
-              className="text-left text-accent/80 font-medium hover:text-primary transition-colors py-2 px-3 rounded-lg hover:bg-gray-50"
+            </Link>
+            <Link
+              href="/testimonials"
+              className={`text-left font-medium transition-colors py-2 px-3 rounded-lg ${
+                pathname === '/testimonials'
+                  ? 'text-primary bg-primary/5'
+                  : 'text-accent/80 hover:text-primary hover:bg-gray-50'
+              }`}
+              onClick={() => setIsMobileMenuOpen(false)}
             >
               Testimonials
-            </button>
-            <button
-              onClick={() => scrollToSection("demo-form")}
-              className="text-left text-accent/80 font-medium hover:text-primary transition-colors py-2 px-3 rounded-lg hover:bg-gray-50"
+            </Link>
+            <Link
+              href="/security"
+              className={`text-left font-medium transition-colors py-2 px-3 rounded-lg ${
+                pathname === '/security'
+                  ? 'text-primary bg-primary/5'
+                  : 'text-accent/80 hover:text-primary hover:bg-gray-50'
+              }`}
+              onClick={() => setIsMobileMenuOpen(false)}
             >
-              Contact
-            </button>
+              Security
+            </Link>
 
             {/* Divider */}
             <div className="border-t border-gray-200 my-2"></div>
