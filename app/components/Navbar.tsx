@@ -106,9 +106,8 @@ export default function Navbar() {
           </Link>
         </div>
 
-        {/* Desktop Auth Buttons */}
+        {/* Desktop Auth Buttons (disabled for now)
         <div className="hidden lg:flex items-center gap-3">
-          {/* Login Button */}
           <Link
             href="/app/login"
             className={`relative group px-5 py-2.5 rounded-xl font-semibold text-sm transition-all duration-300
@@ -119,12 +118,9 @@ export default function Navbar() {
                   : "bg-white border border-gray-200/70 hover:bg-gray-50 hover:border-primary/30 text-secondary hover:text-primary"}
               overflow-hidden`}
           >
-            {/* Shine sweep */}
             <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
-
             <span className="relative flex items-center gap-2">
               <span>Log in</span>
-              {/* Arrow icon - only visible on hover */}
               <svg
                 className="w-0 opacity-0 group-hover:w-4 group-hover:opacity-100 transition-all duration-300"
                 fill="none"
@@ -141,7 +137,6 @@ export default function Navbar() {
             </span>
           </Link>
 
-          {/* Sign Up Button */}
           <Link
             href="/app/signup"
             className="relative group px-6 py-2.5 rounded-xl font-bold text-sm transition-all duration-300
@@ -151,12 +146,9 @@ export default function Navbar() {
               hover:scale-[1.02] active:scale-[0.98]
               overflow-hidden"
           >
-            {/* Shine sweep */}
             <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
-
             <span className="relative flex items-center gap-2">
               <span>Sign up free</span>
-              {/* Arrow icon - only visible on hover */}
               <svg
                 className="w-0 opacity-0 group-hover:w-4 group-hover:opacity-100 transition-all duration-300"
                 fill="none"
@@ -173,10 +165,11 @@ export default function Navbar() {
             </span>
           </Link>
         </div>
+        */}
 
         {/* Mobile: Auth + Hamburger */}
         <div className="flex lg:hidden items-center gap-3">
-          {/* Mobile Sign Up Button */}
+          {/* Mobile Sign Up Button (disabled for now)
           <Link
             href="/app/signup"
             className="relative group px-4 py-2 rounded-lg font-bold text-xs sm:text-sm transition-all duration-300
@@ -185,10 +178,10 @@ export default function Navbar() {
               active:scale-95
               overflow-hidden"
           >
-            {/* Shine effect */}
             <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-500" />
             <span className="relative">Sign up</span>
           </Link>
+          */}
 
           {/* Hamburger Menu Button */}
           <button
@@ -293,7 +286,7 @@ export default function Navbar() {
             {/* Divider */}
             <div className="border-t border-gray-200 my-2"></div>
 
-            {/* Mobile Login Link */}
+            {/* Mobile Login Link (disabled for now)
             <Link
               href="/app/login"
               className="text-left font-semibold transition-all py-2.5 px-3 rounded-lg
@@ -302,6 +295,7 @@ export default function Navbar() {
             >
               Log in
             </Link>
+            */}
           </div>
         </div>
       )}

@@ -1,7 +1,7 @@
 // app/components/ComingSoonModal.tsx
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 
 export default function ComingSoonModal() {
@@ -11,7 +11,7 @@ export default function ComingSoonModal() {
   const [isSuccess, setIsSuccess] = useState(false);
 
   useEffect(() => {
-    // Show modal on page load
+    // Show modal on each page mount (fresh refresh/navigation to Home)
     setIsOpen(true);
   }, []);
 
@@ -20,15 +20,12 @@ export default function ComingSoonModal() {
     setIsSubmitting(true);
 
     // TODO: Replace with your API call
-    // await fetch('/api/waitlist', { ... })
-
-    // Simulate API call
     await new Promise((resolve) => setTimeout(resolve, 1000));
 
     setIsSuccess(true);
     setEmail("");
+    setIsSubmitting(false);
 
-    // Auto-close after success
     setTimeout(() => {
       setIsOpen(false);
       setIsSuccess(false);
@@ -44,34 +41,28 @@ export default function ComingSoonModal() {
 
   return (
     <>
-      {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-black/70 backdrop-blur-sm z-[100] animate-fade-in"
+        className="fixed inset-0 z-[100] bg-black/70 backdrop-blur-sm animate-fade-in"
         onClick={handleClose}
       />
 
-      {/* Modal - MUCH BIGGER */}
-      <div className="fixed inset-0 z-[101] flex items-center justify-center p-4 sm:p-6 lg:p-8 pointer-events-none">
+      <div className="pointer-events-none fixed inset-0 z-[101] flex items-center justify-center p-4 sm:p-6 lg:p-8">
         <div
-          className="relative bg-white w-full max-w-6xl h-[85vh] rounded-3xl shadow-2xl overflow-hidden pointer-events-auto"
+          className="pointer-events-auto relative w-full max-w-3xl overflow-hidden rounded-2xl border border-white/20 bg-white shadow-2xl"
           onClick={(e) => e.stopPropagation()}
         >
-          {/* Background gradient matching your app theme */}
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-purple-50/30 to-white" />
+          <div className="absolute inset-0 bg-gradient-to-br from-white via-blue-50/70 to-background" />
+          <div className="absolute -right-20 -top-16 h-56 w-56 rounded-full bg-primary/10 blur-3xl" />
+          <div className="absolute -bottom-20 -left-16 h-56 w-56 rounded-full bg-secondary/10 blur-3xl" />
 
-          {/* Decorative blobs matching Hero section */}
-          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/10 rounded-full blur-3xl" />
-          <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-purple-200/20 rounded-full blur-3xl" />
-
-          {/* Close Button - FIXED */}
           <button
             onClick={handleClose}
             type="button"
-            className="absolute top-6 right-6 sm:top-8 sm:right-8 z-50 w-12 h-12 bg-white shadow-lg rounded-full flex items-center justify-center text-gray-600 hover:text-white hover:bg-primary transition-all duration-300 group"
+            className="group absolute right-4 top-4 z-50 flex h-10 w-10 items-center justify-center rounded-full bg-white text-gray-600 shadow-md transition-all duration-300 hover:bg-primary hover:text-white"
             aria-label="Close modal"
           >
             <svg
-              className="w-6 h-6 group-hover:rotate-90 transition-transform duration-300"
+              className="h-6 w-6 transition-transform duration-300 group-hover:rotate-90"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -85,95 +76,63 @@ export default function ComingSoonModal() {
             </svg>
           </button>
 
-          {/* Content - Centered with lots of space */}
-          <div className="relative z-10 h-full flex flex-col items-center justify-center px-8 sm:px-16 lg:px-24 text-center">
+          <div className="relative z-10 px-6 py-10 text-center sm:px-10 sm:py-12">
             {!isSuccess ? (
               <>
-                {/* Logo */}
-                <div className="mb-2">
-                  <div className="relative w-24 h-24 sm:w-32 sm:h-32 lg:w-40 lg:h-40 mb-6 mx-auto animate-bounce-slow">
+                <div>
+                  <div className="mx-auto mb-5 relative h-16 w-16 sm:h-20 sm:w-20">
                     <Image
                       src="/icon.svg"
                       alt="WhisprBill Logo"
                       fill
-                      className="object-contain drop-shadow-xl"
+                      className="object-contain drop-shadow-md"
                     />
                   </div>
-                  <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-text">
+                  <h2 className="text-2xl font-bold text-text sm:text-3xl">
                     Whispr<span className="text-primary">Bill</span>
                   </h2>
                 </div>
 
-                {/* Coming Soon - Huge with gradient */}
-              <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-extrabold mb-8 bg-gradient-to-r from-primary via-blue-500 to-purple-600 bg-clip-text text-transparent tracking-tight" style={{ lineHeight: '1.5' }}>
-  Coming Soon
-</h1>
+                <h1
+                  className="mt-3 mb-4 pb-1 bg-gradient-to-r from-secondary via-primary to-blue-500 bg-clip-text text-4xl font-extrabold tracking-tight leading-[1.15] text-transparent sm:text-5xl"
+                >
+                  Coming Soon
+                </h1>
 
-                {/* Description */}
-                <p className="text-lg sm:text-xl lg:text-2xl text-accent/70 mb-16 max-w-3xl leading-relaxed">
-                  AI-powered invoicing and inventory management for modern
-                  businesses.
-                  <br className="hidden sm:block" />
+                <p className="mx-auto mb-8 max-w-xl text-sm leading-relaxed text-accent/75 sm:text-base">
+                  AI-powered invoicing and inventory management for modern businesses.
                   Be the first to know when we launch.
                 </p>
 
-                {/* Email Form - Bigger */}
-                <form onSubmit={handleSubmit} className="w-full max-w-2xl">
-                  <div className="flex flex-col sm:flex-row gap-4 mb-6">
+                <form onSubmit={handleSubmit} className="mx-auto w-full max-w-xl">
+                  <div className="mb-3 flex flex-col gap-3 sm:flex-row">
                     <input
                       type="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="Enter your email address"
-                      className="flex-1 px-6 py-4 sm:py-5 text-base sm:text-lg bg-white border-2 border-gray-200 rounded-xl text-text placeholder:text-gray-400 focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all outline-none shadow-sm"
+                      className="flex-1 rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm text-text shadow-sm outline-none transition-all placeholder:text-gray-400 focus:border-primary focus:ring-4 focus:ring-primary/10 sm:text-base"
                       required
                       disabled={isSubmitting}
                     />
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="px-8 sm:px-10 py-4 sm:py-5 bg-gradient-to-r from-primary to-blue-600 text-white font-bold text-base sm:text-lg rounded-xl shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40 hover:scale-105 active:scale-95 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 whitespace-nowrap"
+                      className="whitespace-nowrap rounded-xl bg-gradient-to-r from-primary to-blue-600 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-primary/25 transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-primary/35 disabled:cursor-not-allowed disabled:opacity-50"
                     >
-                      {isSubmitting ? (
-                        <span className="flex items-center gap-2">
-                          <svg
-                            className="animate-spin h-5 w-5"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                          >
-                            <circle
-                              className="opacity-25"
-                              cx="12"
-                              cy="12"
-                              r="10"
-                              stroke="currentColor"
-                              strokeWidth="4"
-                            />
-                            <path
-                              className="opacity-75"
-                              fill="currentColor"
-                              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                            />
-                          </svg>
-                        </span>
-                      ) : (
-                        "Notify Me"
-                      )}
+                      {isSubmitting ? "Submitting..." : "Join the Waitlist"}
                     </button>
                   </div>
-
-                  {/* Footer text */}
-                  <p className="text-sm sm:text-base text-accent/50 italic">
-                    Notify me when the app is launched
+                  <p className="text-xs italic text-accent/55 sm:text-sm">
+                    No spam. Product updates only.
                   </p>
                 </form>
               </>
             ) : (
-              /* Success State */
               <div className="animate-scale-in">
-                <div className="w-24 h-24 sm:w-28 sm:h-28 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-8">
+                <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-green-100 sm:h-20 sm:w-20">
                   <svg
-                    className="w-12 h-12 sm:w-14 sm:h-14 text-green-600"
+                    className="h-8 w-8 text-green-600 sm:h-10 sm:w-10"
                     fill="currentColor"
                     viewBox="0 0 20 20"
                   >
@@ -184,11 +143,11 @@ export default function ComingSoonModal() {
                     />
                   </svg>
                 </div>
-                <h3 className="text-4xl sm:text-5xl font-bold text-secondary mb-4">
-                  You're on the list! 🎉
+                <h3 className="mb-3 text-3xl font-bold text-secondary sm:text-4xl">
+                  You are on the list!
                 </h3>
-                <p className="text-xl sm:text-2xl text-accent/70">
-                  We'll notify you as soon as we launch.
+                <p className="text-base text-accent/70 sm:text-lg">
+                  We will notify you as soon as we launch.
                 </p>
               </div>
             )}

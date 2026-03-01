@@ -6,19 +6,25 @@ import HowItWorksInteractive from "../components/HowItWorksInteractive";
 
 
 export const metadata: Metadata = {
-  title: "How It Works - AI Invoice Creation in 3 Easy Steps | WhisprBill",
-  description: "See how WhisprBill creates professional invoices in 30 seconds. Chat naturally → AI generates invoice → Export & share. No forms, no training, just results.",
+  title: "How WhisprBill Works - AI Invoice Generator in 3 Steps for India",
+  description: "Learn how to create GST-ready invoices in India in 3 simple steps with WhisprBill. Chat naturally, review instantly, and share professional invoices in seconds.",
   keywords: [
-    "how invoice software works",
-    "AI invoicing tutorial",
-    "invoice creation steps",
-    "automated billing process",
-    "invoice generator guide",
-    "WhisprBill tutorial"
+    "how to create GST invoice online",
+    "AI invoice generator tutorial India",
+    "invoice maker step by step",
+    "how billing software works",
+    "online invoice generator guide India",
+    "GST invoice format walkthrough",
+    "invoicing software tutorial for small business",
+    "AI billing assistant demo",
+    "invoice app onboarding India",
+    "freelancer invoice workflow India",
+    "MSME billing workflow",
+    "WhisprBill how it works"
   ],
   openGraph: {
-    title: "How WhisprBill Works - 3 Simple Steps to Perfect Invoices",
-    description: "From conversation to professional invoice in under 30 seconds. See our AI-powered workflow in action.",
+    title: "How WhisprBill Works - 3 Steps to Fast GST Invoicing",
+    description: "See the complete flow from chat prompt to GST-ready invoice PDF, built for Indian small businesses and freelancers.",
     url: "https://whisprbill.com/how-it-works",
     images: [
       {
@@ -137,10 +143,10 @@ export default function HowItWorksPage() {
 
               <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
                 <Link
-                  href="/pricing"
+                  href="/waitlist"
                   className="inline-flex items-center justify-center rounded-xl bg-white px-8 py-4 text-base font-bold text-secondary transition-all hover:-translate-y-0.5 hover:bg-blue-50 hover:shadow-xl"
                 >
-                  Try It Free
+                  Join the Waitlist
                 </Link>
                 <a
                   href="#interactive-demo"
@@ -524,10 +530,10 @@ export default function HowItWorksPage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
               <Link
-                href="/pricing"
+                href="/waitlist"
                 className="px-8 py-4 bg-white text-primary font-bold rounded-xl hover:bg-gray-100 transition-colors shadow-lg"
               >
-                Start Free Trial - No Credit Card Required
+                Join the Waitlist
               </Link>
               <Link
                 href="/features"
@@ -547,6 +553,7 @@ export default function HowItWorksPage() {
     </>
   );
 }
+
 
 
 
