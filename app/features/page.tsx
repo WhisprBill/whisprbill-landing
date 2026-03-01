@@ -1,9 +1,9 @@
 "use client";
 
-import type { Metadata } from "next";
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
@@ -11,32 +11,35 @@ import Footer from "../components/Footer";
 const spotlightFeatures = [
   {
     id: "ai-invoicing",
+    href: "/features/ai-invoicing",
     title: "Your AI Invoice Assistant That Speaks Your Language",
     description:
-      "Forget navigating through endless menus and forms. Simply chat naturally: 'Create an invoice for Sharma Enterprises for ₹45,000 with 18% GST' and watch your invoice appear instantly. It's invoicing that feels like texting a colleague.",
+      "Forget navigating through endless menus and forms. Simply chat naturally: 'Create an invoice for Sharma Enterprises for â‚¹45,000 with 18% GST' and watch your invoice appear instantly. It's invoicing that feels like texting a colleague.",
     details:
-      "Our advanced AI engine understands context, intent, and business terminology in plain English. Say 'Add 5% trade discount' or 'Change payment terms to Net 30' and it happens in real-time. Need to create a proforma invoice instead? Just ask. Want to add batch numbers to pharmacy items? Simply mention it. The AI remembers your business preferences, customer details, and product catalogs—so you never have to repeat information. It's like having a trained accountant who knows your business inside-out, available 24/7, never takes breaks, and works at the speed of thought. Within minutes of your first conversation, you'll create professional invoices that used to take 20+ minutes of manual data entry.",
-    icon: "💬",
+      "Our advanced AI engine understands context, intent, and business terminology in plain English. Say 'Add 5% trade discount' or 'Change payment terms to Net 30' and it happens in real-time. Need to create a proforma invoice instead? Just ask. Want to add batch numbers to pharmacy items? Simply mention it. The AI remembers your business preferences, customer details, and product catalogsâ€”so you never have to repeat information. It's like having a trained accountant who knows your business inside-out, available 24/7, never takes breaks, and works at the speed of thought. Within minutes of your first conversation, you'll create professional invoices that used to take 20+ minutes of manual data entry.",
+    icon: "ðŸ’¬",
     image: "/wbill-chatwithai.png",
   },
   {
     id: "templates",
+    href: "/features/templates",
     title: "Professional Templates for Every Business Type",
     description:
-      "Choose from 50+ beautifully designed invoice templates spanning every industry—from minimalist designs for tech startups to detailed formats for construction firms. Each template is GST-compliant, fully customizable, and looks stunning on any device or printer.",
+      "Choose from 50+ beautifully designed invoice templates spanning every industryâ€”from minimalist designs for tech startups to detailed formats for construction firms. Each template is GST-compliant, fully customizable, and looks stunning on any device or printer.",
     details:
-      "Stop sending boring, generic invoices. Our template library includes specialized formats for Retail, Wholesale, Services, Manufacturing, Healthcare, Real Estate, Hospitality, and more. Each template follows industry best practices: Service invoices with hourly breakdowns, Product invoices with SKU codes, Proforma invoices for advance orders, Tax invoices with detailed GST breakdowns, Credit/Debit notes for returns, Quotations and Estimates, Delivery Challans, and Purchase Orders. Customize colors, fonts, logos, and layouts in minutes using our drag-and-drop editor—no design skills needed. Add custom fields for industry-specific information like vehicle numbers for transporters or patient IDs for clinics. Set your preferred template as default and never worry about formatting again. Preview exactly how your invoice will look before sending. Export to PDF, print directly, or share via WhatsApp/Email with one click. New templates are added monthly based on user requests—we've already released templates for Event Management, Photography, Consulting, Legal Services, and Educational Institutions. Coming soon: Multi-language templates in Hindi, Tamil, Telugu, and more regional languages. One fashion boutique owner told us: 'Clients now compliment our invoices—something I never imagined possible!' Professional presentation builds trust and gets you paid faster.",
-    icon: "📄",
+      "Stop sending boring, generic invoices. Our template library includes specialized formats for Retail, Wholesale, Services, Manufacturing, Healthcare, Real Estate, Hospitality, and more. Each template follows industry best practices: Service invoices with hourly breakdowns, Product invoices with SKU codes, Proforma invoices for advance orders, Tax invoices with detailed GST breakdowns, Credit/Debit notes for returns, Quotations and Estimates, Delivery Challans, and Purchase Orders. Customize colors, fonts, logos, and layouts in minutes using our drag-and-drop editorâ€”no design skills needed. Add custom fields for industry-specific information like vehicle numbers for transporters or patient IDs for clinics. Set your preferred template as default and never worry about formatting again. Preview exactly how your invoice will look before sending. Export to PDF, print directly, or share via WhatsApp/Email with one click. New templates are added monthly based on user requestsâ€”we've already released templates for Event Management, Photography, Consulting, Legal Services, and Educational Institutions. Coming soon: Multi-language templates in Hindi, Tamil, Telugu, and more regional languages. One fashion boutique owner told us: 'Clients now compliment our invoicesâ€”something I never imagined possible!' Professional presentation builds trust and gets you paid faster.",
+    icon: "ðŸ“„",
     image: "/Wbill-Templates.png",
   },
   {
     id: "analytics",
+    href: "/features/analytics",
     title: "Intelligent Business Insights, Not Just Data Storage",
     description:
-      "Stop drowning in spreadsheets. Our AI-powered analytics dashboard transforms your raw invoicing data into actionable business intelligence. Instantly see which products are flying off shelves, which customers drive revenue, and where your cash is stuck—all without hiring a data analyst.",
+      "Stop drowning in spreadsheets. Our AI-powered analytics dashboard transforms your raw invoicing data into actionable business intelligence. Instantly see which products are flying off shelves, which customers drive revenue, and where your cash is stuckâ€”all without hiring a data analyst.",
     details:
-      "Visual charts automatically track month-over-month revenue growth, identify your top 10 customers by value, highlight slow-moving inventory, and flag overdue payments before they become problems. See real-time metrics like Days Sales Outstanding (DSO), inventory turnover ratios, and profit margins per product category. The system uses predictive analytics to forecast next month's revenue based on current trends and seasonal patterns. Get automated alerts when a customer's payment pattern changes or when stock levels hit reorder points. Perfect for business owners who want to make data-driven decisions without needing an MBA in finance. Most users discover hidden revenue opportunities within their first week of using the dashboard—whether it's upselling to high-value customers, discontinuing unprofitable products, or optimizing pricing strategies based on demand patterns.",
-    icon: "📊",
+      "Visual charts automatically track month-over-month revenue growth, identify your top 10 customers by value, highlight slow-moving inventory, and flag overdue payments before they become problems. See real-time metrics like Days Sales Outstanding (DSO), inventory turnover ratios, and profit margins per product category. The system uses predictive analytics to forecast next month's revenue based on current trends and seasonal patterns. Get automated alerts when a customer's payment pattern changes or when stock levels hit reorder points. Perfect for business owners who want to make data-driven decisions without needing an MBA in finance. Most users discover hidden revenue opportunities within their first week of using the dashboardâ€”whether it's upselling to high-value customers, discontinuing unprofitable products, or optimizing pricing strategies based on demand patterns.",
+    icon: "ðŸ“Š",
     image: "/wbill-dashboard.png",
   },
 ];
@@ -45,52 +48,57 @@ const spotlightFeatures = [
 const advancedFeatures = [
   {
     id: "bulk",
+    href: "/features/bulk-import",
     title: "Lightning-Fast Bulk Import",
     description:
       "Migrating from another system? Upload your entire customer database and product catalog in seconds. Supports Excel, CSV, and Google Sheets with intelligent field mapping that learns from your data structure.",
     detailedInfo:
-      "Our smart importer automatically detects column headers and maps them to the correct fields—no manual configuration needed. Import 10,000 products with variants, pricing tiers, and HSN codes in under 2 minutes. The system validates data in real-time, flagging duplicates and formatting errors before they cause issues. Supports batch updates too: need to increase prices by 10% across 500 items? Upload a CSV and it's done. Includes rollback protection—if something looks wrong, undo the entire import with one click. Perfect for businesses switching from Tally, Excel, or legacy systems without IT expertise.",
-    icon: "📂",
+      "Our smart importer automatically detects column headers and maps them to the correct fieldsâ€”no manual configuration needed. Import 10,000 products with variants, pricing tiers, and HSN codes in under 2 minutes. The system validates data in real-time, flagging duplicates and formatting errors before they cause issues. Supports batch updates too: need to increase prices by 10% across 500 items? Upload a CSV and it's done. Includes rollback protectionâ€”if something looks wrong, undo the entire import with one click. Perfect for businesses switching from Tally, Excel, or legacy systems without IT expertise.",
+    icon: "ðŸ“‚",
     image: "/wbill-bulkupload2.png",
   },
   {
     id: "customers",
+    href: "/features/customer-management",
     title: "Unlimited Customer Management",
     description:
-      "Add unlimited customers even on the Free plan—no artificial caps on your growth. Store complete contact details, billing addresses, payment terms, and transaction history. Organize customers with custom tags and categories for targeted campaigns.",
+      "Add unlimited customers even on the Free planâ€”no artificial caps on your growth. Store complete contact details, billing addresses, payment terms, and transaction history. Organize customers with custom tags and categories for targeted campaigns.",
     detailedInfo:
-      "Unlike competitors who charge per contact, we believe customer data should be unlimited from day one. Store names, phone numbers, emails, GSTIN, billing/shipping addresses, credit limits, payment terms (Net 30, COD, etc.), and custom notes. Tag customers as 'VIP', 'Wholesale', 'Retail', or create your own categories. View complete transaction history: total sales, pending payments, average order value, and purchase frequency. Search and filter customers instantly even with 10,000+ records. Migrating from another system? Our bulk import tool handles CSV/Excel files with automatic field mapping—upload 5,000 customers with full details in under 60 seconds. The system validates GSTINs in real-time using government APIs and flags duplicates before import. Export customer lists anytime for backup or external analysis. Set credit limits and get alerts when customers exceed them. Track communication history: when you last contacted them, quotes sent, pending follow-ups. Segment customers for targeted WhatsApp campaigns: send festive offers to 'VIP' customers or stock clearance alerts to 'Retail' only. One distributor managing 8,000+ customer records told us: 'Finally, a system that doesn't charge me extra for growing my business.' Customer data syncs across devices in real-time—add a customer on mobile, invoice them instantly from desktop.",
-    icon: "👥",
+      "Unlike competitors who charge per contact, we believe customer data should be unlimited from day one. Store names, phone numbers, emails, GSTIN, billing/shipping addresses, credit limits, payment terms (Net 30, COD, etc.), and custom notes. Tag customers as 'VIP', 'Wholesale', 'Retail', or create your own categories. View complete transaction history: total sales, pending payments, average order value, and purchase frequency. Search and filter customers instantly even with 10,000+ records. Migrating from another system? Our bulk import tool handles CSV/Excel files with automatic field mappingâ€”upload 5,000 customers with full details in under 60 seconds. The system validates GSTINs in real-time using government APIs and flags duplicates before import. Export customer lists anytime for backup or external analysis. Set credit limits and get alerts when customers exceed them. Track communication history: when you last contacted them, quotes sent, pending follow-ups. Segment customers for targeted WhatsApp campaigns: send festive offers to 'VIP' customers or stock clearance alerts to 'Retail' only. One distributor managing 8,000+ customer records told us: 'Finally, a system that doesn't charge me extra for growing my business.' Customer data syncs across devices in real-timeâ€”add a customer on mobile, invoice them instantly from desktop.",
+    icon: "ðŸ‘¥",
     image: "/wbill-customers.jpeg",
   },
   {
     id: "multi-company",
+    href: "/features/multi-company",
     title: "Multi-Company Management",
     description:
-      "Run multiple businesses from a single account—each with its own customers, inventory, and financial reports. Switch between companies in one click without logging out. Perfect for entrepreneurs managing multiple brands, franchises, or separate business entities.",
+      "Run multiple businesses from a single accountâ€”each with its own customers, inventory, and financial reports. Switch between companies in one click without logging out. Perfect for entrepreneurs managing multiple brands, franchises, or separate business entities.",
     detailedInfo:
-      "Manage up to 10 companies under one login—no need to juggle multiple accounts or pay for separate subscriptions. Each company operates completely independently with its own customer database, product catalog, invoice numbering, GST settings, and financial reports. Data never mixes: invoices created for Company A won't appear in Company B's records. Switch between companies instantly from the dashboard—select 'Electronics Store' in the morning, 'Consulting Firm' in the afternoon. Perfect for: Franchise owners managing multiple locations, Entrepreneurs running parallel ventures (e.g., retail + services), Holding companies overseeing subsidiary businesses, Accountants/CAs managing client books, Business owners with different GSTINs for different states. Each company has its own branding: upload separate logos, letterheads, and invoice templates per business. Set different pricing tiers, payment terms, and tax settings for each entity. Generate consolidated reports across all companies or individual P&L statements per business. User access control: assign employees to specific companies only—your warehouse manager sees Retail inventory, not Consulting data. Import customers and products separately for each company using bulk upload. One user managing 6 retail outlets told us: 'I can finally see which store is profitable and which needs attention—all from one screen.' Switch seamlessly, stay organized, grow fearlessly.",
-    icon: "🏢",
+      "Manage up to 10 companies under one loginâ€”no need to juggle multiple accounts or pay for separate subscriptions. Each company operates completely independently with its own customer database, product catalog, invoice numbering, GST settings, and financial reports. Data never mixes: invoices created for Company A won't appear in Company B's records. Switch between companies instantly from the dashboardâ€”select 'Electronics Store' in the morning, 'Consulting Firm' in the afternoon. Perfect for: Franchise owners managing multiple locations, Entrepreneurs running parallel ventures (e.g., retail + services), Holding companies overseeing subsidiary businesses, Accountants/CAs managing client books, Business owners with different GSTINs for different states. Each company has its own branding: upload separate logos, letterheads, and invoice templates per business. Set different pricing tiers, payment terms, and tax settings for each entity. Generate consolidated reports across all companies or individual P&L statements per business. User access control: assign employees to specific companies onlyâ€”your warehouse manager sees Retail inventory, not Consulting data. Import customers and products separately for each company using bulk upload. One user managing 6 retail outlets told us: 'I can finally see which store is profitable and which needs attentionâ€”all from one screen.' Switch seamlessly, stay organized, grow fearlessly.",
+    icon: "ðŸ¢",
     image: "/wbill-multicompany.jpeg",
   },
   {
     id: "variants-pricing",
+    href: "/features/variants-pricing",
     title: "Smart Variants & Dynamic Pricing",
     description:
-      "Sell products in multiple sizes, colors, or configurations? Create one master product with unlimited variants—each with its own SKU, stock level, and pricing. Combine this with multi-tier pricing to charge different rates to Retailers, Wholesalers, and VIP customers automatically.",
+      "Sell products in multiple sizes, colors, or configurations? Create one master product with unlimited variantsâ€”each with its own SKU, stock level, and pricing. Combine this with multi-tier pricing to charge different rates to Retailers, Wholesalers, and VIP customers automatically.",
     detailedInfo:
-      "Product Variants: Define custom attributes beyond Size/Color—Flavor, Grade, Voltage, Model, Finish, Material. Sell shirts in 5 sizes × 8 colors = 40 variants managed as one product. Each variant gets its own SKU, barcode, stock quantity, and pricing. Bulk-edit variants: increase prices for all 'XL' sizes across 50 designs in one action. Import variants from Excel using our template system. Track inventory at variant level: see that 'Blue Medium' is low stock while 'Blue Large' is overstocked. Variant-level images help customers identify exactly what they're ordering. Perfect for Apparel (Size/Color), Footwear (Size/Style), Electronics (Model/Capacity), Furniture (Material/Finish), FMCG (Pack Size/Flavor). One footwear retailer manages 2,400 SKUs (200 designs × 12 sizes) effortlessly.\n\nDynamic Pricing Tiers: Create unlimited price lists with custom names: VIP, Regular, Wholesale, Distributor, Export, Retail. Assign customers to tiers once; every invoice automatically uses their pricing—no manual calculation. Set tier-specific discounts by percentage or fixed amount per product/variant. Supports time-based pricing: run Diwali discounts without changing base prices. Quantity-based pricing: automatically give 15% off when order exceeds ₹50,000. Override pricing on individual invoices for special negotiations. Track pricing effectiveness with built-in analytics showing margins per tier. Import pricing across 1000+ products via Excel in minutes. The system alerts you when margins drop below thresholds to prevent under-pricing. One textile distributor increased margins by 3.2% by optimizing tier structures. Variants + Pricing = Ultimate flexibility for complex catalogs.",
-    icon: "💎",
+      "Product Variants: Define custom attributes beyond Size/Colorâ€”Flavor, Grade, Voltage, Model, Finish, Material. Sell shirts in 5 sizes Ã— 8 colors = 40 variants managed as one product. Each variant gets its own SKU, barcode, stock quantity, and pricing. Bulk-edit variants: increase prices for all 'XL' sizes across 50 designs in one action. Import variants from Excel using our template system. Track inventory at variant level: see that 'Blue Medium' is low stock while 'Blue Large' is overstocked. Variant-level images help customers identify exactly what they're ordering. Perfect for Apparel (Size/Color), Footwear (Size/Style), Electronics (Model/Capacity), Furniture (Material/Finish), FMCG (Pack Size/Flavor). One footwear retailer manages 2,400 SKUs (200 designs Ã— 12 sizes) effortlessly.\n\nDynamic Pricing Tiers: Create unlimited price lists with custom names: VIP, Regular, Wholesale, Distributor, Export, Retail. Assign customers to tiers once; every invoice automatically uses their pricingâ€”no manual calculation. Set tier-specific discounts by percentage or fixed amount per product/variant. Supports time-based pricing: run Diwali discounts without changing base prices. Quantity-based pricing: automatically give 15% off when order exceeds â‚¹50,000. Override pricing on individual invoices for special negotiations. Track pricing effectiveness with built-in analytics showing margins per tier. Import pricing across 1000+ products via Excel in minutes. The system alerts you when margins drop below thresholds to prevent under-pricing. One textile distributor increased margins by 3.2% by optimizing tier structures. Variants + Pricing = Ultimate flexibility for complex catalogs.",
+    icon: "ðŸ’Ž",
     image: "/wbill-variantspricing.jpeg",
   },
   {
     id: "gst",
+    href: "/features/gst-compliance",
     title: "100% GST Compliance Guarantee",
     description:
       "Stay fully compliant with Indian tax regulations. Auto-calculate CGST, SGST, IGST based on buyer location. Generate GSTR-1, GSTR-3B reconciliation reports instantly. Supports reverse charge, e-invoicing, and E-way bills.",
     detailedInfo:
-      "The system automatically determines tax type: CGST+SGST for intra-state, IGST for inter-state transactions. Supports all GST rates: 0%, 5%, 12%, 18%, 28%, and cess items. Validates GSTIN in real-time using government APIs. Generates JSON files ready for upload to GST portal—no manual data entry. E-invoice generation with NIC integration for B2B transactions over ₹5 crores turnover. One-click E-way bill creation with automatic distance calculation and validity computation. Reverse charge mechanism for unregistered vendors handled automatically. Comprehensive reports: HSN-wise summary, tax liability statements, input credit ledgers. Monthly reconciliation tools match your data with GSTR-2A to catch discrepancies before filing. Tax rate changes? Update centrally and all future invoices reflect new rates. Trusted by 5,000+ businesses including CA firms who verify GST compliance—zero penalties reported in 2+ years.",
-    icon: "🇮🇳",
+      "The system automatically determines tax type: CGST+SGST for intra-state, IGST for inter-state transactions. Supports all GST rates: 0%, 5%, 12%, 18%, 28%, and cess items. Validates GSTIN in real-time using government APIs. Generates JSON files ready for upload to GST portalâ€”no manual data entry. E-invoice generation with NIC integration for B2B transactions over â‚¹5 crores turnover. One-click E-way bill creation with automatic distance calculation and validity computation. Reverse charge mechanism for unregistered vendors handled automatically. Comprehensive reports: HSN-wise summary, tax liability statements, input credit ledgers. Monthly reconciliation tools match your data with GSTR-2A to catch discrepancies before filing. Tax rate changes? Update centrally and all future invoices reflect new rates. Trusted by 5,000+ businesses including CA firms who verify GST complianceâ€”zero penalties reported in 2+ years.",
+    icon: "ðŸ‡®ðŸ‡³",
     image: "/wbill-gstcompliance.jpeg",
   },
 ];
@@ -98,6 +106,7 @@ const advancedFeatures = [
 export default function FeaturesPage() {
   const [modalContent, setModalContent] = useState<any | null>(null);
   const [activeTab, setActiveTab] = useState(0);
+  const router = useRouter();
 
   return (
     <>
@@ -116,13 +125,13 @@ export default function FeaturesPage() {
             </h2>
             
             <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-secondary mb-4 sm:mb-6 leading-tight px-4 sm:px-0">
-              Everything you need to run invoicing like a Fortune 500 company.{" "}
+              AI invoicing and GST billing features for Indian businesses.{" "}
               <br className="hidden sm:block" />
-              <span className="text-primary">Complexity optional.</span>
+              <span className="text-primary">Built for MSMEs, freelancers, and growing teams.</span>
             </h1>
             
             <p className="text-base sm:text-lg text-accent/80 max-w-3xl mx-auto mb-6 sm:mb-8 leading-relaxed px-4 sm:px-0">
-              From AI-powered invoice creation to advanced inventory management—all the tools you need without the enterprise price tag or learning curve.
+              From AI invoice automation to GST-compliant templates, analytics, and customer workflows - everything you need in one billing software stack.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4 sm:px-0">
@@ -149,9 +158,10 @@ export default function FeaturesPage() {
               {spotlightFeatures.map((feature, index) => (
                 <div
                   key={feature.id}
+                  onClick={() => router.push(feature.href)}
                   className={`flex flex-col lg:flex-row items-center gap-8 sm:gap-12 lg:gap-16 xl:gap-24 ${
                     index % 2 === 1 ? "lg:flex-row-reverse" : ""
-                  }`}
+                  } cursor-pointer`}
                 >
                   {/* Text Content */}
                   <div className="flex-1 space-y-4 sm:space-y-6 lg:space-y-8 text-center lg:text-left">
@@ -163,15 +173,25 @@ export default function FeaturesPage() {
                         {feature.description}
                       </p>
                     </div>
-                    <button
-                      onClick={() => setModalContent(feature)}
-                      className="text-primary font-bold text-base sm:text-lg hover:text-blue-700 transition-colors inline-flex items-center gap-2 group mx-auto lg:mx-0"
-                    >
-                      Learn how this saves you hours
-                      <span className="group-hover:translate-x-1 transition-transform">
-                        →
-                      </span>
-                    </button>
+                    <div className="flex flex-wrap items-center gap-3 justify-center lg:justify-start">
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setModalContent(feature);
+                        }}
+                        className="text-primary font-bold text-base sm:text-lg hover:text-blue-700 transition-colors inline-flex items-center gap-2 group"
+                      >
+                        Learn how this saves you hours
+                        <span className="group-hover:translate-x-1 transition-transform">-&gt;</span>
+                      </button>
+                      <Link
+                        href={feature.href}
+                        onClick={(e) => e.stopPropagation()}
+                        className="inline-flex items-center rounded-full border border-primary/25 bg-primary/5 px-3 py-1.5 text-xs font-semibold text-primary hover:bg-primary/10"
+                      >
+                        Open feature page
+                      </Link>
+                    </div>
                   </div>
 
                   {/* Image Container */}
@@ -205,7 +225,7 @@ export default function FeaturesPage() {
                 Advanced features that give you the competitive edge
               </h2>
               <p className="text-sm sm:text-base md:text-lg text-accent/70 max-w-2xl mx-auto">
-                From multi-company management to GST compliance—industry-specific tools that solve real business problems, not generic features.
+                From multi-company management to GST complianceâ€”industry-specific tools that solve real business problems, not generic features.
               </p>
             </div>
 
@@ -265,16 +285,25 @@ export default function FeaturesPage() {
                               }
                             `}
                           >
-                            <button
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                setModalContent(advancedFeatures[index]);
-                              }}
-                              className="text-primary text-xs font-semibold hover:text-blue-700 transition-colors inline-flex items-center gap-1 mt-1"
-                            >
-                              Read full details
-                              <span className="text-xs">→</span>
-                            </button>
+                            <div className="mt-1 flex flex-wrap items-center gap-2">
+                              <button
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  setModalContent(advancedFeatures[index]);
+                                }}
+                                className="text-primary text-xs font-semibold hover:text-blue-700 transition-colors inline-flex items-center gap-1"
+                              >
+                                Read full details
+                                <span className="text-xs">-&gt;</span>
+                              </button>
+                              <Link
+                                href={feature.href}
+                                onClick={(e) => e.stopPropagation()}
+                                className="rounded-full border border-primary/25 bg-primary/5 px-2.5 py-1 text-[11px] font-semibold text-primary hover:bg-primary/10"
+                              >
+                                Open page
+                              </Link>
+                            </div>
                           </div>
                         </div>
 
@@ -289,7 +318,10 @@ export default function FeaturesPage() {
 
               {/* RIGHT: Full-Height Image Display */}
               <div className="w-full lg:w-3/5 bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-lg border border-gray-100">
-                <div className="relative bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl sm:rounded-2xl overflow-hidden">
+                <div
+                  onClick={() => router.push(advancedFeatures[activeTab].href)}
+                  className="relative cursor-pointer bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl sm:rounded-2xl overflow-hidden"
+                >
                   <div className="relative w-full aspect-[3/2]">
                     {advancedFeatures.map((feature, index) => (
                       <div
@@ -328,14 +360,24 @@ export default function FeaturesPage() {
                           Live feature preview
                         </p>
                       </div>
-                      <button
-                        onClick={() =>
-                          setModalContent(advancedFeatures[activeTab])
-                        }
-                        className="shrink-0 px-3 sm:px-4 py-2 bg-primary text-white text-xs sm:text-sm font-semibold rounded-lg hover:bg-blue-600 transition-colors shadow-sm"
-                      >
-                        Learn More
-                      </button>
+                      <div className="shrink-0 flex items-center gap-2">
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setModalContent(advancedFeatures[activeTab]);
+                          }}
+                          className="px-3 sm:px-4 py-2 bg-primary text-white text-xs sm:text-sm font-semibold rounded-lg hover:bg-blue-600 transition-colors shadow-sm"
+                        >
+                          Learn More
+                        </button>
+                        <Link
+                          href={advancedFeatures[activeTab].href}
+                          onClick={(e) => e.stopPropagation()}
+                          className="px-3 sm:px-4 py-2 bg-white text-primary border border-primary/20 text-xs sm:text-sm font-semibold rounded-lg hover:bg-primary/5 transition-colors"
+                        >
+                          Open Page
+                        </Link>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -365,7 +407,7 @@ export default function FeaturesPage() {
               <div className="rounded-xl sm:rounded-2xl border border-gray-100 bg-gradient-to-br from-green-50/60 to-white p-6 lg:p-7 shadow-sm">
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-11 h-11 rounded-xl bg-green-500 flex items-center justify-center text-white text-2xl">
-                    💬
+                    ðŸ’¬
                   </div>
                   <div>
                     <h3 className="text-lg sm:text-xl font-bold text-secondary">
@@ -377,11 +419,11 @@ export default function FeaturesPage() {
                   </div>
                 </div>
                 <p className="text-sm sm:text-base text-accent/80 leading-relaxed mb-3">
-                  Create and share invoices directly from WhatsApp by chatting with WhisprBot—no need to open the app every time.
+                  Create and share invoices directly from WhatsApp by chatting with WhisprBotâ€”no need to open the app every time.
                 </p>
                 <p className="text-xs sm:text-sm text-accent/70 leading-relaxed">
                   Multiple businesses have specifically asked for this workflow: 
-                  type "Invoice Raj Traders for yesterday's order" in WhatsApp, let the bot prepare the invoice using your existing catalog and tax rules, and get a ready-to-share PDF in the same chat—plus an option to send it to your customer instantly.
+                  type "Invoice Raj Traders for yesterday's order" in WhatsApp, let the bot prepare the invoice using your existing catalog and tax rules, and get a ready-to-share PDF in the same chatâ€”plus an option to send it to your customer instantly.
                 </p>
               </div>
 
@@ -389,7 +431,7 @@ export default function FeaturesPage() {
               <div className="rounded-xl sm:rounded-2xl border border-gray-100 bg-gradient-to-br from-blue-50/60 to-white p-6 lg:p-7 shadow-sm">
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-11 h-11 rounded-xl bg-blue-500 flex items-center justify-center text-white text-2xl">
-                    🎙️
+                    ðŸŽ™ï¸
                   </div>
                   <div>
                     <h3 className="text-lg sm:text-xl font-bold text-secondary">
@@ -404,7 +446,7 @@ export default function FeaturesPage() {
                   Speak your invoice instead of typing it. Say it once, let WhisprBill handle the structure, math, and compliance.
                 </p>
                 <p className="text-xs sm:text-sm text-accent/70 leading-relaxed">
-                  Imagine: "Create an invoice for Mehta Medicals for 12 strips of Crocin at ₹45 each with 12% GST, due in 7 days."  
+                  Imagine: "Create an invoice for Mehta Medicals for 12 strips of Crocin at â‚¹45 each with 12% GST, due in 7 days."  
                   The system will convert your voice into a structured request, run the same deterministic validations and GST rules used today, and present a ready-to-review invoice before you send it.
                 </p>
               </div>
@@ -413,11 +455,11 @@ export default function FeaturesPage() {
               <div className="rounded-xl sm:rounded-2xl border border-gray-100 bg-gradient-to-br from-slate-50/80 to-white p-6 lg:p-7 shadow-sm">
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-11 h-11 rounded-xl bg-slate-800 flex items-center justify-center text-white text-2xl">
-                    🛡️
+                    ðŸ›¡ï¸
                   </div>
                   <div>
                     <h3 className="text-lg sm:text-xl font-bold text-secondary">
-                      Next‑gen private AI engine
+                      Nextâ€‘gen private AI engine
                     </h3>
                     <p className="text-xs text-slate-700 font-semibold uppercase tracking-wide">
                       Exploring & prototyping
@@ -438,7 +480,7 @@ export default function FeaturesPage() {
                   </li>
                   <li>
                     <span className="font-semibold text-secondary">Local-first possibilities.</span> 
-                    We're also exploring whether parts of this intelligence can eventually run on your own device for an extra layer of privacy—no promises yet, but it's a direction we're actively evaluating.
+                    We're also exploring whether parts of this intelligence can eventually run on your own device for an extra layer of privacyâ€”no promises yet, but it's a direction we're actively evaluating.
                   </li>
                 </ul>
               </div>
@@ -446,7 +488,7 @@ export default function FeaturesPage() {
 
             <div className="mt-8 sm:mt-10 text-center">
               <p className="text-xs text-accent/60 max-w-2xl mx-auto leading-relaxed px-4 sm:px-0">
-                Roadmaps can change as we learn from customers. These features represent our current direction, not fixed launch dates—we'll always prioritise stability, compliance, and privacy over rushing a release.
+                Roadmaps can change as we learn from customers. These features represent our current direction, not fixed launch datesâ€”we'll always prioritise stability, compliance, and privacy over rushing a release.
               </p>
             </div>
           </div>
@@ -484,7 +526,7 @@ export default function FeaturesPage() {
                 onClick={() => setModalContent(null)}
                 className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 p-2 text-xl hover:bg-gray-100 rounded-lg transition-colors"
               >
-                ✕
+                âœ•
               </button>
 
               <div className="flex items-center gap-4">
@@ -507,7 +549,7 @@ export default function FeaturesPage() {
                 {(modalContent.details || modalContent.detailedInfo) && (
                   <div className="bg-blue-50/50 border border-blue-100 rounded-lg p-4 sm:p-5 mb-6">
                     <h4 className="text-sm font-bold text-secondary mb-3 flex items-center gap-2">
-                      <span className="text-primary">💡</span>
+                      <span className="text-primary">ðŸ’¡</span>
                       How it works in practice:
                     </h4>
                     <p className="text-xs sm:text-sm text-accent/80 leading-relaxed whitespace-pre-line">
@@ -519,64 +561,64 @@ export default function FeaturesPage() {
                 {/* Benefits callout */}
                 <div className="bg-green-50 border border-green-100 rounded-lg p-4 mb-6">
                   <h4 className="text-sm font-bold text-secondary mb-3 flex items-center gap-2">
-                    <span>✓</span>
+                    <span>âœ“</span>
                     Key Benefits:
                   </h4>
                   <ul className="text-xs sm:text-sm text-accent/80 space-y-2">
                     {modalContent.id === "bulk" && (
                       <>
-                        <li>• Save 40+ hours during system migration</li>
-                        <li>• Zero data entry errors with auto-validation</li>
-                        <li>• Start invoicing on day one, not week four</li>
+                        <li>â€¢ Save 40+ hours during system migration</li>
+                        <li>â€¢ Zero data entry errors with auto-validation</li>
+                        <li>â€¢ Start invoicing on day one, not week four</li>
                       </>
                     )}
                     {modalContent.id === "customers" && (
                       <>
-                        <li>• No limits on growth—unlimited customers forever</li>
-                        <li>• Migrate 5,000+ customers in under 60 seconds</li>
-                        <li>• Real-time GSTIN validation prevents errors</li>
+                        <li>â€¢ No limits on growthâ€”unlimited customers forever</li>
+                        <li>â€¢ Migrate 5,000+ customers in under 60 seconds</li>
+                        <li>â€¢ Real-time GSTIN validation prevents errors</li>
                       </>
                     )}
                     {modalContent.id === "multi-company" && (
                       <>
-                        <li>• Manage up to 10 businesses—one login, zero confusion</li>
-                        <li>• No extra subscriptions—save ₹10,000+ annually</li>
-                        <li>• Switch companies in one click, data never mixes</li>
+                        <li>â€¢ Manage up to 10 businessesâ€”one login, zero confusion</li>
+                        <li>â€¢ No extra subscriptionsâ€”save â‚¹10,000+ annually</li>
+                        <li>â€¢ Switch companies in one click, data never mixes</li>
                       </>
                     )}
                     {modalContent.id === "variants-pricing" && (
                       <>
-                        <li>• Manage 1000+ SKUs as easily as 10 products</li>
-                        <li>• Eliminate pricing errors—save 3-5% margins</li>
-                        <li>• Automate customer-specific pricing instantly</li>
+                        <li>â€¢ Manage 1000+ SKUs as easily as 10 products</li>
+                        <li>â€¢ Eliminate pricing errorsâ€”save 3-5% margins</li>
+                        <li>â€¢ Automate customer-specific pricing instantly</li>
                       </>
                     )}
                     {modalContent.id === "gst" && (
                       <>
-                        <li>• Zero GST penalties with automated compliance</li>
-                        <li>• File returns in 10 minutes instead of 3 days</li>
-                        <li>• E-invoice & E-way bill generation in one click</li>
+                        <li>â€¢ Zero GST penalties with automated compliance</li>
+                        <li>â€¢ File returns in 10 minutes instead of 3 days</li>
+                        <li>â€¢ E-invoice & E-way bill generation in one click</li>
                       </>
                     )}
-                    {!modalContent.id && modalContent.icon === "📄" && (
+                    {!modalContent.id && modalContent.icon === "ðŸ“„" && (
                       <>
-                        <li>• Professional presentation builds client trust</li>
-                        <li>• New templates added monthly based on requests</li>
-                        <li>• Get paid faster with polished, branded invoices</li>
+                        <li>â€¢ Professional presentation builds client trust</li>
+                        <li>â€¢ New templates added monthly based on requests</li>
+                        <li>â€¢ Get paid faster with polished, branded invoices</li>
                       </>
                     )}
-                    {!modalContent.id && modalContent.icon === "💬" && (
+                    {!modalContent.id && modalContent.icon === "ðŸ’¬" && (
                       <>
-                        <li>• Save 15-20 hours per week on invoicing tasks</li>
-                        <li>• Reduce errors by 95% with AI automation</li>
-                        <li>• Get paid faster with professional invoices</li>
+                        <li>â€¢ Save 15-20 hours per week on invoicing tasks</li>
+                        <li>â€¢ Reduce errors by 95% with AI automation</li>
+                        <li>â€¢ Get paid faster with professional invoices</li>
                       </>
                     )}
-                    {!modalContent.id && modalContent.icon === "📊" && (
+                    {!modalContent.id && modalContent.icon === "ðŸ“Š" && (
                       <>
-                        <li>• Discover hidden revenue opportunities instantly</li>
-                        <li>• Make data-driven decisions without analysts</li>
-                        <li>• Prevent payment delays with automated alerts</li>
+                        <li>â€¢ Discover hidden revenue opportunities instantly</li>
+                        <li>â€¢ Make data-driven decisions without analysts</li>
+                        <li>â€¢ Prevent payment delays with automated alerts</li>
                       </>
                     )}
                   </ul>
@@ -594,10 +636,10 @@ export default function FeaturesPage() {
                   Close
                 </button>
                 <Link
-                  href="/app/signup"
+                  href={modalContent?.href ?? "/waitlist"}
                   className="flex-1 px-6 py-3 bg-primary text-white font-bold rounded-xl hover:bg-blue-600 transition-colors text-center shadow-lg shadow-blue-200 text-sm sm:text-base"
                 >
-                  Start Free Trial Now
+                  {modalContent?.href ? "Open Full Feature Page" : "Join the Waitlist"}
                 </Link>
               </div>
             </div>
@@ -613,3 +655,4 @@ export default function FeaturesPage() {
     </>
   );
 }
+

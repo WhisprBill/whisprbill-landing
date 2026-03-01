@@ -5,18 +5,27 @@ import Pricing from "../components/Pricing";
 import Footer from "../components/Footer";
 
 export const metadata: Metadata = {
-  title: "Pricing Plans - Affordable Invoicing Software | WhisprBill",
-  description: "Start free forever. Upgrade to Pro for ₹499/month. No hidden fees, cancel anytime. Compare WhisprBill pricing plans and find the perfect fit for your business.",
+  title: "Pricing - Free Invoice Generator & GST Billing Software Plans | WhisprBill India",
+  description:
+    "Compare WhisprBill pricing for free invoice generator and GST billing software in India. Start free, upgrade anytime, and automate invoicing for small business, freelancers, and MSMEs.",
   keywords: [
-    "invoice software pricing",
-    "WhisprBill plans",
-    "affordable billing software India",
-    "free invoice generator",
-    "GST software pricing"
+    "free invoice generator India pricing",
+    "GST billing software plans",
+    "billing software pricing India",
+    "invoice maker India plans",
+    "invoicing software for small business India",
+    "MSME billing software pricing",
+    "freelancer invoice software pricing India",
+    "online invoice generator subscription",
+    "AI invoice generator India pricing",
+    "GST invoice app pricing",
+    "best billing software India cost",
+    "affordable invoicing software India"
   ],
   openGraph: {
-    title: "WhisprBill Pricing - Plans Starting at ₹0",
-    description: "Free forever plan available. Pro plan with unlimited features at ₹499/month. No credit card required to start.",
+    title: "WhisprBill Pricing - Free and Pro Plans for GST Billing in India",
+    description:
+      "Start with a free invoice generator, then scale with AI-powered GST billing software plans built for Indian businesses.",
     url: "https://whisprbill.com/pricing",
     images: [{ url: "/og-pricing.png", width: 1200, height: 630 }],
   },
@@ -237,3 +246,5 @@ export default function PricingPage() {
     </>
   );
 }
+
+

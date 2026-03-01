@@ -5,19 +5,27 @@ import Footer from "../components/Footer";
 import PrivacySecurity from "../components/PrivacySecurity";
 
 export const metadata: Metadata = {
-  title: "Security & Privacy - Enterprise-Grade Data Protection | WhisprBill",
-  description: "AI-powered invoicing with privacy-first architecture. 256-bit encryption, zero AI training on your data, SOC 2 compliant. Your business data stays yours, forever.",
+  title: "Invoice Data Security & Privacy for Indian Businesses | WhisprBill",
+  description:
+    "Explore WhisprBill security controls for GST billing software in India, including encryption, access controls, audit logs, and privacy-first AI invoice processing.",
   keywords: [
-    "invoice software security",
-    "data privacy India",
-    "SOC 2 compliant billing",
-    "secure invoicing software",
-    "GDPR compliant invoice",
-    "encrypted business data"
+    "secure invoice generator India",
+    "GST billing software security",
+    "invoice data privacy India",
+    "billing software with encryption",
+    "SOC 2 invoicing platform",
+    "GDPR compliant billing software",
+    "Indian IT Act compliant invoicing",
+    "audit trail invoice software",
+    "privacy first AI billing assistant",
+    "secure GST invoice app",
+    "role based access billing software",
+    "business data protection for invoicing"
   ],
   openGraph: {
-    title: "Security & Privacy - Your Data Stays Yours | WhisprBill",
-    description: "Enterprise-grade security with AI that respects your privacy. No data training, full encryption, audit-ready compliance.",
+    title: "WhisprBill Security - Private, Encrypted, Audit-Ready Invoicing",
+    description:
+      "See how WhisprBill protects invoice data with layered security and privacy controls designed for Indian businesses.",
     url: "https://whisprbill.com/security",
     images: [
       {

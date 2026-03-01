@@ -5,19 +5,25 @@ import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 
 export const metadata: Metadata = {
-  title: "AI Conversational Invoicing - Create Invoices by Chatting | WhisprBill",
-  description: "Generate professional invoices in 10 seconds using natural language. Just chat: 'Invoice Sharma Enterprises for ₹45,000 with 18% GST'. Reduce billing time by 80%. Free trial available.",
+  title: "AI Invoice Generator India - Create GST Invoices by Chat | WhisprBill",
+  description: "Use WhisprBill as your AI billing assistant in India. Create GST-ready invoices through chat, reduce manual entry, and speed up billing for freelancers and small businesses.",
   keywords: [
-    "AI invoice generator",
-    "conversational invoicing software",
-    "voice invoice creation",
-    "automated billing India",
-    "AI accounting assistant",
-    "chat-based invoicing"
+    "AI invoice generator India",
+    "ai bill generator",
+    "ai billing system",
+    "ai billing assistant",
+    "chat invoice generator",
+    "conversational invoicing software India",
+    "voice based invoice maker",
+    "automatic GST invoice generator",
+    "smart billing software India",
+    "AI invoice template generator",
+    "online AI invoicing tool",
+    "invoice automation for small business India"
   ],
   openGraph: {
-    title: "AI Invoice Generator - Create Invoices by Chatting",
-    description: "Create invoices by chatting naturally. No forms, no menus—just describe what you need and get a professional invoice in seconds.",
+    title: "AI Invoice Generator India - Chat to Create GST Invoices",
+    description: "Generate professional GST invoices with natural language prompts using WhisprBill's AI billing assistant.",
     url: "https://whisprbill.com/features/ai-invoicing",
     images: [
       {
@@ -530,3 +536,4 @@ export default function AIInvoicingPage() {
     </>
   );
 }
+

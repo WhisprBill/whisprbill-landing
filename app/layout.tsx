@@ -13,13 +13,27 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://whisprbill.com'), // Replace with your actual domain
+  metadataBase: new URL("https://whisprbill.com"),
   title: {
-    default: "WhisprBill - AI-Powered Invoicing & Billing Software",
-    template: "%s | WhisprBill"
+    default: "WhisprBill - AI Invoicing and GST Billing Software for India",
+    template: "%s | WhisprBill",
   },
-  description: "Create professional invoices in seconds with AI. WhisprBill combines conversational AI with powerful invoicing and inventory management. Reduce billing time by 80%.",
-  keywords: ["AI invoicing software", "invoice generator", "billing software", "conversational invoice creation", "automated invoicing", "small business billing", "invoice management", "inventory management"],
+  description:
+    "WhisprBill is an AI invoicing and GST billing platform for Indian businesses. Create invoices faster, manage billing workflows, and run compliant operations from one dashboard.",
+  keywords: [
+    "AI invoicing software India",
+    "GST billing platform",
+    "invoice management software",
+    "automated billing system",
+    "small business billing solution",
+    "MSME invoicing software",
+    "online billing software India",
+    "invoice automation tool",
+    "business invoicing dashboard",
+    "GST-compliant invoicing",
+    "billing and invoicing software",
+    "WhisprBill",
+  ],
   authors: [{ name: "WhisprBill Team" }],
   creator: "WhisprBill",
   publisher: "WhisprBill",
@@ -27,10 +41,11 @@ export const metadata: Metadata = {
   // Open Graph for social sharing
   openGraph: {
     type: "website",
-    locale: "en_US",
+    locale: "en_IN",
     url: "https://whisprbill.com",
-    title: "WhisprBill - AI-Powered Invoicing Software",
-    description: "Create invoices conversationally with AI. Save time, reduce errors, and get paid faster.",
+    title: "WhisprBill - AI Invoicing and GST Billing Software for India",
+    description:
+      "Create GST-ready invoices with AI, reduce billing effort, and manage business invoicing workflows in one platform.",
     siteName: "WhisprBill",
     images: [
       {
@@ -45,8 +60,9 @@ export const metadata: Metadata = {
   // Twitter Cards
   twitter: {
     card: "summary_large_image",
-    title: "WhisprBill - AI-Powered Invoicing Software",
-    description: "Create invoices conversationally with AI. Save time and get paid faster.",
+    title: "WhisprBill - AI GST Billing Software for Indian Businesses",
+    description:
+      "Faster invoicing with AI, GST-ready billing, and workflow automation for MSMEs and growing teams.",
     creator: "@whisprbill", // Add your Twitter handle
     images: ["/twitter-image.png"], // Create this 1200x630px image
   },
