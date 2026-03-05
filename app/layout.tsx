@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Script from "next/script";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -37,7 +38,7 @@ export const metadata: Metadata = {
   authors: [{ name: "WhisprBill Team" }],
   creator: "WhisprBill",
   publisher: "WhisprBill",
-  
+
   // Open Graph for social sharing
   openGraph: {
     type: "website",
@@ -56,7 +57,7 @@ export const metadata: Metadata = {
       },
     ],
   },
-  
+
   // Twitter Cards
   twitter: {
     card: "summary_large_image",
@@ -66,21 +67,21 @@ export const metadata: Metadata = {
     creator: "@whisprbill", // Add your Twitter handle
     images: ["/twitter-image.png"], // Create this 1200x630px image
   },
-  
+
   // Verification tags (add when you have them)
   verification: {
     google: "your-google-verification-code",
     // yandex: "your-yandex-verification-code",
     // bing: "your-bing-verification-code",
   },
-  
+
   // Mobile optimization
   viewport: {
     width: "device-width",
     initialScale: 1,
     maximumScale: 5,
   },
-  
+
   // robots control
   robots: {
     index: true,
@@ -88,12 +89,12 @@ export const metadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
     },
   },
-  
+
   // Canonical URL
   alternates: {
     canonical: "https://whisprbill.com",
@@ -115,24 +116,25 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Organization",
-              "name": "WhisprBill",
-              "url": "https://whisprbill.com",
-              "logo": "https://whisprbill.com/logo.png",
-              "description": "AI-powered invoicing and billing software that helps businesses create invoices conversationally",
-              "sameAs": [
+              name: "WhisprBill",
+              url: "https://whisprbill.com",
+              logo: "https://whisprbill.com/logo.png",
+              description:
+                "AI-powered invoicing and billing software that helps businesses create invoices conversationally",
+              sameAs: [
                 // Add your social profiles
                 "https://twitter.com/whisprbill",
                 "https://linkedin.com/company/whisprbill",
               ],
-              "contactPoint": {
+              contactPoint: {
                 "@type": "ContactPoint",
-                "contactType": "customer support",
-                "email": "support@whisprbill.com"
-              }
-            })
+                contactType: "customer support",
+                email: "support@whisprbill.com",
+              },
+            }),
           }}
         />
-        
+
         {/* WebApplication Schema for SaaS */}
         <script
           type="application/ld+json"
@@ -140,34 +142,48 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "WebApplication",
-              "name": "WhisprBill",
-              "description": "AI-powered invoicing software that allows users to create professional invoices conversationally, reducing billing time by up to 80%",
-              "url": "https://whisprbill.com",
-              "applicationCategory": "BusinessApplication",
-              "operatingSystem": "Web browser",
-              "browserRequirements": "Requires JavaScript. Requires HTML5.",
-              "offers": {
+              name: "WhisprBill",
+              description:
+                "AI-powered invoicing software that allows users to create professional invoices conversationally, reducing billing time by up to 80%",
+              url: "https://whisprbill.com",
+              applicationCategory: "BusinessApplication",
+              operatingSystem: "Web browser",
+              browserRequirements: "Requires JavaScript. Requires HTML5.",
+              offers: {
                 "@type": "AggregateOffer",
-                "lowPrice": "0", // Free tier if you have one
-                "highPrice": "99", // Adjust based on your pricing
-                "priceCurrency": "USD",
-                "offerCount": "3" // Number of pricing tiers
+                lowPrice: "0", // Free tier if you have one
+                highPrice: "99", // Adjust based on your pricing
+                priceCurrency: "USD",
+                offerCount: "3", // Number of pricing tiers
               },
-              "featureList": [
+              featureList: [
                 "AI-powered conversational invoice creation",
                 "Manual invoice builder",
                 "Inventory management",
                 "Automated billing",
                 "Invoice templates",
-                "Real-time collaboration"
-              ]
-            })
+                "Real-time collaboration",
+              ],
+            }),
           }}
         />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        {/* Google Analytics */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-GFRYEZJ2S8"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-GFRYEZJ2S8');
+          `}
+        </Script>
         {children}
       </body>
     </html>
