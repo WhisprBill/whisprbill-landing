@@ -3,12 +3,14 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { submitWaitlistEmailOnly } from "../actions";
 
 export default function ComingSoonModal() {
   const [isOpen, setIsOpen] = useState(false);
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     // Show modal on each page mount (fresh refresh/navigation to Home)
@@ -18,18 +20,25 @@ export default function ComingSoonModal() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setErrorMessage("");
 
-    // TODO: Replace with your API call
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    const formData = new FormData();
+    formData.set("email", email);
+    const result = await submitWaitlistEmailOnly(formData);
 
-    setIsSuccess(true);
-    setEmail("");
+    if (result.success) {
+      setIsSuccess(true);
+      setEmail("");
+
+      setTimeout(() => {
+        setIsOpen(false);
+        setIsSuccess(false);
+      }, 2500);
+    } else {
+      setErrorMessage(result.message || "Something went wrong. Please try again.");
+    }
+
     setIsSubmitting(false);
-
-    setTimeout(() => {
-      setIsOpen(false);
-      setIsSuccess(false);
-    }, 2500);
   };
 
   const handleClose = () => {
@@ -126,6 +135,11 @@ export default function ComingSoonModal() {
                   <p className="text-xs italic text-accent/55 sm:text-sm">
                     No spam. Product updates only.
                   </p>
+                  {errorMessage && (
+                    <p className="mt-3 rounded-xl border border-red-200 bg-red-50 px-4 py-2 text-xs text-red-700 sm:text-sm">
+                      {errorMessage}
+                    </p>
+                  )}
                 </form>
               </>
             ) : (

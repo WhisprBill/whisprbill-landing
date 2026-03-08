@@ -1,256 +1,351 @@
-import type { Metadata } from "next";
 import Link from "next/link";
+import {
+  ShieldCheck,
+  Lock,
+  KeyRound,
+  ServerCrash,
+  FileSearch,
+  UserCog,
+  CreditCard,
+  EyeOff,
+  Download,
+  Smartphone,
+  ArrowRight,
+  CheckCircle2,
+  AlertTriangle,
+} from "lucide-react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import PrivacySecurity from "../components/PrivacySecurity";
+import FAQItem from "../components/FAQItem";
 
-export const metadata: Metadata = {
-  title: "Invoice Data Security & Privacy for Indian Businesses | WhisprBill",
-  description:
-    "Explore WhisprBill security controls for GST billing software in India, including encryption, access controls, audit logs, and privacy-first AI invoice processing.",
-  keywords: [
-    "secure invoice generator India",
-    "GST billing software security",
-    "invoice data privacy India",
-    "billing software with encryption",
-    "SOC 2 invoicing platform",
-    "GDPR compliant billing software",
-    "Indian IT Act compliant invoicing",
-    "audit trail invoice software",
-    "privacy first AI billing assistant",
-    "secure GST invoice app",
-    "role based access billing software",
-    "business data protection for invoicing"
-  ],
-  openGraph: {
-    title: "WhisprBill Security - Private, Encrypted, Audit-Ready Invoicing",
+// ─── Static Data ─────────────────────────────────────────────────────────────
+
+const securityFeatures = [
+  {
+    Icon: EyeOff,
+    title: "PII Masking Before AI",
     description:
-      "See how WhisprBill protects invoice data with layered security and privacy controls designed for Indian businesses.",
-    url: "https://whisprbill.com/security",
-    images: [
-      {
-        url: "/og-security.png",
-        width: 1200,
-        height: 630,
-        alt: "WhisprBill Security and Privacy",
-      },
+      "Customer names, GSTINs, phone numbers, and amounts are replaced with placeholders before any request reaches the AI layer. Your actual business data never leaves our database.",
+    details: [
+      "Real data stays in your DB",
+      "AI sees anonymised intent only",
+      "No business data in AI prompts",
     ],
   },
-  alternates: {
-    canonical: "https://whisprbill.com/security",
+  {
+    Icon: Lock,
+    title: "Encrypted at Every Layer",
+    description:
+      "Data is encrypted both at rest and in transit. Whether your data is stored or moving between your device and our servers, it's always protected.",
+    details: ["Encrypted at rest", "TLS in transit", "Hosted in India"],
   },
-};
+  {
+    Icon: KeyRound,
+    title: "Secure Authentication",
+    description:
+      "Sign in with Google OAuth or email. We use refresh token rotation with tokens stored securely server-side — not in browser storage.",
+    details: [
+      "Google OAuth support",
+      "Refresh token rotation",
+      "Secure server-side storage",
+    ],
+  },
+  {
+    Icon: Smartphone,
+    title: "Two-Factor Authentication",
+    description:
+      "2FA is live and available on all accounts. We strongly recommend enabling it for anyone with access to financial data.",
+    details: [
+      "Available on all plans",
+      "Authenticator app support",
+      "Adds a second layer to login",
+    ],
+  },
+  {
+    Icon: CreditCard,
+    title: "Payment Security",
+    description:
+      "Payments are processed by a trusted Indian payment provider — we never handle or store card details. Every payment event is cryptographically verified before any action is taken.",
+    details: [
+      "No card data stored",
+      "Webhook signature verification",
+      "India-native payment processing",
+    ],
+  },
+  {
+    Icon: FileSearch,
+    title: "Activity & Webhook Logs",
+    description:
+      "Every key action — invoice creation, payment event, login — is logged with timestamps. A full trail for audit and dispute resolution.",
+    details: [
+      "Invoice & payment event logs",
+      "Webhook delivery history",
+      "User activity timestamps",
+    ],
+  },
+  {
+    Icon: UserCog,
+    title: "Role-Based Access Control",
+    description:
+      "Assign team members specific roles so they only access what's relevant to their work. Admins control permissions across the workspace.",
+    details: [
+      "Per-user role assignment",
+      "Workspace-level controls",
+      "Admin permission management",
+    ],
+  },
+  {
+    Icon: Download,
+    title: "Data Portability",
+    description:
+      "Export your complete data — customers, products, invoices, and history — in standard formats at any time. No restrictions, no delays.",
+    details: [
+      "CSV and JSON export",
+      "Full history included",
+      "Export before or after cancelling",
+    ],
+  },
+  {
+    Icon: ServerCrash,
+    title: "Managed Backups",
+    description:
+      "Your database is backed up on a regular schedule by our infrastructure provider. Your data is not at risk from a single point of failure.",
+    details: [
+      "Automated backup schedule",
+      "Point-in-time recovery",
+      "No single point of failure",
+    ],
+  },
+];
+
+const privacyCommitments = [
+  {
+    title: "We Never Sell Your Data",
+    description:
+      "Your customer lists, invoices, and financial information will never be sold or shared with third parties for commercial purposes.",
+  },
+  {
+    title: "AI Never Sees Your Real Business Data",
+    description:
+      "PII masking ensures that names, GSTINs, amounts, and product details are anonymised before reaching the AI layer. The AI parses intent — not your actual records.",
+  },
+  {
+    title: "Deterministic Calculations, Not AI Guesses",
+    description:
+      "All GST calculations, tax breakdowns, and invoice totals are computed by rule-based backend logic — not by generative AI. Zero hallucinations on financial figures.",
+  },
+  {
+    title: "You Own Your Data Completely",
+    description:
+      "Export everything in standard formats at any time. Cancel your account and take all your data with you — no lock-in.",
+  },
+  {
+    title: "Transparent Data Processing",
+    description:
+      "We clearly document what data we collect, why we need it, and how it's processed. No hidden surprises.",
+  },
+];
+
+const stats = [
+  { value: "2FA", label: "Available on all accounts" },
+  { value: "PII", label: "Masked before AI layer" },
+  { value: "Zero", label: "Card data stored" },
+  { value: "100%", label: "Data ownership" },
+];
+
+const faqs = [
+  {
+    q: "Does WhisprBill send my business data to AI models?",
+    a: "No. Before any request reaches the AI layer, real customer names, GSTINs, and amounts are replaced with placeholders. The AI only sees anonymised intent — your actual business data never leaves our database.",
+  },
+  {
+    q: "How does WhisprBill prevent AI hallucinations in invoices?",
+    a: "GST rates, totals, and tax breakdowns are computed by deterministic rule-based algorithms on our backend — not by generative AI. The AI only parses your intent; all maths runs on verified, predictable logic.",
+  },
+  {
+    q: "Where is my data stored?",
+    a: "All data is stored on AWS ap-south-1 (Mumbai), keeping your business data within Indian jurisdiction.",
+  },
+  {
+    q: "How are payments secured?",
+    a: "Payments are processed entirely by Razorpay. WhisprBill verifies every payment webhook using cryptographic signature verification via Node.js — we never store raw card or payment details.",
+  },
+  {
+    q: "Is two-factor authentication available?",
+    a: "Yes — 2FA is live on all accounts. We recommend enabling it for anyone with access to invoicing and financial data.",
+  },
+  {
+    q: "Can I export all my data?",
+    a: "Yes. Export your complete dataset — customers, invoices, products, and history — in CSV or JSON format at any time. No restrictions.",
+  },
+  {
+    q: "What happens to my data if I cancel?",
+    a: "You can export everything before cancelling. Reach out to us and we'll ensure a clean handoff of your data.",
+  },
+  {
+    q: "Does WhisprBill have formal security certifications?",
+    a: "We're an early-stage product and don't currently hold independent certifications like SOC 2 or ISO 27001. Our infrastructure providers (AWS and Supabase) carry their own certifications. We're building toward formal audits as we scale.",
+  },
+];
+
+// ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default function SecurityPage() {
   return (
     <>
-      {/* Structured Data */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "WebPage",
-            "name": "WhisprBill Security & Privacy",
-            "description": "Enterprise-grade security and privacy protection for AI-powered invoicing software",
-            "provider": {
-              "@type": "Organization",
-              "name": "WhisprBill",
-              "description": "AI-powered invoicing with privacy-first architecture"
-            }
-          })
-        }}
-      />
-
-      {/* FAQ Schema */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": [
-              {
-                "@type": "Question",
-                "name": "Does WhisprBill train AI models on my business data?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "No, never. WhisprBill uses AI only for intent parsing (understanding your requests). Customer names, amounts, GSTINs, and product details never leave your secure database and are never used for AI training. Your business intelligence remains confidential forever."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "How does WhisprBill prevent AI hallucinations in invoices?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "GST rates, totals, and tax breakdowns are computed by rule-based algorithms—not generative AI. The AI only understands your intent; all calculations run on deterministic backend systems. This ensures invoices are always mathematically accurate with zero hallucinations."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Is WhisprBill compliant with data protection regulations?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Yes. WhisprBill infrastructure is SOC 2 compliant with 256-bit encryption. Every invoice generation is logged for audit trails. We comply with GDPR, Indian IT Act, and GST regulations. You retain 100% ownership of your data with export rights anytime."
-                }
-              }
-            ]
-          })
-        }}
-      />
-
       <Navbar />
-      
+
       <main className="min-h-screen bg-background">
-        {/* Hero Section */}
-        <section className="py-20 lg:py-28 bg-gradient-to-br from-green-50 via-blue-50 to-purple-50">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
-            <div className="inline-flex items-center gap-2 bg-green-100 text-green-700 px-4 py-2 rounded-full text-sm font-semibold mb-6">
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/>
-              </svg>
-              Bank-Level Security
-            </div>
-            
-            <h1 className="text-4xl lg:text-5xl xl:text-6xl font-extrabold text-secondary mb-6 leading-tight">
-              AI-Powered. <span className="text-primary">Privacy-First.</span>
-            </h1>
-            
-            <p className="text-xl text-accent/80 mb-8 leading-relaxed max-w-3xl mx-auto">
-              We believe AI should empower your business—not compromise your privacy. Here's exactly how we keep your sensitive financial data secure while delivering intelligent automation.
+        {/* ── Hero ──────────────────────────────────────────────────────── */}
+        <section className="relative overflow-hidden bg-gradient-to-br from-secondary via-blue-950 to-primary py-16 sm:py-20 lg:py-28">
+          <div className="absolute -left-16 top-10 h-44 w-44 rounded-full bg-white/10 blur-3xl" />
+          <div className="absolute right-0 top-20 h-56 w-56 rounded-full bg-cyan-300/10 blur-3xl" />
+
+          <div className="relative mx-auto max-w-4xl px-4 sm:px-6 text-center text-white">
+            <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-blue-100">
+              <ShieldCheck className="h-3.5 w-3.5 text-emerald-300" />
+              Security & Privacy
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <h1 className="text-3xl font-extrabold leading-tight sm:text-4xl lg:text-5xl xl:text-6xl">
+              AI-Powered.{" "}
+              <span className="bg-gradient-to-r from-blue-100 to-cyan-200 bg-clip-text text-transparent">
+                Privacy-First.
+              </span>
+            </h1>
+
+            <p className="mx-auto mt-5 max-w-3xl text-base leading-relaxed text-blue-100 sm:text-lg lg:text-xl">
+              We believe AI should empower your business — not compromise your
+              privacy. Here's exactly how we keep your sensitive financial data
+              secure while delivering intelligent automation.
+            </p>
+
+            <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
               <Link
-                href="/pricing"
-                className="px-8 py-4 bg-primary text-white font-bold rounded-xl hover:bg-blue-600 transition-colors shadow-lg text-center"
+                href="/waitlist"
+                className="inline-flex items-center justify-center gap-2 rounded-xl bg-white px-8 py-4 text-base font-bold text-secondary transition-all hover:-translate-y-0.5 hover:bg-blue-50 hover:shadow-xl"
               >
-                Start Secure Trial
+                Get Early Access
               </Link>
               <a
                 href="#security-details"
-                className="px-8 py-4 bg-white text-primary font-bold rounded-xl hover:bg-gray-50 transition-colors border-2 border-primary text-center"
+                className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/40 bg-white/5 px-8 py-4 text-base font-bold text-white transition-all hover:-translate-y-0.5 hover:bg-white/15"
               >
-                See Security Details ↓
+                See How It Works
+                <ArrowRight className="h-4 w-4" strokeWidth={2.5} />
               </a>
             </div>
+
+            <ul className="mt-7 flex flex-col items-center justify-center gap-3 text-sm text-blue-100 sm:flex-row sm:gap-6">
+              {[
+                "PII masked before AI",
+                "Hosted in India",
+                "Payments verified cryptographically",
+              ].map((item) => (
+                <li key={item} className="flex items-center gap-2">
+                  <CheckCircle2
+                    className="h-4 w-4 text-emerald-300"
+                    strokeWidth={2}
+                  />
+                  {item}
+                </li>
+              ))}
+            </ul>
           </div>
         </section>
 
-        {/* Main Interactive Component */}
+        {/* ── Interactive Component ──────────────────────────────────────── */}
         <div id="security-details">
           <PrivacySecurity />
         </div>
 
-        {/* Detailed Security Features */}
-        <section className="py-20 bg-white">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6">
-            <h2 className="text-3xl lg:text-4xl font-bold text-center text-secondary mb-4">
-              Comprehensive Security Architecture
-            </h2>
-            <p className="text-center text-accent/70 mb-16 max-w-2xl mx-auto">
-              Multiple layers of protection for your business-critical data
-            </p>
+        {/* ── Security Features Grid ─────────────────────────────────────── */}
+        <section className="bg-white py-16 sm:py-20 lg:py-24">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6">
+            <div className="mx-auto mb-12 max-w-2xl text-center">
+              <p className="inline-flex items-center rounded-full border border-primary/15 bg-primary/5 px-4 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-primary">
+                Security Architecture
+              </p>
+              <h2 className="mt-4 text-3xl font-extrabold text-secondary sm:text-4xl">
+                Layered protection for{" "}
+                <span className="text-primary">your financial data</span>
+              </h2>
+              <p className="mt-3 text-sm text-accent/70 sm:text-base">
+                Built on trusted infrastructure, with security decisions made at
+                every layer of the stack.
+              </p>
+            </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {[
-                {
-                  icon: "🔐",
-                  title: "End-to-End Encryption",
-                  description: "All data transmitted between your device and our servers uses 256-bit AES encryption—the same standard used by banks and government agencies.",
-                  details: ["TLS 1.3 in transit", "AES-256 at rest", "Encrypted backups"]
-                },
-                {
-                  icon: "🏢",
-                  title: "Data Sovereignty",
-                  description: "Your data is stored in secure Indian data centers, ensuring compliance with local regulations and complete control over your information.",
-                  details: ["India-based servers", "GDPR compliant", "Right to erasure"]
-                },
-                {
-                  icon: "👤",
-                  title: "Access Control",
-                  description: "Role-based permissions ensure team members only see data relevant to their role. Multi-factor authentication available for added security.",
-                  details: ["2FA support", "Role-based access", "Session management"]
-                },
-                {
-                  icon: "📝",
-                  title: "Audit Trails",
-                  description: "Every action is logged with timestamps and user IDs. Perfect for compliance audits, dispute resolution, and security monitoring.",
-                  details: ["Complete activity logs", "Export for audits", "Tamper-proof records"]
-                },
-                {
-                  icon: "🔄",
-                  title: "Automatic Backups",
-                  description: "Your data is backed up every 6 hours to geographically distributed servers. Recovery point objective (RPO) of under 6 hours.",
-                  details: ["4x daily backups", "30-day retention", "One-click restore"]
-                },
-                {
-                  icon: "🛡️",
-                  title: "DDoS Protection",
-                  description: "Enterprise-grade DDoS mitigation ensures your invoicing continues uninterrupted even during targeted attacks.",
-                  details: ["99.9% uptime SLA", "Real-time monitoring", "Auto-scaling"]
-                },
-              ].map((feature, index) => (
-                <div key={index} className="bg-gray-50 rounded-2xl p-6 border border-gray-100 hover:border-primary/30 hover:shadow-lg transition-all">
-                  <div className="text-4xl mb-4">{feature.icon}</div>
-                  <h3 className="text-xl font-bold text-secondary mb-3">{feature.title}</h3>
-                  <p className="text-accent/80 text-sm mb-4 leading-relaxed">{feature.description}</p>
-                  <ul className="space-y-1">
-                    {feature.details.map((detail, idx) => (
-                      <li key={idx} className="flex items-center gap-2 text-xs text-accent/70">
-                        <span className="text-green-500">✓</span>
-                        <span>{detail}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {securityFeatures.map((feature) => {
+                const Icon = feature.Icon;
+                return (
+                  <div
+                    key={feature.title}
+                    className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/25 hover:shadow-[0_20px_48px_rgba(1,38,82,0.10)]"
+                  >
+                    <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                      <Icon className="h-5 w-5" strokeWidth={1.8} />
+                    </div>
+                    <h3 className="mt-4 text-base font-extrabold text-secondary sm:text-lg">
+                      {feature.title}
+                    </h3>
+                    <p className="mt-2 text-sm leading-relaxed text-accent/70">
+                      {feature.description}
+                    </p>
+                    <ul className="mt-4 space-y-1.5">
+                      {feature.details.map((d) => (
+                        <li
+                          key={d}
+                          className="flex items-center gap-2 text-xs text-accent/70"
+                        >
+                          <CheckCircle2
+                            className="h-3.5 w-3.5 shrink-0 text-emerald-500"
+                            strokeWidth={2}
+                          />
+                          {d}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </section>
 
-        {/* Privacy Commitments */}
-        <section className="py-20 bg-gradient-to-br from-blue-50 to-purple-50">
-          <div className="max-w-5xl mx-auto px-4 sm:px-6">
-            <h2 className="text-3xl lg:text-4xl font-bold text-center text-secondary mb-4">
-              Our Privacy Commitments
-            </h2>
-            <p className="text-center text-accent/70 mb-12 max-w-2xl mx-auto">
-              Clear promises about how we handle your data
-            </p>
+        {/* ── Privacy Commitments ────────────────────────────────────────── */}
+        <section className="bg-gradient-to-b from-slate-50 to-background py-16 sm:py-20 lg:py-24">
+          <div className="mx-auto max-w-4xl px-4 sm:px-6">
+            <div className="mx-auto mb-10 max-w-2xl text-center">
+              <p className="inline-flex items-center rounded-full border border-primary/15 bg-primary/5 px-4 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-primary">
+                Our Commitments
+              </p>
+              <h2 className="mt-4 text-3xl font-extrabold text-secondary">
+                What we promise about your data
+              </h2>
+            </div>
 
-            <div className="space-y-6">
-              {[
-                {
-                  title: "We Never Sell Your Data",
-                  description: "Your customer lists, invoices, and financial information will never be sold, shared, or monetized. Period."
-                },
-                {
-                  title: "No AI Training on Your Business Data",
-                  description: "Unlike many AI tools, we don't use your invoices to train our models. Your competitive intelligence stays confidential."
-                },
-                {
-                  title: "You Own Your Data Completely",
-                  description: "Export all your data anytime in standard formats. Cancel your account and take everything with you—no lock-in."
-                },
-                {
-                  title: "Transparent Data Processing",
-                  description: "We clearly document what data we collect, why we need it, and exactly how it's processed. No hidden surprises."
-                },
-                {
-                  title: "Right to Deletion",
-                  description: "Request complete deletion of your account and data. We'll permanently remove everything within 30 days."
-                },
-              ].map((commitment, index) => (
-                <div key={index} className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 flex items-start gap-4">
-                  <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center shrink-0 mt-1">
-                    <svg className="w-5 h-5 text-primary" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
-                    </svg>
+            <div className="space-y-4">
+              {privacyCommitments.map((c) => (
+                <div
+                  key={c.title}
+                  className="flex items-start gap-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"
+                >
+                  <div className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/10">
+                    <CheckCircle2
+                      className="h-4 w-4 text-primary"
+                      strokeWidth={2}
+                    />
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-secondary mb-2">{commitment.title}</h3>
-                    <p className="text-accent/80 text-sm leading-relaxed">{commitment.description}</p>
+                    <h3 className="text-base font-extrabold text-secondary sm:text-lg">
+                      {c.title}
+                    </h3>
+                    <p className="mt-1.5 text-sm leading-relaxed text-accent/75">
+                      {c.description}
+                    </p>
                   </div>
                 </div>
               ))}
@@ -258,177 +353,87 @@ export default function SecurityPage() {
           </div>
         </section>
 
-        {/* Compliance Certifications */}
-        <section className="py-20 bg-white">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6">
-            <h2 className="text-3xl font-bold text-center text-secondary mb-12">
-              Compliance & Certifications
-            </h2>
+       
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {[
-                {
-                  cert: "SOC 2 Type II",
-                  description: "Audited for security, availability, and confidentiality"
-                },
-                {
-                  cert: "GDPR Compliant",
-                  description: "Full compliance with EU data protection regulations"
-                },
-                {
-                  cert: "ISO 27001",
-                  description: "Information security management certified"
-                },
-                {
-                  cert: "Indian IT Act",
-                  description: "Compliant with Section 43A data protection"
-                },
-              ].map((item, index) => (
-                <div key={index} className="bg-gradient-to-br from-gray-50 to-blue-50 rounded-xl p-6 text-center border border-gray-100">
-                  <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <svg className="w-8 h-8 text-primary" fill="currentColor" viewBox="0 0 20 20">
-                      <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/>
-                      <path fillRule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm9.707 5.707a1 1 0 00-1.414-1.414L9 12.586l-1.293-1.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/>
-                    </svg>
-                  </div>
-                  <h3 className="font-bold text-secondary mb-2">{item.cert}</h3>
-                  <p className="text-xs text-accent/70">{item.description}</p>
+        {/* ── Stats Strip ───────────────────────────────────────────────── */}
+        <section className="bg-gradient-to-r from-secondary via-blue-950 to-primary py-10 sm:py-12">
+          <div className="mx-auto max-w-5xl px-4 sm:px-6">
+            <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
+              {stats.map((s) => (
+                <div key={s.label} className="text-center text-white">
+                  <p className="text-2xl font-extrabold sm:text-3xl">
+                    {s.value}
+                  </p>
+                  <p className="mt-1 text-xs text-blue-200 sm:text-sm">
+                    {s.label}
+                  </p>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* FAQ */}
-        <section className="py-20 bg-gray-50">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6">
-            <h2 className="text-3xl font-bold text-center text-secondary mb-12">
-              Security & Privacy FAQ
-            </h2>
-
-            <div className="space-y-6">
-              {[
-                {
-                  q: "Does WhisprBill train AI models on my business data?",
-                  a: "No, never. WhisprBill uses AI only for intent parsing (understanding your requests). Customer names, amounts, GSTINs, and product details never leave your secure database and are never used for AI training. Your business intelligence remains confidential forever."
-                },
-                {
-                  q: "How does WhisprBill prevent AI hallucinations in invoices?",
-                  a: "GST rates, totals, and tax breakdowns are computed by rule-based algorithms—not generative AI. The AI only understands your intent; all calculations run on deterministic backend systems. This ensures invoices are always mathematically accurate with zero hallucinations."
-                },
-                {
-                  q: "Is WhisprBill compliant with data protection regulations?",
-                  a: "Yes. WhisprBill infrastructure is SOC 2 compliant with 256-bit encryption. Every invoice generation is logged for audit trails. We comply with GDPR, Indian IT Act, and GST regulations. You retain 100% ownership of your data with export rights anytime."
-                },
-                {
-                  q: "Where is my data stored?",
-                  a: "All data is stored in secure data centers located in India, ensuring compliance with local data residency requirements. We use geographically distributed backups for disaster recovery while keeping data within Indian jurisdiction."
-                },
-                {
-                  q: "Can I export all my data?",
-                  a: "Absolutely! Export your complete database anytime in CSV or JSON format. This includes customers, products, invoices, and all historical records. No restrictions, no delays—you own your data."
-                },
-                {
-                  q: "What happens to my data if I cancel my subscription?",
-                  a: "Your data remains accessible for 90 days after cancellation for export purposes. After that, if you don't reactivate or export, we permanently delete all your information per your request. You're always in control."
-                },
-                {
-                  q: "How do you handle security incidents?",
-                  a: "We have a 24/7 security monitoring team. In the unlikely event of a breach, we notify affected users within 72 hours per GDPR requirements and provide detailed incident reports and remediation steps."
-                },
-                {
-                  q: "Is two-factor authentication (2FA) available?",
-                  a: "Yes! We strongly recommend enabling 2FA for all accounts. Supports authenticator apps (Google Authenticator, Authy) and SMS-based verification for added account security."
-                }
-              ].map((faq, index) => (
-                <details key={index} className="bg-white rounded-xl p-6 shadow-lg border border-gray-100 group">
-                  <summary className="font-bold text-secondary cursor-pointer list-none flex justify-between items-center">
-                    <span>{faq.q}</span>
-                    <span className="text-primary group-open:rotate-180 transition-transform">▼</span>
-                  </summary>
-                  <p className="mt-4 text-accent/80 leading-relaxed">{faq.a}</p>
-                </details>
+        {/* ── FAQ ────────────────────────────────────────────────────────── */}
+        <section className="bg-gradient-to-b from-slate-50 to-background py-16 sm:py-20 lg:py-24">
+          <div className="mx-auto max-w-3xl px-4 sm:px-6">
+            <div className="mb-10 text-center">
+              <p className="inline-flex items-center rounded-full border border-primary/15 bg-primary/5 px-4 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-primary">
+                FAQ
+              </p>
+              <h2 className="mt-4 text-3xl font-extrabold text-secondary">
+                Security & privacy questions
+              </h2>
+            </div>
+            <div className="space-y-3">
+              {faqs.map((faq) => (
+                <FAQItem key={faq.q} q={faq.q} a={faq.a} />
               ))}
             </div>
           </div>
         </section>
 
-        {/* Trust Badges */}
-        <section className="py-20 bg-white">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6">
-            <div className="bg-gradient-to-br from-green-50 to-blue-50 rounded-3xl p-8 lg:p-12 border border-green-100">
-              <div className="text-center mb-8">
-                <h2 className="text-2xl lg:text-3xl font-bold text-secondary mb-3">
-                  Trusted by 5,000+ Businesses
-                </h2>
-                <p className="text-accent/70">
-                  Join companies that trust WhisprBill with their most sensitive financial data
-                </p>
-              </div>
+        {/* ── Final CTA ──────────────────────────────────────────────────── */}
+        <section className="relative overflow-hidden bg-gradient-to-br from-primary to-blue-600 py-16 sm:py-20 text-white">
+          <div className="absolute -left-16 top-0 h-48 w-48 rounded-full bg-white/10 blur-3xl" />
+          <div className="absolute bottom-0 right-0 h-48 w-48 rounded-full bg-cyan-300/10 blur-3xl" />
 
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-8">
-                <div className="bg-white rounded-xl p-4 text-center shadow-sm">
-                  <div className="text-3xl font-bold text-primary mb-1">99.9%</div>
-                  <div className="text-xs text-accent/60">Uptime SLA</div>
-                </div>
-                <div className="bg-white rounded-xl p-4 text-center shadow-sm">
-                  <div className="text-3xl font-bold text-primary mb-1">256-bit</div>
-                  <div className="text-xs text-accent/60">Encryption</div>
-                </div>
-                <div className="bg-white rounded-xl p-4 text-center shadow-sm">
-                  <div className="text-3xl font-bold text-primary mb-1">4x</div>
-                  <div className="text-xs text-accent/60">Daily Backups</div>
-                </div>
-                <div className="bg-white rounded-xl p-4 text-center shadow-sm">
-                  <div className="text-3xl font-bold text-primary mb-1">24/7</div>
-                  <div className="text-xs text-accent/60">Security Monitoring</div>
-                </div>
-              </div>
-
-              <div className="mt-8 text-center">
-                <p className="text-sm text-accent/60 mb-4">
-                  Questions about our security practices?
-                </p>
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center gap-2 text-primary font-semibold hover:underline"
-                >
-                  Contact our security team
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </Link>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Final CTA */}
-        <section className="py-20 bg-gradient-to-br from-primary to-blue-600 text-white">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
-            <h2 className="text-3xl lg:text-4xl font-bold mb-6">
-              Security You Can Trust. AI You Can Control.
+          <div className="relative mx-auto max-w-4xl px-4 sm:px-6 text-center">
+            <h2 className="text-3xl font-extrabold lg:text-4xl">
+              Security you can verify. AI you can trust.
             </h2>
-            <p className="text-lg mb-8 opacity-90">
-              Experience intelligent invoicing without compromising on privacy
+            <p className="mx-auto mt-4 mb-8 max-w-xl text-lg opacity-90">
+              Early access is open. No credit card, no surprises.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
+            <div className="flex flex-col justify-center gap-4 sm:flex-row">
               <Link
-                href="/pricing"
-                className="px-8 py-4 bg-white text-primary font-bold rounded-xl hover:bg-gray-100 transition-colors shadow-lg"
+                href="/waitlist"
+                className="inline-flex items-center justify-center gap-2 rounded-xl bg-white px-8 py-4 text-base font-bold text-primary transition-colors hover:bg-blue-50 hover:shadow-lg"
               >
-                Start Secure Free Trial
+                Get Early Access
               </Link>
               <Link
                 href="/features"
-                className="px-8 py-4 bg-transparent border-2 border-white text-white font-bold rounded-xl hover:bg-white/10 transition-colors"
+                className="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-white/60 bg-transparent px-8 py-4 text-base font-bold text-white transition-colors hover:bg-white/10"
               >
                 Explore Features
+                <ArrowRight className="h-4 w-4" strokeWidth={2.5} />
               </Link>
             </div>
-            <p className="text-sm opacity-75">
-              ✓ No credit card  ✓ Bank-level encryption  ✓ Your data stays yours
-            </p>
+            <ul className="mt-6 flex flex-col items-center justify-center gap-3 text-sm opacity-80 sm:flex-row sm:gap-6">
+              {[
+                "PII masked before AI",
+                "2FA on all accounts",
+                "Your data stays yours",
+              ].map((item) => (
+                <li key={item} className="flex items-center gap-2">
+                  <CheckCircle2
+                    className="h-4 w-4 text-emerald-300"
+                    strokeWidth={2}
+                  />
+                  {item}
+                </li>
+              ))}
+            </ul>
           </div>
         </section>
       </main>

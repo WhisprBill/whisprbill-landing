@@ -74,3 +74,135 @@ export async function submitDemoRequest(formData: FormData) {
     };
   }
 }
+
+export async function submitWaitlistRequest(formData: FormData) {
+  const name = formData.get("name") as string;
+  const email = formData.get("email") as string;
+  const company = (formData.get("company") as string) || "";
+  const notes = (formData.get("notes") as string) || "";
+  const source = "Website Waitlist";
+
+  if (!name || !email) {
+    return { success: false, message: "Name and Email are required." };
+  }
+
+  try {
+    // 1. Send Email Notification
+    await resend.emails.send({
+      from: "onboarding@resend.dev", // Use verified domain later
+      to: "whisprbill@gmail.com", // YOUR EMAIL
+      subject: `New Waitlist Signup: ${name}`,
+      html: `
+        <h2>New Waitlist Signup</h2>
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Company:</strong> ${company || "Not provided"}</p>
+        <p><strong>Notes:</strong><br/>${notes || "No notes provided"}</p>
+        <p><strong>Source:</strong> ${source}</p>
+      `,
+    });
+
+    // 2. Save to Google Sheets (Waitlist tab)
+    const auth = new google.auth.GoogleAuth({
+      credentials: {
+        client_email: process.env.GOOGLE_CLIENT_EMAIL,
+        private_key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, "\n"),
+      },
+      scopes: ["https://www.googleapis.com/auth/spreadsheets"],
+    });
+
+    const sheets = google.sheets({ version: "v4", auth });
+
+    await sheets.spreadsheets.values.append({
+      spreadsheetId: process.env.GOOGLE_SHEET_ID,
+      range: "Waitlist!A:F", // Columns: Name, Email, Company, Notes, Source, Timestamp
+      valueInputOption: "USER_ENTERED",
+      requestBody: {
+        values: [
+          [
+            name,
+            email,
+            company,
+            notes,
+            source,
+            new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }),
+          ],
+        ],
+      },
+    });
+
+    return {
+      success: true,
+      message: "You are on the waitlist.",
+    };
+  } catch (error) {
+    console.error("Waitlist submission error:", error);
+    return {
+      success: false,
+      message: "Something went wrong. Please try again.",
+    };
+  }
+}
+
+export async function submitWaitlistEmailOnly(formData: FormData) {
+  const email = formData.get("email") as string;
+  const source = "ComingSoonModal";
+
+  if (!email) {
+    return { success: false, message: "Email is required." };
+  }
+
+  try {
+    // 1. Send Email Notification
+    await resend.emails.send({
+      from: "onboarding@resend.dev", // Use verified domain later
+      to: "whisprbill@gmail.com", // YOUR EMAIL
+      subject: `New Waitlist Signup (Modal): ${email}`,
+      html: `
+        <h2>New Waitlist Signup</h2>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Source:</strong> ${source}</p>
+      `,
+    });
+
+    // 2. Save to Google Sheets (Waitlist tab)
+    const auth = new google.auth.GoogleAuth({
+      credentials: {
+        client_email: process.env.GOOGLE_CLIENT_EMAIL,
+        private_key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, "\n"),
+      },
+      scopes: ["https://www.googleapis.com/auth/spreadsheets"],
+    });
+
+    const sheets = google.sheets({ version: "v4", auth });
+
+    await sheets.spreadsheets.values.append({
+      spreadsheetId: process.env.GOOGLE_SHEET_ID,
+      range: "Waitlist!A:F", // Columns: Name, Email, Company, Notes, Source, Timestamp
+      valueInputOption: "USER_ENTERED",
+      requestBody: {
+        values: [
+          [
+            "",
+            email,
+            "",
+            "",
+            source,
+            new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }),
+          ],
+        ],
+      },
+    });
+
+    return {
+      success: true,
+      message: "You are on the waitlist.",
+    };
+  } catch (error) {
+    console.error("Modal waitlist submission error:", error);
+    return {
+      success: false,
+      message: "Something went wrong. Please try again.",
+    };
+  }
+}
