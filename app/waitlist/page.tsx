@@ -3,9 +3,25 @@
 import { useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import { submitWaitlistRequest } from "../actions";
 
 export default function WaitlistPage() {
-  const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [message, setMessage] = useState("");
+
+  async function handleSubmit(formData: FormData) {
+    setStatus("loading");
+    setMessage("");
+    const result = await submitWaitlistRequest(formData);
+
+    if (result.success) {
+      setStatus("success");
+      setMessage(result.message);
+    } else {
+      setStatus("error");
+      setMessage(result.message);
+    }
+  }
 
   return (
     <>
@@ -28,12 +44,9 @@ export default function WaitlistPage() {
                 Be among the first to get updates, early feature access, and launch perks.
               </p>
 
-              {!submitted ? (
+              {status !== "success" ? (
                 <form
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    setSubmitted(true);
-                  }}
+                  action={handleSubmit}
                   className="mt-8 grid gap-4"
                 >
                   <div className="grid gap-4 sm:grid-cols-2">
@@ -66,15 +79,21 @@ export default function WaitlistPage() {
                   />
                   <button
                     type="submit"
+                    disabled={status === "loading"}
                     className="inline-flex items-center justify-center rounded-xl bg-white px-8 py-3.5 text-sm font-bold text-secondary transition-all hover:-translate-y-0.5 hover:bg-blue-50 hover:shadow-xl sm:text-base"
                   >
-                    Join Waitlist
+                    {status === "loading" ? "Joining..." : "Join Waitlist"}
                   </button>
+                  {status === "error" && (
+                    <p className="rounded-xl border border-red-300/30 bg-red-400/15 px-4 py-3 text-sm text-red-100">
+                      {message || "Something went wrong. Please try again."}
+                    </p>
+                  )}
                 </form>
               ) : (
                 <div className="mt-8 rounded-2xl border border-emerald-300/30 bg-emerald-400/15 p-6">
                   <p className="text-lg font-semibold text-emerald-100">
-                    You are on the waitlist.
+                    {message || "You are on the waitlist."}
                   </p>
                   <p className="mt-2 text-sm text-blue-100">
                     We will reach out with updates and early access details.

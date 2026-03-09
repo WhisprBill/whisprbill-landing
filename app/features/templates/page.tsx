@@ -3,21 +3,39 @@ import Image from "next/image";
 import Link from "next/link";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
+import {
+  LayoutTemplate,
+  FileText,
+  Download,
+  Palette,
+  Sparkles,
+  CheckCircle2,
+  ChevronDown,
+  ArrowRight,
+  MessageSquare,
+  BadgeIndianRupee,
+  Building2,
+  Clock,
+  Stamp,
+} from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Professional Invoice Templates - 50+ Industry-Specific Designs | WhisprBill",
-  description: "Choose from 50+ beautifully designed GST-compliant invoice templates. Retail, Wholesale, Services, Healthcare formats. Fully customizable with your branding. Export to PDF instantly.",
+  title: "Professional Invoice Templates - Modern & Classic Designs | WhisprBill",
+  description:
+    "Choose from a growing library of GST-compliant invoice templates - from clean modern styles to classic formats. Covers tax invoices, bill of supply, proforma, quotations, and more. Export to PDF instantly.",
   keywords: [
     "invoice templates India",
+    "GST invoice templates",
     "professional invoice designs",
-    "GST compliant templates",
-    "customizable invoice formats",
-    "retail invoice template",
-    "service invoice template"
+    "modern invoice format",
+    "tax invoice template",
+    "proforma invoice template",
+    "GST billing software India",
   ],
   openGraph: {
-    title: "50+ Professional Invoice Templates - GST Compliant",
-    description: "Beautiful invoice templates for every industry. Customize colors, fonts, logos. GST-compliant and ready to use.",
+    title: "Professional Invoice Templates | WhisprBill",
+    description:
+      "A growing library of GST-compliant invoice templates - modern to classic. Customize with your branding and export instantly.",
     url: "https://whisprbill.com/features/templates",
     images: [
       {
@@ -43,24 +61,24 @@ export default function TemplatesPage() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "SoftwareApplication",
-            "name": "WhisprBill Invoice Templates",
-            "applicationCategory": "BusinessApplication",
-            "description": "50+ professional invoice templates for every industry. GST-compliant, customizable, and print-ready.",
-            "operatingSystem": "Web browser",
-            "offers": {
+            name: "WhisprBill Invoice Templates",
+            applicationCategory: "BusinessApplication",
+            description:
+              "GST-compliant invoice templates ranging from modern to classic styles. Covers tax invoices, bill of supply, proforma, quotations, delivery challans, and more.",
+            operatingSystem: "Web browser",
+            offers: {
               "@type": "Offer",
-              "price": "0",
-              "priceCurrency": "INR"
+              price: "0",
+              priceCurrency: "INR",
             },
-            "featureList": [
-              "50+ industry-specific templates",
+            featureList: [
+              "Modern and classic invoice styles",
               "GST-compliant formats",
               "Custom branding and logos",
-              "Drag-and-drop editor",
-              "PDF/WhatsApp sharing",
-              "Multi-language support"
-            ]
-          })
+              "PDF export and WhatsApp sharing",
+              "Growing template library",
+            ],
+          }),
         }}
       />
 
@@ -71,54 +89,59 @@ export default function TemplatesPage() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "FAQPage",
-            "mainEntity": [
+            mainEntity: [
               {
                 "@type": "Question",
-                "name": "How many invoice templates does WhisprBill offer?",
-                "acceptedAnswer": {
+                name: "What invoice templates does WhisprBill offer?",
+                acceptedAnswer: {
                   "@type": "Answer",
-                  "text": "WhisprBill offers 50+ professionally designed invoice templates covering industries like Retail, Wholesale, Services, Manufacturing, Healthcare, Real Estate, Hospitality, and more. New templates are added monthly based on user requests."
-                }
+                  text: "WhisprBill offers a growing library of GST-compliant invoice templates ranging from modern minimal styles to classic formats. Supported invoice types include tax invoices, bill of supply, proforma invoices, and quotations - with credit notes, debit notes, and delivery challans coming soon.",
+                },
               },
               {
                 "@type": "Question",
-                "name": "Can I customize invoice templates with my branding?",
-                "acceptedAnswer": {
+                name: "Can I add my branding to invoice templates?",
+                acceptedAnswer: {
                   "@type": "Answer",
-                  "text": "Yes! Customize colors, fonts, logos, and layouts using our drag-and-drop editor. Add custom fields for industry-specific information. No design skills needed—changes preview in real-time."
-                }
+                  text: "Yes. You can upload your company logo and it will appear on every invoice. Paid plans remove the WhisprBill watermark entirely, and Pro plans will support custom logo watermarks on invoice backgrounds.",
+                },
               },
               {
                 "@type": "Question",
-                "name": "Are the templates GST compliant?",
-                "acceptedAnswer": {
+                name: "Are WhisprBill templates GST compliant?",
+                acceptedAnswer: {
                   "@type": "Answer",
-                  "text": "Absolutely. Every template is designed to be 100% GST compliant with proper tax breakdowns, HSN codes, GSTIN fields, and all mandatory information required by Indian tax regulations."
-                }
-              }
-            ]
-          })
+                  text: "Every template includes mandatory GST fields - GSTIN, HSN/SAC codes, tax breakdowns (CGST, SGST, IGST), and all fields required under Indian GST regulations.",
+                },
+              },
+            ],
+          }),
         }}
       />
 
       <Navbar />
-      
+
       <main className="min-h-screen bg-background">
         {/* Hero Section */}
-        <section className="py-20 lg:py-28 bg-gradient-to-br from-purple-50 via-pink-50 to-orange-50">
+        <section className="py-20 lg:py-28 bg-gradient-to-br from-blue-50 via-indigo-50 to-slate-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div>
-                <div className="inline-block px-4 py-2 bg-purple-500/10 rounded-full text-purple-700 font-semibold text-sm mb-6">
-                  📄 50+ Professional Templates
+                <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full text-primary font-semibold text-sm mb-6">
+                  <LayoutTemplate size={15} />
+                  Invoice Templates
                 </div>
-                
+
                 <h1 className="text-4xl lg:text-5xl xl:text-6xl font-extrabold text-secondary mb-6 leading-tight">
-                  Professional Templates for <span className="text-primary">Every Business Type</span>
+                  Templates That Make Your{" "}
+                  <span className="text-primary">Invoice Stand Out</span>
                 </h1>
-                
+
                 <p className="text-xl text-accent/80 mb-8 leading-relaxed">
-                  Choose from 50+ beautifully designed invoice templates spanning every industry—from minimalist designs for tech startups to detailed formats for construction firms. Each template is GST-compliant, fully customizable, and looks stunning on any device or printer.
+                  Choose from a growing library of GST-compliant invoice
+                  templates - ranging from clean modern designs to classic
+                  professional formats. Every template is print-ready and
+                  customizable with your branding.
                 </p>
 
                 <div className="flex flex-col sm:flex-row gap-4 mb-8">
@@ -126,33 +149,28 @@ export default function TemplatesPage() {
                     href="/pricing"
                     className="px-8 py-4 bg-primary text-white font-bold rounded-xl hover:bg-blue-600 transition-colors shadow-lg text-center"
                   >
-                    Start Free Trial
+                    Get Started Free
                   </Link>
                   <a
-                    href="#template-gallery"
+                    href="#template-styles"
                     className="px-8 py-4 bg-white text-primary font-bold rounded-xl hover:bg-gray-50 transition-colors border-2 border-primary text-center"
                   >
-                    Browse Templates ↓
+                    Browse Templates
                   </a>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4 text-sm">
-                  <div className="flex items-center gap-2">
-                    <span className="text-green-500 text-lg">✓</span>
-                    <span className="text-accent/70">50+ designs</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-green-500 text-lg">✓</span>
-                    <span className="text-accent/70">GST compliant</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-green-500 text-lg">✓</span>
-                    <span className="text-accent/70">Fully customizable</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-green-500 text-lg">✓</span>
-                    <span className="text-accent/70">Print ready</span>
-                  </div>
+                <div className="grid grid-cols-2 gap-3 text-sm">
+                  {[
+                    "Modern & classic styles",
+                    "GST compliant",
+                    "Your logo on every invoice",
+                    "Print & PDF ready",
+                  ].map((item) => (
+                    <div key={item} className="flex items-center gap-2">
+                      <CheckCircle2 size={16} className="text-primary shrink-0" />
+                      <span className="text-accent/70">{item}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
 
@@ -167,94 +185,62 @@ export default function TemplatesPage() {
                     priority
                   />
                 </div>
-                
-                {/* Floating badge */}
                 <div className="absolute -bottom-6 -right-6 bg-white rounded-xl shadow-xl p-4 border border-gray-100">
-                  <div className="text-2xl font-bold text-primary">50+</div>
-                  <div className="text-xs text-accent/70">Templates available</div>
+                  <div className="text-sm font-bold text-primary">Growing</div>
+                  <div className="text-xs text-accent/70">Template library</div>
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Template Categories */}
-        <section id="template-gallery" className="py-20">
+        {/* Template Styles */}
+        <section id="template-styles" className="py-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
             <h2 className="text-3xl lg:text-4xl font-bold text-center text-secondary mb-4">
-              Templates for Every Industry
+              From Classic to Modern
             </h2>
             <p className="text-center text-accent/70 mb-16 max-w-2xl mx-auto">
-              Specialized formats designed for your business type with industry best practices built-in
+              Whether you prefer a clean minimal look or a traditional
+              structured format, there's a template that fits your business
             </p>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
               {[
                 {
-                  category: "Retail & Wholesale",
-                  description: "Product invoices with SKU codes, batch numbers, and inventory tracking",
-                  icon: "🛍️",
-                  features: ["Itemized pricing", "Bulk discounts", "Stock tracking"]
+                  title: "Modern & Minimal",
+                  description:
+                    "Clean layouts with generous whitespace, subtle accents, and a contemporary feel. Ideal for service businesses, agencies, and tech companies that want a polished first impression.",
+                  Icon: Sparkles,
+                  tags: ["Clean layout", "Accent colors", "Whitespace-forward"],
                 },
                 {
-                  category: "Services & Consulting",
-                  description: "Service invoices with hourly breakdowns, project milestones, and time tracking",
-                  icon: "💼",
-                  features: ["Hourly rates", "Project phases", "Time logs"]
+                  title: "Classic & Structured",
+                  description:
+                    "Traditional invoice formats with clearly defined sections, bordered tables, and a formal look. Works well for traders, manufacturers, and businesses that prefer a conventional style.",
+                  Icon: FileText,
+                  tags: ["Bordered tables", "Formal layout", "Structured sections"],
                 },
-                {
-                  category: "Manufacturing",
-                  description: "Detailed BOMs, material costs, labor charges, and production tracking",
-                  icon: "🏭",
-                  features: ["BOM breakdown", "Material costs", "Labor tracking"]
-                },
-                {
-                  category: "Healthcare & Pharmacy",
-                  description: "Medical invoices with patient IDs, prescription details, and insurance codes",
-                  icon: "🏥",
-                  features: ["Patient records", "Medicine details", "Insurance fields"]
-                },
-                {
-                  category: "Real Estate & Construction",
-                  description: "Property invoices with plot numbers, milestone payments, and legal references",
-                  icon: "🏗️",
-                  features: ["Plot details", "Milestone billing", "Legal refs"]
-                },
-                {
-                  category: "Hospitality & Food",
-                  description: "Restaurant bills, hotel invoices with room services, and F&B breakdowns",
-                  icon: "🍽️",
-                  features: ["Menu items", "Room charges", "Service tax"]
-                },
-                {
-                  category: "Technology & Software",
-                  description: "SaaS invoices, license fees, subscription billing, and support charges",
-                  icon: "💻",
-                  features: ["Subscriptions", "License keys", "Support tiers"]
-                },
-                {
-                  category: "Transportation & Logistics",
-                  description: "Freight invoices with vehicle details, distance calculation, and fuel surcharges",
-                  icon: "🚚",
-                  features: ["Vehicle IDs", "Distance calc", "Fuel charges"]
-                },
-                {
-                  category: "Education & Training",
-                  description: "Course fees, admission charges, exam fees, and student enrollment details",
-                  icon: "🎓",
-                  features: ["Course details", "Student IDs", "Fee structure"]
-                },
-              ].map((category, index) => (
-                <div key={index} className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all">
-                  <div className="text-4xl mb-4">{category.icon}</div>
-                  <h3 className="text-xl font-bold text-secondary mb-3">{category.category}</h3>
-                  <p className="text-accent/80 text-sm mb-4 leading-relaxed">{category.description}</p>
-                  <div className="space-y-2">
-                    {category.features.map((feature, idx) => (
-                      <div key={idx} className="flex items-center gap-2 text-sm text-accent/70">
-                        <span className="text-primary">✓</span>
-                        <span>{feature}</span>
-                      </div>
+              ].map(({ title, description, Icon, tags }, index) => (
+                <div
+                  key={index}
+                  className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 hover:shadow-md transition-all"
+                >
+                  <div className="w-11 h-11 rounded-lg bg-primary/10 flex items-center justify-center mb-5">
+                    <Icon size={22} className="text-primary" />
+                  </div>
+                  <h3 className="text-xl font-bold text-secondary mb-3">{title}</h3>
+                  <p className="text-accent/80 text-sm leading-relaxed mb-5">
+                    {description}
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="px-3 py-1 bg-primary/8 text-primary text-xs font-medium rounded-full"
+                      >
+                        {tag}
+                      </span>
                     ))}
                   </div>
                 </div>
@@ -263,216 +249,408 @@ export default function TemplatesPage() {
           </div>
         </section>
 
-        {/* Customization Features */}
+        {/* Invoice Types */}
         <section className="py-20 bg-gray-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
             <h2 className="text-3xl lg:text-4xl font-bold text-center text-secondary mb-4">
-              Customize Every Detail
+              Supported Invoice Types
             </h2>
             <p className="text-center text-accent/70 mb-16 max-w-2xl mx-auto">
-              Make templates truly yours with our drag-and-drop editor—no design skills needed
+              Templates are available for the most common invoice formats, with
+              more types being added regularly
             </p>
 
-            <div className="grid md:grid-cols-2 gap-8">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
               {[
                 {
-                  title: "Branding & Colors",
-                  description: "Upload your logo, set brand colors, and customize fonts to match your company identity. Changes apply across all future invoices automatically.",
-                  icon: "🎨"
+                  type: "Tax Invoice",
+                  description:
+                    "Standard GST-registered invoice with CGST, SGST, and IGST breakdowns. Mandatory for registered businesses.",
+                  available: true,
                 },
                 {
-                  title: "Custom Fields",
-                  description: "Add industry-specific fields like vehicle numbers for transporters, patient IDs for clinics, or project codes for agencies. Fields save for future use.",
-                  icon: "📋"
+                  type: "Bill of Supply",
+                  description:
+                    "For businesses not charging GST on outward supply under applicable rules. Includes bill-of-supply structure with required fields.",
+                  available: true,
                 },
                 {
-                  title: "Layout Options",
-                  description: "Choose between compact, standard, or detailed layouts. Adjust spacing, column widths, and section order with drag-and-drop simplicity.",
-                  icon: "📐"
+                  type: "Proforma Invoice",
+                  description:
+                    "Pre-sale invoice sent before confirming an order. Useful for advance payments and order confirmations.",
+                  available: true,
                 },
                 {
-                  title: "Multi-Language Support",
-                  description: "Generate invoices in English, Hindi, Tamil, Telugu, and more regional languages. Coming soon: Auto-translate product descriptions.",
-                  icon: "🌍"
+                  type: "Quotation / Estimate",
+                  description:
+                    "Send a formal price quote to clients before work begins. Convert to invoice with one click.",
+                  available: true,
                 },
                 {
-                  title: "Terms & Conditions",
-                  description: "Add custom payment terms, return policies, warranty information, and legal disclaimers. Save templates for different customer types.",
-                  icon: "📜"
+                  type: "Credit Note",
+                  description:
+                    "Issue refunds or adjustments against a previously sent invoice.",
+                  available: false,
                 },
                 {
-                  title: "Export Formats",
-                  description: "Export to PDF for printing, share via WhatsApp/Email, or download as Excel for accounting. All formats maintain your custom styling.",
-                  icon: "📤"
+                  type: "Debit Note",
+                  description:
+                    "Raise additional charges or corrections against an existing invoice.",
+                  available: false,
                 },
-              ].map((feature, index) => (
-                <div key={index} className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100">
-                  <div className="text-4xl mb-4">{feature.icon}</div>
-                  <h3 className="text-xl font-bold text-secondary mb-3">{feature.title}</h3>
-                  <p className="text-accent/80 text-sm leading-relaxed">{feature.description}</p>
+                {
+                  type: "Delivery Challan",
+                  description:
+                    "Document goods dispatched without an invoice - for internal transfers or approval-based deliveries.",
+                  available: false,
+                },
+              ].map(({ type, description, available }, index) => (
+                <div
+                  key={index}
+                  className={`bg-white rounded-xl p-6 border transition-all ${
+                    available
+                      ? "border-gray-100 shadow-sm hover:shadow-md"
+                      : "border-dashed border-gray-200 opacity-75"
+                  }`}
+                >
+                  <div className="flex items-center justify-between mb-3">
+                    <h3 className="font-bold text-secondary">{type}</h3>
+                    {available ? (
+                      <span className="text-xs font-semibold px-2.5 py-1 bg-green-50 text-green-600 rounded-full">
+                        Available
+                      </span>
+                    ) : (
+                      <span className="inline-flex items-center gap-1 text-xs font-semibold px-2.5 py-1 bg-amber-50 text-amber-600 rounded-full">
+                        <Clock size={11} />
+                        Coming Soon
+                      </span>
+                    )}
+                  </div>
+                  <p className="text-sm text-accent/70 leading-relaxed">
+                    {description}
+                  </p>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Detailed Features Breakdown */}
+        {/* Branding & Watermarks */}
         <section className="py-20">
           <div className="max-w-5xl mx-auto px-4 sm:px-6">
-            <h2 className="text-3xl font-bold text-center text-secondary mb-12">
-              Why Businesses Love Our Templates
+            <h2 className="text-3xl font-bold text-center text-secondary mb-4">
+              Your Brand on Every Invoice
             </h2>
+            <p className="text-center text-accent/70 mb-16 max-w-2xl mx-auto">
+              Upload your logo and brand your invoices. Paid plans keep them
+              clean and watermark-free.
+            </p>
 
-            <div className="bg-purple-50/50 border border-purple-100 rounded-2xl p-6 lg:p-8 mb-8">
-              <h3 className="text-xl font-bold text-secondary mb-4">
-                Complete Flexibility, Zero Design Work
-              </h3>
-              <p className="text-accent/80 mb-4 leading-relaxed">
-                Stop sending boring, generic invoices. Our template library includes specialized formats for Retail, Wholesale, Services, Manufacturing, Healthcare, Real Estate, Hospitality, and more. Each template follows industry best practices: Service invoices with hourly breakdowns, Product invoices with SKU codes, Proforma invoices for advance orders, Tax invoices with detailed GST breakdowns, Credit/Debit notes for returns, Quotations and Estimates, Delivery Challans, and Purchase Orders.
-              </p>
-              <p className="text-accent/80 leading-relaxed">
-                Customize colors, fonts, logos, and layouts in minutes using our drag-and-drop editor—no design skills needed. Add custom fields for industry-specific information like vehicle numbers for transporters or patient IDs for clinics. Set your preferred template as default and never worry about formatting again.
-              </p>
-            </div>
-
-            <div className="bg-green-50/50 border border-green-100 rounded-2xl p-6 lg:p-8">
-              <h3 className="text-xl font-bold text-secondary mb-4">
-                Professional Presentation Gets You Paid Faster
-              </h3>
-              <p className="text-accent/80 mb-4 leading-relaxed">
-                Preview exactly how your invoice will look before sending. Export to PDF, print directly, or share via WhatsApp/Email with one click. New templates are added monthly based on user requests—we've already released templates for Event Management, Photography, Consulting, Legal Services, and Educational Institutions.
-              </p>
-              <p className="text-accent/80 leading-relaxed">
-                Coming soon: Multi-language templates in Hindi, Tamil, Telugu, and more regional languages. One fashion boutique owner told us: "Clients now compliment our invoices—something I never imagined possible!" Professional presentation builds trust and gets you paid faster.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* FAQ */}
-        <section className="py-20 bg-gray-50">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6">
-            <h2 className="text-3xl font-bold text-center text-secondary mb-12">
-              Frequently Asked Questions
-            </h2>
-
-            <div className="space-y-6">
+            <div className="grid md:grid-cols-3 gap-6">
               {[
                 {
-                  q: "How many invoice templates does WhisprBill offer?",
-                  a: "WhisprBill offers 50+ professionally designed invoice templates covering industries like Retail, Wholesale, Services, Manufacturing, Healthcare, Real Estate, Hospitality, and more. New templates are added monthly based on user requests."
+                  plan: "Free Plan",
+                  Icon: FileText,
+                  color: "border-gray-200",
+                  badge: "bg-gray-100 text-gray-600",
+                  badgeText: "Free",
+                  points: [
+                    "Your logo on invoices",
+                    "WhisprBill watermark included",
+                    "All template styles accessible",
+                  ],
+                  note: null,
                 },
                 {
-                  q: "Can I customize invoice templates with my branding?",
-                  a: "Yes! Customize colors, fonts, logos, and layouts using our drag-and-drop editor. Add custom fields for industry-specific information. No design skills needed—changes preview in real-time before you send."
+                  plan: "Paid Plans",
+                  Icon: CheckCircle2,
+                  color: "border-primary/30",
+                  badge: "bg-primary/10 text-primary",
+                  badgeText: "Starter & above",
+                  points: [
+                    "Your logo on invoices",
+                    "No WhisprBill watermark",
+                    "Clean, professional output",
+                  ],
+                  note: null,
                 },
                 {
-                  q: "Are the templates GST compliant?",
-                  a: "Absolutely. Every template is designed to be 100% GST compliant with proper tax breakdowns, HSN codes, GSTIN fields, and all mandatory information required by Indian tax regulations."
+                  plan: "Pro Plan",
+                  Icon: Stamp,
+                  color: "border-indigo-200",
+                  badge: "bg-indigo-50 text-indigo-600",
+                  badgeText: "Pro",
+                  points: [
+                    "Everything in Paid Plans",
+                    "No WhisprBill watermark",
+                    "Custom logo watermark on invoice background",
+                  ],
+                  note: "Coming soon",
                 },
-                {
-                  q: "Can I create different templates for different customers?",
-                  a: "Yes! Save multiple customized templates for different customer types (e.g., 'Retail Template', 'Wholesale Template', 'VIP Template'). Assign default templates per customer or select manually per invoice."
-                },
-                {
-                  q: "What export formats are supported?",
-                  a: "Export invoices as PDF (for printing/email), Excel (for accounting software), or share directly via WhatsApp/Email. All exports maintain your custom styling and branding."
-                },
-                {
-                  q: "Can I add my company letterhead?",
-                  a: "Yes! Upload your letterhead image and it will appear on every invoice. You can also add footer information like bank details, terms & conditions, and digital signatures."
-                }
-              ].map((faq, index) => (
-                <details key={index} className="bg-white rounded-xl p-6 shadow-lg border border-gray-100 group">
-                  <summary className="font-bold text-secondary cursor-pointer list-none flex justify-between items-center">
-                    <span>{faq.q}</span>
-                    <span className="text-primary group-open:rotate-180 transition-transform">▼</span>
-                  </summary>
-                  <p className="mt-4 text-accent/80 leading-relaxed">{faq.a}</p>
-                </details>
+              ].map(({ plan, Icon, color, badge, badgeText, points, note }) => (
+                <div
+                  key={plan}
+                  className={`bg-white rounded-2xl p-6 border-2 ${color} shadow-sm`}
+                >
+                  <div className="flex items-center justify-between mb-5">
+                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                      <Icon size={20} className="text-primary" />
+                    </div>
+                    <span className={`text-xs font-semibold px-3 py-1 rounded-full ${badge}`}>
+                      {badgeText}
+                    </span>
+                  </div>
+                  <h3 className="font-bold text-secondary mb-4">{plan}</h3>
+                  <ul className="space-y-3">
+                    {points.map((point) => (
+                      <li key={point} className="flex items-start gap-2 text-sm text-accent/80">
+                        <CheckCircle2 size={15} className="text-primary shrink-0 mt-0.5" />
+                        <span>{point}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  {note && (
+                    <p className="mt-4 text-xs text-amber-600 font-medium flex items-center gap-1">
+                      <Clock size={11} />
+                      {note}
+                    </p>
+                  )}
+                </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Related Features */}
-        <section className="py-20">
+        {/* Template Features */}
+        <section className="py-20 bg-gray-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
-            <h2 className="text-3xl font-bold text-center text-secondary mb-12">
-              Works Seamlessly With Other Features
+            <h2 className="text-3xl lg:text-4xl font-bold text-center text-secondary mb-4">
+              What Every Template Includes
             </h2>
+            <p className="text-center text-accent/70 mb-16 max-w-2xl mx-auto">
+              Every template in the library ships with these essentials out of
+              the box
+            </p>
 
-            <div className="grid md:grid-cols-3 gap-8">
+            <div className="grid md:grid-cols-2 gap-8">
               {[
                 {
-                  title: "AI Conversational Invoicing",
-                  description: "AI-generated invoices automatically use your chosen template with all customizations",
-                  link: "/features/ai-invoicing",
-                  icon: "💬"
+                  title: "Full GST Compliance",
+                  description:
+                    "All templates include mandatory GST fields - GSTIN, HSN/SAC codes, and separate CGST, SGST, and IGST breakdowns as required by Indian tax regulations.",
+                  Icon: BadgeIndianRupee,
                 },
                 {
-                  title: "GST Compliance",
-                  description: "Every template includes mandatory GST fields with automatic tax calculations",
-                  link: "/features/gst-compliance",
-                  icon: "🇮🇳"
+                  title: "Your Logo & Branding",
+                  description:
+                    "Upload your company logo once and it appears on every invoice automatically. Paid plans remove the WhisprBill watermark for a fully branded output.",
+                  Icon: Palette,
                 },
                 {
-                  title: "Multi-Company Management",
-                  description: "Set different templates for each company you manage—automatic brand switching",
-                  link: "/features/multi-company",
-                  icon: "🏢"
+                  title: "PDF Export & Sharing",
+                  description:
+                    "Export any invoice as a PDF for printing or email, or share directly via WhatsApp. All exports preserve your template styling exactly.",
+                  Icon: Download,
                 },
-              ].map((feature, index) => (
-                <Link
+                {
+                  title: "Growing Library",
+                  description:
+                    "New templates are added regularly. More invoice types - including credit notes, debit notes, and delivery challans - are actively being worked on.",
+                  Icon: LayoutTemplate,
+                },
+              ].map(({ title, description, Icon }, index) => (
+                <div
                   key={index}
-                  href={feature.link}
-                  className="bg-white rounded-xl p-6 shadow-lg border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all group"
+                  className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100"
                 >
-                  <div className="text-3xl mb-3">{feature.icon}</div>
-                  <h3 className="text-lg font-bold text-secondary mb-2 group-hover:text-primary transition-colors">
+                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+                    <Icon size={20} className="text-primary" />
+                  </div>
+                  <h3 className="text-xl font-bold text-secondary mb-3">{title}</h3>
+                  <p className="text-accent/80 text-sm leading-relaxed">{description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ */}
+        <section className="py-20">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6">
+            <h2 className="text-3xl font-bold text-center text-secondary mb-12">
+              Frequently Asked Questions
+            </h2>
+
+            <div className="space-y-4">
+              {[
+                {
+                  q: "What invoice templates does WhisprBill offer?",
+                  a: "WhisprBill offers a growing library of GST-compliant invoice templates ranging from modern minimal styles to classic formats. Currently supported types include tax invoices, bill of supply, proforma invoices, and quotations - with credit notes, debit notes, and delivery challans coming soon.",
+                },
+                {
+                  q: "Can I add my branding to templates?",
+                  a: "Yes. Upload your company logo once and it will appear on every invoice automatically. Paid plans remove the WhisprBill watermark entirely. Pro plans will also support a custom logo watermark in the invoice background.",
+                },
+                {
+                  q: "Do free plan invoices have a watermark?",
+                  a: "Yes. Invoices generated on the free plan include a WhisprBill watermark. Upgrading to any paid plan removes it and gives you clean, fully branded invoice output.",
+                },
+                {
+                  q: "Are the templates GST compliant?",
+                  a: "Every template includes mandatory GST fields - GSTIN, HSN/SAC codes, and tax breakdowns for CGST, SGST, and IGST as required under Indian GST regulations.",
+                },
+                {
+                  q: "What export formats are supported?",
+                  a: "Export invoices as PDF for printing or email, or share directly via WhatsApp. All exports retain your chosen template style and branding.",
+                },
+                {
+                  q: "Will more templates and invoice types be added?",
+                  a: "Yes. The template library is actively growing. Credit notes, debit notes, and delivery challans are in development. New template designs are added regularly.",
+                },
+              ].map((faq, index) => (
+                <details
+                  key={index}
+                  className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 group"
+                >
+                  <summary className="font-semibold text-secondary cursor-pointer list-none flex justify-between items-center gap-4">
+                    <span>{faq.q}</span>
+                    <ChevronDown
+                      size={18}
+                      className="text-primary shrink-0 group-open:rotate-180 transition-transform"
+                    />
+                  </summary>
+                  <p className="mt-4 text-accent/80 leading-relaxed text-sm">{faq.a}</p>
+                </details>
+              ))}
+            </div>
+          </div>
+        </section>
+        {/* Related Features */}
+        <section className="relative overflow-hidden bg-gradient-to-b from-background via-white to-background py-20">
+          <div className="pointer-events-none absolute inset-0">
+            <div className="absolute -left-20 top-10 h-56 w-56 rounded-full bg-primary/10 blur-3xl" />
+            <div className="absolute bottom-0 right-0 h-60 w-60 rounded-full bg-secondary/10 blur-3xl" />
+          </div>
+
+          <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
+            <div className="mx-auto max-w-3xl text-center">
+              <p className="inline-flex items-center rounded-full border border-primary/15 bg-primary/5 px-4 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-primary">
+                Related Modules
+              </p>
+              <h2 className="mt-4 text-3xl font-extrabold text-secondary sm:text-4xl">
+                Works seamlessly with other features
+              </h2>
+              <p className="mt-3 text-accent/70 sm:text-lg">
+                Use templates with AI drafting, GST controls, and multi-company workflows for cleaner billing operations.
+              </p>
+            </div>
+
+            <div className="mt-10 grid gap-5 md:grid-cols-3">
+              {[
+                {
+                  badge: "AI",
+                  title: "AI Conversational Invoicing",
+                  description:
+                    "AI-generated drafts automatically apply your selected invoice template and branding style.",
+                  link: "/features/ai-invoicing",
+                  Icon: MessageSquare,
+                },
+                {
+                  badge: "Compliance",
+                  title: "GST Compliance",
+                  description:
+                    "Templates include GST-ready structure with required tax sections and cleaner pre-send review.",
+                  link: "/features/gst-compliance",
+                  Icon: BadgeIndianRupee,
+                },
+                {
+                  badge: "Operations",
+                  title: "Multi-Company Management",
+                  description:
+                    "Assign different templates per company and keep brand output separated across entities.",
+                  link: "/features/multi-company",
+                  Icon: Building2,
+                },
+              ].map((feature) => (
+                <Link
+                  key={feature.title}
+                  href={feature.link}
+                  className="group relative overflow-hidden rounded-2xl border border-primary/15 bg-white p-6 shadow-[0_12px_30px_rgba(1,38,82,0.08)] transition-all duration-300 hover:-translate-y-1 hover:border-primary/25 hover:shadow-[0_22px_45px_rgba(1,38,82,0.16)]"
+                >
+                  <div className="pointer-events-none absolute inset-x-0 top-0 h-20 bg-gradient-to-r from-primary/10 via-cyan-100/40 to-secondary/10 opacity-70" />
+
+                  <div className="relative flex items-center justify-between">
+                    <span className="rounded-full border border-primary/20 bg-white px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.1em] text-primary">
+                      {feature.badge}
+                    </span>
+                    <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary transition-transform duration-300 group-hover:scale-105">
+                      <feature.Icon className="h-5 w-5" strokeWidth={1.7} />
+                    </span>
+                  </div>
+
+                  <h3 className="relative mt-5 text-xl font-bold text-secondary transition-colors group-hover:text-primary">
                     {feature.title}
                   </h3>
-                  <p className="text-sm text-accent/70 mb-3">{feature.description}</p>
-                  <div className="text-primary font-semibold text-sm flex items-center gap-1 group-hover:gap-2 transition-all">
-                    Learn more <span>→</span>
+                  <p className="relative mt-3 text-sm leading-relaxed text-accent/75">
+                    {feature.description}
+                  </p>
+
+                  <div className="relative mt-5 inline-flex items-center gap-2 text-sm font-semibold text-primary">
+                    <span>Explore feature</span>
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </div>
                 </Link>
               ))}
             </div>
           </div>
         </section>
-
         {/* Final CTA */}
-        <section className="py-20 bg-gradient-to-br from-primary to-blue-600 text-white">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
-            <h2 className="text-3xl lg:text-4xl font-bold mb-6">
-              Start Using Professional Templates Today
-            </h2>
-            <p className="text-lg mb-8 opacity-90">
-              Join 5,000+ businesses creating beautiful, branded invoices
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
-              <Link
-                href="/pricing"
-                className="px-8 py-4 bg-white text-primary font-bold rounded-xl hover:bg-gray-100 transition-colors shadow-lg"
-              >
-                Start Free Trial - No Credit Card Required
-              </Link>
-              <Link
-                href="/features"
-                className="px-8 py-4 bg-transparent border-2 border-white text-white font-bold rounded-xl hover:bg-white/10 transition-colors"
-              >
-                Explore All Features
-              </Link>
+        <section className="relative overflow-hidden py-20">
+          <div className="absolute inset-0 bg-gradient-to-br from-secondary via-primary to-blue-700" />
+          <div className="absolute -top-10 right-10 h-64 w-64 rounded-full bg-white/10 blur-3xl" />
+          <div className="absolute -bottom-16 left-0 h-72 w-72 rounded-full bg-cyan-300/10 blur-3xl" />
+
+          <div className="relative max-w-5xl mx-auto px-4 sm:px-6">
+            <div className="rounded-3xl border border-white/20 bg-white/10 p-8 text-center text-white shadow-2xl backdrop-blur-md sm:p-12">
+              <p className="mb-4 inline-flex items-center rounded-full border border-white/25 bg-white/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-blue-100">
+                Ready to Send Better Invoices
+              </p>
+              <h2 className="text-3xl font-bold leading-tight sm:text-4xl lg:text-5xl">
+                Pick a template and send your first invoice today
+              </h2>
+              <p className="mx-auto mt-4 max-w-3xl text-base text-blue-100 sm:text-lg">
+                Choose your format, add your logo, and generate clean GST-ready invoices in minutes.
+              </p>
+
+              <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
+                <Link
+                  href="/pricing"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-white px-8 py-4 font-bold text-primary shadow-lg transition-all hover:-translate-y-0.5 hover:bg-blue-50"
+                >
+                  Get Started Free
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+                <Link
+                  href="/features"
+                  className="inline-flex items-center justify-center rounded-xl border-2 border-white/70 bg-transparent px-8 py-4 font-bold text-white transition-colors hover:bg-white/10"
+                >
+                  Explore All Features
+                </Link>
+              </div>
+
+              <p className="mt-6 text-sm text-blue-100/90">
+                GST compliant | Watermark-free on paid plans | PDF ready
+              </p>
             </div>
-            <p className="text-sm opacity-75">
-              ✓ 50+ templates  ✓ Fully customizable  ✓ GST compliant
-            </p>
           </div>
-        </section>
+        </section>
       </main>
 
       <Footer />
     </>
   );
 }
+
+
+
+

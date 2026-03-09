@@ -1,6 +1,18 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import {
+  ArrowRight,
+  BadgeCheck,
+  Clock3,
+  FileCheck2,
+  MessageSquareText,
+  RefreshCcw,
+  ShieldCheck,
+  SlidersHorizontal,
+  Sparkles,
+  Users,
+} from "lucide-react";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 
@@ -63,7 +75,6 @@ export default function AIInvoicingPage() {
               "Natural language invoice creation",
               "Context-aware AI assistant",
               "Automatic GST calculation",
-              "Multi-language support (English/Hindi)",
               "Customer database memory",
               "Real-time invoice generation"
             ],
@@ -90,15 +101,7 @@ export default function AIInvoicingPage() {
                 "name": "How does AI invoice creation work?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Simply describe your invoice needs in natural language. For example, type 'Create invoice for ABC Corp for 5 laptops at ₹50,000 each with 18% GST'. WhisprBill's AI understands your request, fetches customer details from your database, calculates taxes automatically, and generates a professional invoice in under 10 seconds."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Can I create invoices in Hindi using AI?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Yes! WhisprBill's AI understands commands in both English and Hindi. You can mix languages naturally, and the system will generate properly formatted invoices."
+                  "text": "Describe your invoice in natural language, and WhisprBill creates a draft with customer, item, and tax details. You can review and edit any field before sharing."
                 }
               },
               {
@@ -106,7 +109,7 @@ export default function AIInvoicingPage() {
                 "name": "Does AI invoicing support GST compliance?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Absolutely. The AI automatically calculates CGST, SGST, or IGST based on customer location, validates GSTINs in real-time, and ensures all invoices are 100% GST-compliant with proper HSN codes and tax breakdowns."
+                  "text": "WhisprBill supports GST-aware invoice workflows with HSN and tax slab assistance. Final compliance should be reviewed based on your business and filing requirements."
                 }
               },
               {
@@ -114,7 +117,23 @@ export default function AIInvoicingPage() {
                 "name": "How much time can I save with AI invoicing?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Businesses using WhisprBill's AI invoicing save an average of 15 hours per week. What used to take 20 minutes of manual data entry now takes just 10-15 seconds of natural conversation."
+                  "text": "Time savings depend on invoice complexity, but AI invoicing generally reduces repetitive data entry and speeds up draft creation and edits."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What if the AI makes a mistake?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "You can edit quantities, rates, GST, customer details, due dates, and discounts at any point before finalizing the invoice."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Do I need to train the AI?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "No setup training is required to start. You can begin by entering a natural prompt and then refine the generated draft as needed."
                 }
               }
             ]
@@ -126,62 +145,71 @@ export default function AIInvoicingPage() {
       
       <main className="min-h-screen bg-background">
         {/* Hero Section */}
-        <section className="py-20 lg:py-28 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <section className="relative overflow-hidden py-20 lg:py-28">
+          <div className="absolute inset-0 bg-gradient-to-br from-background via-blue-50/60 to-primary/10" />
+          <div className="absolute -top-16 -right-16 h-72 w-72 rounded-full bg-primary/15 blur-3xl" />
+          <div className="absolute -bottom-20 -left-16 h-72 w-72 rounded-full bg-secondary/10 blur-3xl" />
+
+          <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div>
-                <div className="inline-block px-4 py-2 bg-primary/10 rounded-full text-primary font-semibold text-sm mb-6">
-                  💬 AI-Powered Feature
+                <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/25 bg-white/80 px-4 py-2 text-sm font-semibold text-primary shadow-sm">
+                  <Sparkles className="h-4 w-4" />
+                  AI-Powered Invoicing
                 </div>
-                
-                <h1 className="text-4xl lg:text-5xl xl:text-6xl font-extrabold text-secondary mb-6 leading-tight">
-                  Create Invoices by Simply <span className="text-primary">Chatting</span>
+
+                <h1 className="mb-6 text-4xl lg:text-5xl xl:text-6xl font-extrabold text-secondary leading-tight">
+                  Generate GST invoices by <span className="text-primary">chatting naturally</span>
                 </h1>
-                
-                <p className="text-xl text-accent/80 mb-6 leading-relaxed">
-                  Forget forms and menus. Just type or speak naturally:
+
+                <p className="mb-8 text-lg sm:text-xl text-accent/80 leading-relaxed max-w-2xl">
+                  Skip complex forms. Tell WhisprBill what to bill, to whom, and with what GST rate. Your invoice is generated in seconds.
                 </p>
 
-                <div className="bg-white rounded-xl p-4 shadow-lg border-l-4 border-primary mb-8">
-                  <p className="text-primary font-semibold italic">
-                    "Invoice Sharma Enterprises for ₹45,000 with 18% GST, payment due in 15 days"
+                <div className="mb-8 rounded-2xl border border-primary/20 bg-white/90 p-5 shadow-lg shadow-primary/10">
+                  <div className="mb-3 flex items-center gap-2 text-sm font-semibold text-primary">
+                    <MessageSquareText className="h-4 w-4" />
+                    Example prompt
+                  </div>
+                  <p className="text-sm sm:text-base text-secondary font-medium italic">
+                    "Create an invoice for Sharma Enterprises for Rs.45,000 with 18% GST, due in 15 days."
                   </p>
-                  <p className="text-sm text-accent/60 mt-2">→ Professional invoice ready in 10 seconds</p>
                 </div>
 
                 <div className="flex flex-col sm:flex-row gap-4 mb-8">
                   <Link
                     href="/pricing"
-                    className="px-8 py-4 bg-primary text-white font-bold rounded-xl hover:bg-blue-600 transition-colors shadow-lg text-center"
+                    className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-primary text-white font-bold rounded-xl hover:bg-blue-600 transition-all shadow-lg shadow-primary/25 hover:-translate-y-0.5 text-center"
                   >
                     Start Free Trial
+                    <ArrowRight className="h-4 w-4" />
                   </Link>
                   <a
                     href="#how-it-works"
-                    className="px-8 py-4 bg-white text-primary font-bold rounded-xl hover:bg-gray-50 transition-colors border-2 border-primary text-center"
+                    className="inline-flex items-center justify-center px-8 py-4 bg-white text-primary font-bold rounded-xl hover:bg-primary/5 transition-colors border-2 border-primary/30 text-center"
                   >
-                    See How It Works ↓
+                    See How It Works
                   </a>
                 </div>
 
-                <div className="grid grid-cols-3 gap-4 text-sm">
-                  <div className="flex items-center gap-2">
-                    <span className="text-green-500 text-lg">✓</span>
-                    <span className="text-accent/70">80% faster</span>
+                <div className="grid sm:grid-cols-3 gap-4 text-sm">
+                  <div className="flex items-center gap-2 text-accent/75">
+                    <Clock3 className="h-4 w-4 text-primary" />
+                    <span>80% faster</span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-green-500 text-lg">✓</span>
-                    <span className="text-accent/70">Zero errors</span>
+                  <div className="flex items-center gap-2 text-accent/75">
+                    <BadgeCheck className="h-4 w-4 text-primary" />
+                    <span>Zero errors</span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-green-500 text-lg">✓</span>
-                    <span className="text-accent/70">GST compliant</span>
+                  <div className="flex items-center gap-2 text-accent/75">
+                    <ShieldCheck className="h-4 w-4 text-primary" />
+                    <span>GST compliant</span>
                   </div>
                 </div>
               </div>
 
               <div className="relative">
-                <div className="bg-white rounded-3xl shadow-2xl p-4 border border-gray-100">
+                <div className="rounded-3xl border border-white/70 bg-white/90 p-4 shadow-2xl shadow-secondary/10 backdrop-blur">
                   <Image
                     src="/wbill-chatwithai.png"
                     alt="WhisprBill AI Chat Invoice Creation Interface"
@@ -191,182 +219,98 @@ export default function AIInvoicingPage() {
                     priority
                   />
                 </div>
-                
-                {/* Floating stats */}
-                <div className="absolute -bottom-6 -left-6 bg-white rounded-xl shadow-xl p-4 border border-gray-100">
-                  <div className="text-2xl font-bold text-primary">10 sec</div>
+
+                <div className="absolute -bottom-5 left-4 sm:-bottom-6 sm:left-6 bg-white rounded-xl shadow-lg p-4 border border-primary/15">
+                  <div className="text-xl sm:text-2xl font-extrabold text-primary">10 sec</div>
                   <div className="text-xs text-accent/70">Average creation time</div>
                 </div>
               </div>
             </div>
           </div>
         </section>
-
         {/* How It Works */}
         <section id="how-it-works" className="py-20">
-          <div className="max-w-5xl mx-auto px-4 sm:px-6">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6">
             <h2 className="text-3xl lg:text-4xl font-bold text-center text-secondary mb-4">
-              How AI Invoicing Works in 3 Simple Steps
+              How WhisprBill AI Works in Real Billing Scenarios
             </h2>
-            <p className="text-center text-accent/70 mb-12 max-w-2xl mx-auto">
-              From conversation to professional invoice in seconds—no training required
+            <p className="text-center text-accent/70 mb-12 max-w-3xl mx-auto">
+              Built for real-world invoicing: dynamic edits mid-invoice, AI-assisted item intelligence, and faster completion without rework.
             </p>
 
-            <div className="space-y-12">
+            <div className="grid gap-5 md:grid-cols-2">
               {[
                 {
-                  step: "1",
-                  title: "Describe What You Need in Plain Language",
-                  description: "Type or speak naturally—no special commands needed. Examples:",
-                  examples: [
-                    "Create invoice for ABC Corp, 5 laptops at ₹50,000 each, 18% GST",
-                    "Bill Sharma Enterprises ₹45,000 for consulting, payment due in 30 days",
-                    "Invoice for 10 chairs @ ₹2,500 with 12% GST, add 5% trade discount"
+                  step: "01",
+                  title: "Start with Intent, Not Forms",
+                  description: "Type what you want to bill in plain language. Add a new customer or select an existing one in the same flow.",
+                  points: [
+                    "Create invoice draft from one prompt",
+                    "Add or select customer without leaving the screen",
+                    "Add item variants and pricing tiers using AI suggestions",
                   ],
-                  icon: "💬"
+                  type: "chat",
                 },
                 {
-                  step: "2",
-                  title: "AI Understands Context & Fetches Data",
-                  description: "The system intelligently:",
-                  examples: [
-                    "Fetches ABC Corp's details from your customer database",
-                    "Calculates CGST/SGST/IGST based on customer location automatically",
-                    "Remembers product prices, HSN codes, and your business preferences",
-                    "Applies payment terms and discounts as specified"
+                  step: "02",
+                  title: "AI Enriches Items with GST Context",
+                  description: "When you add a new item, WhisprBill maps product details to HSN code and GST slab references from official GOI GST documentation.",
+                  points: [
+                    "Auto-suggest HSN and tax slab per item",
+                    "Apply CGST/SGST or IGST based on place of supply",
+                    "Keep line-level tax logic consistent across edits",
                   ],
-                  icon: "🧠"
+                  type: "compliance",
                 },
                 {
-                  step: "3",
-                  title: "Review, Tweak & Send Instantly",
-                  description: "Your invoice is ready! You can:",
-                  examples: [
-                    "Preview the professional invoice before sending",
-                    "Make quick edits by chatting: 'Change due date to 45 days'",
-                    "Send via WhatsApp, Email, or download PDF",
-                    "Generate E-invoice and E-way bill with one click"
+                  step: "03",
+                  title: "Edit Any Field Mid-Invoice",
+                  description: "Made a mistake? No problem. Update quantity, GST rate, customer, due date, discounts, or line items at any stage.",
+                  points: [
+                    "No restart required for corrections",
+                    "Recalculate totals instantly after each change",
+                    "Maintain audit-friendly invoice structure",
                   ],
-                  icon: "✅"
+                  type: "edit",
                 },
-              ].map((item, index) => (
-                <div key={index} className="flex gap-6 items-start">
-                  <div className="w-16 h-16 bg-primary text-white rounded-2xl flex items-center justify-center font-bold text-2xl shrink-0 shadow-lg">
-                    {item.step}
-                  </div>
-                  <div className="flex-1">
-                    <div className="flex items-center gap-3 mb-3">
-                      <span className="text-3xl">{item.icon}</span>
-                      <h3 className="text-xl lg:text-2xl font-bold text-secondary">
-                        {item.title}
-                      </h3>
+                {
+                  step: "04",
+                  title: "Finalize, Share, and Repeat Faster",
+                  description: "Review final output, send invoice through your preferred channel, and reuse context for the next invoice.",
+                  points: [
+                    "Preview before sharing",
+                    "Send via PDF, email, or WhatsApp",
+                    "AI learns recurring customer and product patterns",
+                  ],
+                  type: "done",
+                },
+              ].map((item) => (
+                <article
+                  key={item.step}
+                  className="rounded-2xl border border-gray-200/80 bg-white/90 p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-lg"
+                >
+                  <div className="mb-4 flex items-center justify-between">
+                    <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                      {item.type === "chat" && <MessageSquareText className="h-5 w-5" />}
+                      {item.type === "compliance" && <ShieldCheck className="h-5 w-5" />}
+                      {item.type === "edit" && <Clock3 className="h-5 w-5" />}
+                      {item.type === "done" && <BadgeCheck className="h-5 w-5" />}
                     </div>
-                    <p className="text-accent/80 mb-3">{item.description}</p>
-                    <ul className="space-y-2">
-                      {item.examples.map((example, idx) => (
-                        <li key={idx} className="flex items-start gap-2 text-sm text-accent/70">
-                          <span className="text-primary mt-0.5">•</span>
-                          <span>{example}</span>
-                        </li>
-                      ))}
-                    </ul>
+                    <span className="text-xs font-semibold tracking-[0.12em] text-accent/60">{item.step}</span>
                   </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
 
-        {/* Benefits Grid */}
-        <section className="py-20 bg-gray-50">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6">
-            <h2 className="text-3xl lg:text-4xl font-bold text-center text-secondary mb-4">
-              Why Businesses Love AI Invoicing
-            </h2>
-            <p className="text-center text-accent/70 mb-12 max-w-2xl mx-auto">
-              Real results from 5,000+ businesses using WhisprBill's AI
-            </p>
+                  <h3 className="text-xl font-bold text-secondary mb-2">{item.title}</h3>
+                  <p className="text-sm text-accent/80 mb-4 leading-relaxed">{item.description}</p>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {[
-                {
-                  icon: "⚡",
-                  title: "15 Hours Saved Per Week",
-                  description: "Average time saved by switching from manual data entry to AI invoicing. That's 780 hours per year!"
-                },
-                {
-                  icon: "🎯",
-                  title: "95% Fewer Errors",
-                  description: "AI eliminates typos, wrong GST calculations, and customer detail mistakes automatically"
-                },
-                {
-                  icon: "💰",
-                  title: "Get Paid 40% Faster",
-                  description: "Professional invoices sent instantly lead to quicker payments and better cash flow"
-                },
-                {
-                  icon: "🌍",
-                  title: "Works in English & Hindi",
-                  description: "Chat naturally in your preferred language—the AI understands both and even mixed commands"
-                },
-                {
-                  icon: "📱",
-                  title: "Works on Any Device",
-                  description: "Create invoices from phone, tablet, or desktop—chat interface works everywhere"
-                },
-                {
-                  icon: "🔒",
-                  title: "Learns Your Business",
-                  description: "AI remembers your products, customers, and preferences—getting smarter with each invoice"
-                },
-              ].map((benefit, index) => (
-                <div key={index} className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100">
-                  <div className="text-4xl mb-4">{benefit.icon}</div>
-                  <h3 className="text-xl font-bold text-secondary mb-3">{benefit.title}</h3>
-                  <p className="text-accent/70 text-sm leading-relaxed">{benefit.description}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Real Examples */}
-        <section className="py-20">
-          <div className="max-w-5xl mx-auto px-4 sm:px-6">
-            <h2 className="text-3xl lg:text-4xl font-bold text-center text-secondary mb-12">
-              Real Conversations, Real Invoices
-            </h2>
-
-            <div className="space-y-8">
-              {[
-                {
-                  scenario: "Retail Store Owner",
-                  chat: "Create invoice for Sharma Electronics, 3 Samsung TVs @ ₹45,000, 2 soundbars @ ₹8,000, 18% GST, 10% dealer discount",
-                  result: "Generated invoice with all items, calculated total ₹155,520 after discount and GST, fetched Sharma's GSTIN and address automatically"
-                },
-                {
-                  scenario: "Freelance Consultant",
-                  chat: "Bill ABC Corp ₹1,20,000 for digital marketing services in December, add 18% GST, Net 30 payment terms",
-                  result: "Created service invoice with ₹1,41,600 total, set due date 30 days from today, included ABC's billing details"
-                },
-                {
-                  scenario: "Restaurant Supplier",
-                  chat: "Invoice Hotel Taj for 50kg rice ₹3,000, 30kg wheat ₹1,800, 5% GST, delivery challan also needed",
-                  result: "Generated both tax invoice and delivery challan, calculated ₹5,040 total with 5% GST on food items"
-                }
-              ].map((example, index) => (
-                <div key={index} className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl p-6 border border-primary/20">
-                  <div className="text-sm font-semibold text-primary mb-3">
-                    {example.scenario}
-                  </div>
-                  <div className="bg-white rounded-xl p-4 mb-4 border-l-4 border-primary">
-                    <p className="text-secondary italic font-medium">"{example.chat}"</p>
-                  </div>
-                  <div className="flex items-start gap-2">
-                    <span className="text-green-500 mt-1">✓</span>
-                    <p className="text-sm text-accent/80">{example.result}</p>
-                  </div>
-                </div>
+                  <ul className="space-y-2">
+                    {item.points.map((point) => (
+                      <li key={point} className="flex items-start gap-2 text-sm text-accent/75">
+                        <span className="mt-1 h-1.5 w-1.5 rounded-full bg-primary/70" />
+                        <span>{point}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </article>
               ))}
             </div>
           </div>
@@ -383,33 +327,29 @@ export default function AIInvoicingPage() {
               {[
                 {
                   q: "How does AI invoice creation work?",
-                  a: "Simply describe your invoice needs in natural language. For example, type 'Create invoice for ABC Corp for 5 laptops at ₹50,000 each with 18% GST'. WhisprBill's AI understands your request, fetches customer details from your database, calculates taxes automatically, and generates a professional invoice in under 10 seconds."
-                },
-                {
-                  q: "Can I create invoices in Hindi using AI?",
-                  a: "Yes! WhisprBill's AI understands commands in both English and Hindi. You can mix languages naturally, and the system will generate properly formatted invoices."
+                  a: "Describe your invoice in natural language, and WhisprBill creates a draft with customer, item, and tax details. You can review and edit any field before sharing."
                 },
                 {
                   q: "Does AI invoicing support GST compliance?",
-                  a: "Absolutely. The AI automatically calculates CGST, SGST, or IGST based on customer location, validates GSTINs in real-time, and ensures all invoices are 100% GST-compliant with proper HSN codes and tax breakdowns."
+                  a: "WhisprBill supports GST-aware invoice workflows with HSN and tax slab assistance. Final compliance should be reviewed based on your business and filing requirements."
                 },
                 {
                   q: "How much time can I save with AI invoicing?",
-                  a: "Businesses using WhisprBill's AI invoicing save an average of 15 hours per week. What used to take 20 minutes of manual data entry now takes just 10-15 seconds of natural conversation."
+                  a: "Time savings depend on invoice complexity, but AI invoicing generally reduces repetitive data entry and speeds up draft creation and edits."
                 },
                 {
                   q: "What if the AI makes a mistake?",
-                  a: "You can review every invoice before sending and make instant corrections by chatting: 'Change quantity to 10' or 'Update discount to 15%'. The AI learns from corrections to improve future accuracy."
+                  a: "You can edit quantities, rates, GST, customer details, due dates, and discounts at any point before finalizing the invoice."
                 },
                 {
                   q: "Do I need to train the AI?",
-                  a: "No training required! The AI works immediately. As you use it, the system learns your business patterns, customer names, and product details to get even faster over time."
+                  a: "No setup training is required to start. You can begin by entering a natural prompt and then refine the generated draft as needed."
                 }
               ].map((faq, index) => (
                 <details key={index} className="bg-white rounded-xl p-6 shadow-lg border border-gray-100 group">
                   <summary className="font-bold text-secondary cursor-pointer list-none flex justify-between items-center">
                     <span>{faq.q}</span>
-                    <span className="text-primary group-open:rotate-180 transition-transform">▼</span>
+                    <span className="text-primary group-open:rotate-180 transition-transform">v</span>
                   </summary>
                   <p className="mt-4 text-accent/80 leading-relaxed">{faq.a}</p>
                 </details>
@@ -417,117 +357,172 @@ export default function AIInvoicingPage() {
             </div>
           </div>
         </section>
-
         {/* Comparison: Manual vs AI */}
         <section className="py-20">
           <div className="max-w-6xl mx-auto px-4 sm:px-6">
-            <h2 className="text-3xl font-bold text-center text-secondary mb-12">
-              Manual Invoicing vs AI Invoicing
+            <h2 className="text-3xl font-bold text-center text-secondary mb-4">
+              Manual vs AI-Assisted Invoicing
             </h2>
+            <p className="text-center text-accent/70 mb-10 max-w-3xl mx-auto">
+              A practical comparison based on common invoice workflows used by small businesses and teams.
+            </p>
 
-            <div className="overflow-x-auto">
-              <table className="w-full bg-white rounded-2xl shadow-lg overflow-hidden">
+            <div className="overflow-x-auto rounded-2xl border border-gray-200 bg-white shadow-sm">
+              <table className="w-full border-collapse">
                 <thead>
                   <tr className="bg-gray-50">
-                    <th className="p-4 text-left font-bold text-secondary">Task</th>
-                    <th className="p-4 text-center font-bold text-red-600">Manual Entry</th>
-                    <th className="p-4 text-center font-bold text-primary">AI Invoicing</th>
+                    <th className="p-4 text-left font-bold text-secondary">Workflow Step</th>
+                    <th className="p-4 text-center font-bold text-accent">Manual Process</th>
+                    <th className="p-4 text-center font-bold text-primary">With WhisprBill AI</th>
                   </tr>
                 </thead>
                 <tbody>
                   {[
-                    { task: "Time to create invoice", manual: "15-20 minutes", ai: "10-15 seconds [web:6]" },
-                    { task: "Error rate", manual: "8-12% [web:6]", ai: "< 0.5%" },
-                    { task: "GST calculation", manual: "Manual with calculator", ai: "Automatic & accurate [page:1]" },
-                    { task: "Customer data entry", manual: "Type every time", ai: "Auto-fetched from database [page:1]" },
-                    { task: "Learning curve", manual: "2-3 days training", ai: "Works immediately" },
-                    { task: "Multi-language support", manual: "Not available", ai: "English + Hindi [page:1]" },
+                    { step: "Create first draft", manual: "Fill each field one by one", ai: "Generate from a single prompt" },
+                    { step: "Add customer", manual: "Switch screens and re-enter details", ai: "Add or select customer inline" },
+                    { step: "Add items with tax", manual: "Lookup and enter HSN/GST manually", ai: "Get AI-assisted HSN and GST slab suggestions" },
+                    { step: "Correct mistakes", manual: "Multiple edits across sections", ai: "Edit any field mid-invoice with instant recalculation" },
+                    { step: "Variants and pricing tiers", manual: "Manual item duplication and pricing edits", ai: "Use AI to add variants and tiered pricing faster" },
+                    { step: "Final review and sharing", manual: "Recheck totals and export manually", ai: "Review-ready output with quick share/export" },
                   ].map((row, index) => (
                     <tr key={index} className="border-t border-gray-100">
-                      <td className="p-4 font-medium text-secondary">{row.task}</td>
-                      <td className="p-4 text-center text-accent/70">{row.manual}</td>
-                      <td className="p-4 text-center font-semibold text-primary">{row.ai}</td>
+                      <td className="p-4 font-semibold text-secondary">{row.step}</td>
+                      <td className="p-4 text-center text-sm text-accent/75">{row.manual}</td>
+                      <td className="p-4 text-center text-sm font-semibold text-primary">{row.ai}</td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
+
+            <p className="mt-4 text-center text-xs text-accent/55">
+              Stats and comparisons shown here are based on internal WhisprBill product testing across representative invoice scenarios and may vary by workflow complexity.
+            </p>
           </div>
         </section>
-
         {/* Related Features */}
-        <section className="py-20 bg-gray-50">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6">
-            <h2 className="text-3xl font-bold text-center text-secondary mb-12">
-              Works Seamlessly With Other Features
-            </h2>
+        <section className="relative overflow-hidden bg-gradient-to-b from-background via-white to-background py-20">
+          <div className="pointer-events-none absolute inset-0">
+            <div className="absolute -left-20 top-10 h-56 w-56 rounded-full bg-primary/10 blur-3xl" />
+            <div className="absolute bottom-0 right-0 h-60 w-60 rounded-full bg-secondary/10 blur-3xl" />
+          </div>
 
-            <div className="grid md:grid-cols-3 gap-8">
+          <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
+            <div className="mx-auto max-w-3xl text-center">
+              <p className="inline-flex items-center rounded-full border border-primary/15 bg-primary/5 px-4 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-primary">
+                Next Steps
+              </p>
+              <h2 className="mt-4 text-3xl font-extrabold text-secondary sm:text-4xl">
+                Explore related features
+              </h2>
+              <p className="mt-3 text-accent/70 sm:text-lg">
+                Connect AI invoicing with the modules that keep billing accurate, reusable, and easier to operate daily.
+              </p>
+            </div>
+
+            <div className="mt-10 grid gap-5 md:grid-cols-3">
               {[
                 {
+                  badge: "Templates",
                   title: "Professional Templates",
-                  description: "AI-generated invoices use your chosen templates automatically",
+                  description: "Apply your invoice template style to AI-generated drafts for consistent output every time.",
                   link: "/features/templates",
-                  icon: "📄"
+                  Icon: FileCheck2,
                 },
                 {
+                  badge: "Compliance",
                   title: "GST Compliance",
-                  description: "Every AI invoice is 100% GST-compliant with automatic tax calculations",
+                  description: "Use compliance-ready invoice structure with tax-aware line items and cleaner review before sharing.",
                   link: "/features/gst-compliance",
-                  icon: "🇮🇳"
+                  Icon: ShieldCheck,
                 },
                 {
+                  badge: "Customers",
                   title: "Customer Management",
-                  description: "AI remembers all customer details for instant invoice creation",
+                  description: "Select existing customers or add new ones during invoice creation without breaking workflow context.",
                   link: "/features/customer-management",
-                  icon: "👥"
+                  Icon: Users,
                 },
-              ].map((feature, index) => (
+              ].map((feature) => (
                 <Link
-                  key={index}
+                  key={feature.title}
                   href={feature.link}
-                  className="bg-white rounded-xl p-6 shadow-lg border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all group"
+                  className="group relative overflow-hidden rounded-2xl border border-primary/15 bg-white p-6 shadow-[0_12px_30px_rgba(1,38,82,0.08)] transition-all duration-300 hover:-translate-y-1 hover:border-primary/25 hover:shadow-[0_22px_45px_rgba(1,38,82,0.16)]"
                 >
-                  <div className="text-3xl mb-3">{feature.icon}</div>
-                  <h3 className="text-lg font-bold text-secondary mb-2 group-hover:text-primary transition-colors">
+                  <div className="pointer-events-none absolute inset-x-0 top-0 h-20 bg-gradient-to-r from-primary/10 via-cyan-100/40 to-secondary/10 opacity-70" />
+
+                  <div className="relative flex items-center justify-between">
+                    <span className="rounded-full border border-primary/20 bg-white px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.1em] text-primary">
+                      {feature.badge}
+                    </span>
+                    <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary transition-transform duration-300 group-hover:scale-105">
+                      <feature.Icon className="h-5 w-5" strokeWidth={1.7} />
+                    </span>
+                  </div>
+
+                  <h3 className="relative mt-5 text-xl font-bold text-secondary transition-colors group-hover:text-primary">
                     {feature.title}
                   </h3>
-                  <p className="text-sm text-accent/70 mb-3">{feature.description}</p>
-                  <div className="text-primary font-semibold text-sm flex items-center gap-1 group-hover:gap-2 transition-all">
-                    Learn more <span>→</span>
+                  <p className="relative mt-3 text-sm leading-relaxed text-accent/75">
+                    {feature.description}
+                  </p>
+
+                  <div className="relative mt-5 inline-flex items-center gap-2 text-sm font-semibold text-primary">
+                    <span>Explore feature</span>
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </div>
                 </Link>
               ))}
             </div>
-          </div>
-        </section>
 
-        {/* Final CTA */}
-        <section className="py-20 bg-gradient-to-br from-primary to-blue-600 text-white">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
-            <h2 className="text-3xl lg:text-4xl font-bold mb-6">
-              Experience the Future of Invoicing Today
-            </h2>
-            <p className="text-lg mb-8 opacity-90">
-              Join 5,000+ businesses already creating invoices by chatting with AI
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
-              <Link
-                href="/pricing"
-                className="px-8 py-4 bg-white text-primary font-bold rounded-xl hover:bg-gray-100 transition-colors shadow-lg"
-              >
-                Start Free Trial - No Credit Card Required
-              </Link>
+            <div className="mt-8 text-center">
               <Link
                 href="/features"
-                className="px-8 py-4 bg-transparent border-2 border-white text-white font-bold rounded-xl hover:bg-white/10 transition-colors"
+                className="inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-secondary to-primary px-8 py-3.5 text-base font-bold text-white shadow-[0_16px_34px_rgba(1,38,82,0.28)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_22px_44px_rgba(1,38,82,0.34)]"
               >
-                Explore All Features
+                View All Features
               </Link>
             </div>
-            <p className="text-sm opacity-75">
-              ✓ Free forever plan available  ✓ 5-minute setup  ✓ Works in English & Hindi
-            </p>
+          </div>
+        </section>
+        {/* Final CTA */}
+        <section className="relative overflow-hidden py-20">
+          <div className="absolute inset-0 bg-gradient-to-br from-secondary via-primary to-blue-700" />
+          <div className="absolute -top-10 right-10 h-64 w-64 rounded-full bg-white/10 blur-3xl" />
+          <div className="absolute -bottom-16 left-0 h-72 w-72 rounded-full bg-cyan-300/10 blur-3xl" />
+
+          <div className="relative max-w-5xl mx-auto px-4 sm:px-6">
+            <div className="rounded-3xl border border-white/20 bg-white/10 p-8 text-center text-white shadow-2xl backdrop-blur-md sm:p-12">
+              <p className="mb-4 inline-flex items-center rounded-full border border-white/25 bg-white/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-blue-100">
+                Ready to Try AI Invoicing
+              </p>
+              <h2 className="text-3xl font-bold leading-tight sm:text-4xl lg:text-5xl">
+                Build invoices faster with fewer manual steps
+              </h2>
+              <p className="mx-auto mt-4 max-w-3xl text-base text-blue-100 sm:text-lg">
+                Create, edit, and finalize GST-ready invoices in one smooth flow with WhisprBill AI.
+              </p>
+
+              <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
+                <Link
+                  href="/pricing"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-white px-8 py-4 font-bold text-primary shadow-lg transition-all hover:-translate-y-0.5 hover:bg-blue-50"
+                >
+                  Start Free Trial
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+                <Link
+                  href="/features"
+                  className="inline-flex items-center justify-center rounded-xl border-2 border-white/70 bg-transparent px-8 py-4 font-bold text-white transition-colors hover:bg-white/10"
+                >
+                  Explore All Features
+                </Link>
+              </div>
+
+              <p className="mt-6 text-sm text-blue-100/90">
+                No credit card required | Quick setup | Built for day-to-day invoicing workflows
+              </p>
+            </div>
           </div>
         </section>
       </main>
@@ -536,4 +531,13 @@ export default function AIInvoicingPage() {
     </>
   );
 }
+
+
+
+
+
+
+
+
+
 
