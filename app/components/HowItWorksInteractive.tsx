@@ -9,18 +9,21 @@ const steps = [
     title: "Capture Details",
     description:
       "Chat or type your invoice request in plain language. WhisprBill turns it into a structured draft instantly.",
+    image: "/wbill-chatwithai.png",
   },
   {
     id: 2,
     title: "Refine in One View",
     description:
       "Adjust line items, tax, and discounts with a focused editor that stays in sync with the preview.",
+    image: "/preview-screenshot-cropped.png",
   },
   {
     id: 3,
     title: "Send & Track",
     description:
       "Export a branded PDF, share in a click, and keep every invoice tracked in one timeline.",
+    image: "/wbill-customers.jpeg",
   },
 ];
 
@@ -64,15 +67,7 @@ export default function HowItWorksInteractive() {
 
             {/* Screen content – replace src with your actual dashboard shot */}
             <div className="relative overflow-hidden rounded-2xl border border-slate-200 bg-background">
-              <Image
-                src="/images/how-it-works-dashboard.png"
-                alt="WhisprBill invoice flow preview"
-                width={900}
-                height={650}
-                className={`h-auto w-full object-cover transition-transform duration-700 ${
-                  activeStep === 0 ? "scale-[1.01]" : activeStep === 1 ? "scale-[1.015]" : "scale-[1.02]"
-                }`}
-              />
+              
             </div>
           </div>
 
@@ -86,6 +81,20 @@ export default function HowItWorksInteractive() {
           <h2 className="mt-1 text-3xl font-extrabold leading-tight text-secondary sm:text-4xl">
             3 simple steps to go from{" "}
             <span className="text-primary">idea to invoice</span>
+            <Image
+  key={steps[activeStep].image}
+  src={steps[activeStep].image}
+  alt={steps[activeStep].title}
+  width={900}
+  height={650}
+  className={`h-auto w-full object-cover transition-all duration-700 ${
+    activeStep === 0
+      ? "scale-[1.01]"
+      : activeStep === 1
+      ? "scale-[1.015]"
+      : "scale-[1.02]"
+  } opacity-100`}
+/>
           </h2>
           <p className="mt-2 text-sm text-accent/75 sm:text-base">
             Skip templates and manual formatting. Describe the work once — WhisprBill handles structure, taxes, and delivery.
