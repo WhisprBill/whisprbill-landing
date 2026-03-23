@@ -163,8 +163,8 @@ export default function Footer() {
         <div className="pt-6 sm:pt-8 border-t border-white/10 flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-4 text-[10px] sm:text-xs text-gray-500">
           <p className="text-center sm:text-left">© 2026 WhisprBill. All rights reserved.</p>
           <div className="flex flex-wrap justify-center gap-4 sm:gap-6 lg:gap-8">
-            <Link href="#" className="hover:text-white transition-colors">Privacy Policy</Link>
-            <Link href="#" className="hover:text-white transition-colors">Terms of Service</Link>
+            <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
+            <Link href="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
             <Link href="#" className="hover:text-white transition-colors">Refund Policy</Link>
           </div>
         </div>
