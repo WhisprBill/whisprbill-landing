@@ -6,6 +6,53 @@ import { google } from "googleapis";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
+function getErrorDetails(error: unknown) {
+  if (error instanceof Error) {
+    const errWithExtra = error as Error & {
+      code?: string | number;
+      status?: number;
+      errors?: unknown;
+      response?: unknown;
+    };
+
+    return {
+      name: errWithExtra.name,
+      message: errWithExtra.message,
+      code: errWithExtra.code,
+      status: errWithExtra.status,
+      errors: errWithExtra.errors,
+      response: errWithExtra.response,
+      stack: errWithExtra.stack,
+    };
+  }
+
+  return { raw: error };
+}
+
+function logActionError(
+  action: string,
+  stage: "EMAIL_SEND" | "SHEETS_APPEND",
+  error: unknown,
+  meta: Record<string, unknown> = {}
+) {
+  console.error(`[${action}] ${stage} failed`, {
+    ...meta,
+    error: getErrorDetails(error),
+  });
+}
+
+function createSheetsClient() {
+  const auth = new google.auth.GoogleAuth({
+    credentials: {
+      client_email: process.env.GOOGLE_CLIENT_EMAIL,
+      private_key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, "\n"),
+    },
+    scopes: ["https://www.googleapis.com/auth/spreadsheets"],
+  });
+
+  return google.sheets({ version: "v4", auth });
+}
+
 export async function submitDemoRequest(formData: FormData) {
   const name = formData.get("name") as string;
   const email = formData.get("email") as string;
@@ -18,13 +65,12 @@ export async function submitDemoRequest(formData: FormData) {
   }
 
   try {
-    // 1. Send Email Notification
     await resend.emails.send({
-      from: "onboarding@resend.dev", // Use verified domain later
-      to: "whisprbill@gmail.com", // YOUR EMAIL
+      from: "onboarding@resend.dev",
+      to: "whisprbill@gmail.com",
       subject: `New Lead: ${name} - ${queryType}`,
       html: `
-        <h2>New Inquiry 🚀</h2>
+        <h2>New Inquiry</h2>
         <p><strong>Name:</strong> ${name}</p>
         <p><strong>Email:</strong> ${email}</p>
         <p><strong>Phone:</strong> ${phone}</p>
@@ -32,21 +78,17 @@ export async function submitDemoRequest(formData: FormData) {
         <p><strong>Message:</strong><br/>${message || "No custom message"}</p>
       `,
     });
+  } catch (error) {
+    logActionError("submitDemoRequest", "EMAIL_SEND", error, { email, queryType });
+    return { success: false, message: "Something went wrong. Please try again." };
+  }
 
-    // 2. Save to Google Sheets
-    const auth = new google.auth.GoogleAuth({
-      credentials: {
-        client_email: process.env.GOOGLE_CLIENT_EMAIL,
-        private_key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, "\n"),
-      },
-      scopes: ["https://www.googleapis.com/auth/spreadsheets"],
-    });
-
-    const sheets = google.sheets({ version: "v4", auth });
+  try {
+    const sheets = createSheetsClient();
 
     await sheets.spreadsheets.values.append({
       spreadsheetId: process.env.GOOGLE_SHEET_ID,
-      range: "Sheet1!A:F", // Columns: Name, Email, Phone, Type, Message, Date
+      range: "Sheet1!A:F",
       valueInputOption: "USER_ENTERED",
       requestBody: {
         values: [
@@ -67,11 +109,15 @@ export async function submitDemoRequest(formData: FormData) {
       message: "Request received! We'll contact you shortly.",
     };
   } catch (error) {
-    console.error("Submission error:", error);
-    return {
-      success: false,
-      message: "Something went wrong. Please try again.",
-    };
+    logActionError("submitDemoRequest", "SHEETS_APPEND", error, {
+      spreadsheetIdPresent: Boolean(process.env.GOOGLE_SHEET_ID),
+      clientEmailPresent: Boolean(process.env.GOOGLE_CLIENT_EMAIL),
+      privateKeyPresent: Boolean(process.env.GOOGLE_PRIVATE_KEY),
+      range: "Sheet1!A:F",
+      email,
+    });
+
+    return { success: false, message: "Something went wrong. Please try again." };
   }
 }
 
@@ -87,10 +133,9 @@ export async function submitWaitlistRequest(formData: FormData) {
   }
 
   try {
-    // 1. Send Email Notification
     await resend.emails.send({
-      from: "onboarding@resend.dev", // Use verified domain later
-      to: "whisprbill@gmail.com", // YOUR EMAIL
+      from: "onboarding@resend.dev",
+      to: "whisprbill@gmail.com",
       subject: `New Waitlist Signup: ${name}`,
       html: `
         <h2>New Waitlist Signup</h2>
@@ -101,21 +146,17 @@ export async function submitWaitlistRequest(formData: FormData) {
         <p><strong>Source:</strong> ${source}</p>
       `,
     });
+  } catch (error) {
+    logActionError("submitWaitlistRequest", "EMAIL_SEND", error, { email, source });
+    return { success: false, message: "Something went wrong. Please try again." };
+  }
 
-    // 2. Save to Google Sheets (Waitlist tab)
-    const auth = new google.auth.GoogleAuth({
-      credentials: {
-        client_email: process.env.GOOGLE_CLIENT_EMAIL,
-        private_key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, "\n"),
-      },
-      scopes: ["https://www.googleapis.com/auth/spreadsheets"],
-    });
-
-    const sheets = google.sheets({ version: "v4", auth });
+  try {
+    const sheets = createSheetsClient();
 
     await sheets.spreadsheets.values.append({
       spreadsheetId: process.env.GOOGLE_SHEET_ID,
-      range: "Waitlist!A:F", // Columns: Name, Email, Company, Notes, Source, Timestamp
+      range: "Waitlist!A:F",
       valueInputOption: "USER_ENTERED",
       requestBody: {
         values: [
@@ -136,11 +177,16 @@ export async function submitWaitlistRequest(formData: FormData) {
       message: "You are on the waitlist.",
     };
   } catch (error) {
-    console.error("Waitlist submission error:", error);
-    return {
-      success: false,
-      message: "Something went wrong. Please try again.",
-    };
+    logActionError("submitWaitlistRequest", "SHEETS_APPEND", error, {
+      spreadsheetIdPresent: Boolean(process.env.GOOGLE_SHEET_ID),
+      clientEmailPresent: Boolean(process.env.GOOGLE_CLIENT_EMAIL),
+      privateKeyPresent: Boolean(process.env.GOOGLE_PRIVATE_KEY),
+      range: "Waitlist!A:F",
+      email,
+      source,
+    });
+
+    return { success: false, message: "Something went wrong. Please try again." };
   }
 }
 
@@ -153,10 +199,9 @@ export async function submitWaitlistEmailOnly(formData: FormData) {
   }
 
   try {
-    // 1. Send Email Notification
     await resend.emails.send({
-      from: "onboarding@resend.dev", // Use verified domain later
-      to: "whisprbill@gmail.com", // YOUR EMAIL
+      from: "onboarding@resend.dev",
+      to: "whisprbill@gmail.com",
       subject: `New Waitlist Signup (Modal): ${email}`,
       html: `
         <h2>New Waitlist Signup</h2>
@@ -164,21 +209,17 @@ export async function submitWaitlistEmailOnly(formData: FormData) {
         <p><strong>Source:</strong> ${source}</p>
       `,
     });
+  } catch (error) {
+    logActionError("submitWaitlistEmailOnly", "EMAIL_SEND", error, { email, source });
+    return { success: false, message: "Something went wrong. Please try again." };
+  }
 
-    // 2. Save to Google Sheets (Waitlist tab)
-    const auth = new google.auth.GoogleAuth({
-      credentials: {
-        client_email: process.env.GOOGLE_CLIENT_EMAIL,
-        private_key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, "\n"),
-      },
-      scopes: ["https://www.googleapis.com/auth/spreadsheets"],
-    });
-
-    const sheets = google.sheets({ version: "v4", auth });
+  try {
+    const sheets = createSheetsClient();
 
     await sheets.spreadsheets.values.append({
       spreadsheetId: process.env.GOOGLE_SHEET_ID,
-      range: "Waitlist!A:F", // Columns: Name, Email, Company, Notes, Source, Timestamp
+      range: "Waitlist!A:F",
       valueInputOption: "USER_ENTERED",
       requestBody: {
         values: [
@@ -199,10 +240,15 @@ export async function submitWaitlistEmailOnly(formData: FormData) {
       message: "You are on the waitlist.",
     };
   } catch (error) {
-    console.error("Modal waitlist submission error:", error);
-    return {
-      success: false,
-      message: "Something went wrong. Please try again.",
-    };
+    logActionError("submitWaitlistEmailOnly", "SHEETS_APPEND", error, {
+      spreadsheetIdPresent: Boolean(process.env.GOOGLE_SHEET_ID),
+      clientEmailPresent: Boolean(process.env.GOOGLE_CLIENT_EMAIL),
+      privateKeyPresent: Boolean(process.env.GOOGLE_PRIVATE_KEY),
+      range: "Waitlist!A:F",
+      email,
+      source,
+    });
+
+    return { success: false, message: "Something went wrong. Please try again." };
   }
 }
