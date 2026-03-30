@@ -10,18 +10,21 @@ const steps = [
     title: "Capture Details",
     description:
       "Chat or type your invoice request in plain language. WhisprBill turns it into a structured draft instantly.",
+    image: "/wbill-chatwithai.png",
   },
   {
     id: 2,
     title: "Refine in One View",
     description:
       "Adjust line items, tax, and discounts with a focused editor that stays in sync with the preview.",
+    image: "/preview-screenshot-cropped.png",
   },
   {
     id: 3,
     title: "Send & Track",
     description:
       "Export a branded PDF, share in a click, and keep every invoice tracked in one timeline.",
+    image: "/wbill-customers.jpeg",
   },
 ];
 
@@ -38,19 +41,18 @@ export default function HowItWorksInteractive() {
 
   return (
     <section className="relative overflow-hidden bg-gradient-to-b from-background via-white to-background py-16 sm:py-20 lg:py-24">
-      {/* subtle background orbs from your theme */}
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute left-1/2 top-0 h-72 w-72 -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" />
         <div className="absolute bottom-[-4rem] right-[-2rem] h-60 w-60 rounded-full bg-secondary/10 blur-3xl" />
       </div>
 
       <div className="relative mx-auto flex max-w-7xl flex-col items-center gap-10 px-4 sm:px-6 lg:flex-row lg:items-start lg:gap-14">
+        
         {/* LEFT: browser / app preview */}
         <div className="w-full max-w-xl lg:w-[56%] lg:max-w-none">
-          {/* Browser chrome */}
           <div className="mx-auto rounded-3xl border border-slate-200 bg-gradient-to-b from-white to-slate-50 p-4 sm:p-5 shadow-[0_24px_60px_rgba(15,23,42,0.20)] transition-all duration-500">
+            
             <div className="flex items-center justify-between pb-3">
-              {/* traffic lights */}
               <div className="flex gap-1.5">
                 <span className="h-2.5 w-2.5 rounded-full bg-red-400" />
                 <span className="h-2.5 w-2.5 rounded-full bg-amber-300" />
@@ -63,16 +65,15 @@ export default function HowItWorksInteractive() {
               <div className="h-5 w-8 rounded-full bg-slate-100" />
             </div>
 
-            {/* Screen content – replace src with your actual dashboard shot */}
-            <div className="relative overflow-hidden rounded-2xl border border-slate-200 bg-background">
+            {/* ✅ FIXED: Image goes here */}
+            <div className="relative overflow-hidden rounded-2xl border border-slate-200 bg-background aspect-[16/10]">
               <Image
-                src="/images/how-it-works-dashboard.png"
-                alt="WhisprBill invoice flow preview"
-                width={900}
-                height={650}
-                className={`h-auto w-full object-cover transition-transform duration-700 ${
-                  activeStep === 0 ? "scale-[1.01]" : activeStep === 1 ? "scale-[1.015]" : "scale-[1.02]"
-                }`}
+                key={steps[activeStep].image}
+                src={steps[activeStep].image}
+                alt={steps[activeStep].title}
+                fill
+                className="object-contain transition-all duration-700"
+                priority
               />
             </div>
           </div>
@@ -82,12 +83,13 @@ export default function HowItWorksInteractive() {
           </p>
         </div>
 
-        {/* RIGHT: heading + vertical steps */}
+        {/* RIGHT: content */}
         <div className="w-full max-w-xl lg:w-[44%] lg:max-w-lg">
           <h2 className="mt-1 text-3xl font-extrabold leading-tight text-secondary sm:text-4xl">
             3 simple steps to go from{" "}
             <span className="text-primary">idea to invoice</span>
           </h2>
+
           <p className="mt-2 text-sm text-accent/75 sm:text-base">
             Skip templates and manual formatting. Describe the work once — WhisprBill handles structure, taxes, and delivery.
           </p>
@@ -103,10 +105,9 @@ export default function HowItWorksInteractive() {
                   idx === activeStep ? "bg-primary/[0.04]" : "hover:bg-slate-50/80"
                 }`}
               >
-                {/* bullet column */}
                 <div className="mt-1 flex flex-col items-center">
                   <div
-                    className={`grid h-8 w-8 shrink-0 place-items-center rounded-full text-xs font-bold leading-none [font-variant-numeric:tabular-nums] transition-all duration-300 ${
+                    className={`grid h-8 w-8 shrink-0 place-items-center rounded-full text-xs font-bold transition-all duration-300 ${
                       idx === activeStep
                         ? "bg-primary text-white ring-2 ring-primary/20 shadow-[0_8px_18px_rgba(0,82,204,0.22)]"
                         : "bg-primary/90 text-white"
@@ -115,24 +116,15 @@ export default function HowItWorksInteractive() {
                     {String(step.id).padStart(2, "0")}
                   </div>
                   {idx !== steps.length - 1 && (
-                    <div className={`mt-1 h-full w-px transition-colors duration-300 ${idx < activeStep ? "bg-primary/40" : "bg-slate-200"}`} />
+                    <div className={`mt-1 h-full w-px ${idx < activeStep ? "bg-primary/40" : "bg-slate-200"}`} />
                   )}
                 </div>
 
-                {/* text column */}
                 <div>
-                  <h3
-                    className={`text-sm font-semibold transition-colors sm:text-base ${
-                      idx === activeStep ? "text-primary" : "text-secondary"
-                    }`}
-                  >
+                  <h3 className={`text-sm font-semibold ${idx === activeStep ? "text-primary" : "text-secondary"}`}>
                     {step.title}
                   </h3>
-                  <p
-                    className={`mt-1 text-xs transition-colors sm:text-sm ${
-                      idx === activeStep ? "text-accent/90" : "text-accent/80"
-                    }`}
-                  >
+                  <p className={`mt-1 text-xs ${idx === activeStep ? "text-accent/90" : "text-accent/80"}`}>
                     {step.description}
                   </p>
                 </div>
