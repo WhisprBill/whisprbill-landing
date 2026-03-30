@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const steps = [
@@ -131,14 +132,15 @@ export default function HowItWorksInteractive() {
             ))}
           </div>
 
-          <button
-            type="button"
-            className="mt-8 inline-flex items-center rounded-xl bg-secondary px-5 py-2.5 text-sm font-bold text-white shadow-sm hover:bg-secondary/90"
+          <Link
+            href="https://app.whisprbill.com/login"
+            className="mt-8 inline-flex items-center rounded-xl bg-secondary px-5 py-2.5 text-sm font-bold text-white shadow-sm transition-colors hover:bg-secondary/90"
           >
-            Start Creating Invoices
-          </button>
+            Start Free Forever
+          </Link>
         </div>
       </div>
     </section>
   );
 }
+

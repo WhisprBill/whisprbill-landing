@@ -102,15 +102,21 @@ export default function ComingSoonModal() {
                   </h2>
                 </div>
 
+                <p className="mt-3 inline-flex items-center rounded-full border border-primary/20 bg-primary/5 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-primary">
+                  Beta Access
+                </p>
                 <h1
-                  className="mt-3 mb-4 pb-1 bg-gradient-to-r from-secondary via-primary to-blue-500 bg-clip-text text-4xl font-extrabold tracking-tight leading-[1.15] text-transparent sm:text-5xl"
+                  className="mt-3 mb-3 bg-gradient-to-r from-secondary via-primary to-blue-500 bg-clip-text text-3xl font-extrabold tracking-tight leading-[1.15] text-transparent sm:text-4xl"
                 >
-                  Coming Soon
+                  Premium Access for Early Users
                 </h1>
 
-                <p className="mx-auto mb-8 max-w-xl text-sm leading-relaxed text-accent/75 sm:text-base">
-                  AI-powered invoicing and inventory management for modern businesses.
-                  Be the first to know when we launch.
+                <p className="mx-auto mb-2 max-w-lg text-sm leading-relaxed text-accent/75 sm:text-base">
+                  We are currently in beta access. Enter your email and our team
+                  will reach out with premium access details.
+                </p>
+                <p className="mx-auto mb-8 max-w-lg text-xs text-accent/60 sm:text-sm">
+                  Premium access is offered for one month.
                 </p>
 
                 <form onSubmit={handleSubmit} className="mx-auto w-full max-w-xl">
@@ -129,12 +135,9 @@ export default function ComingSoonModal() {
                       disabled={isSubmitting}
                       className="whitespace-nowrap rounded-xl bg-gradient-to-r from-primary to-blue-600 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-primary/25 transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-primary/35 disabled:cursor-not-allowed disabled:opacity-50"
                     >
-                      {isSubmitting ? "Submitting..." : "Join the Waitlist"}
+                      {isSubmitting ? "Submitting..." : "Get Premium Access"}
                     </button>
                   </div>
-                  <p className="text-xs italic text-accent/55 sm:text-sm">
-                    No spam. Product updates only.
-                  </p>
                   {errorMessage && (
                     <p className="mt-3 rounded-xl border border-red-200 bg-red-50 px-4 py-2 text-xs text-red-700 sm:text-sm">
                       {errorMessage}
@@ -158,10 +161,13 @@ export default function ComingSoonModal() {
                   </svg>
                 </div>
                 <h3 className="mb-3 text-3xl font-bold text-secondary sm:text-4xl">
-                  You are on the list!
+                  Request received.
                 </h3>
                 <p className="text-base text-accent/70 sm:text-lg">
-                  We will notify you as soon as we launch.
+                  We will reach out with premium access details.
+                </p>
+                <p className="mt-2 text-xs italic text-accent/60 sm:text-sm">
+                  Premium access is for one month.
                 </p>
               </div>
             )}

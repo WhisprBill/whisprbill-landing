@@ -123,10 +123,10 @@ export default function GSTCompliancePage() {
 
                 <div className="flex flex-col sm:flex-row gap-4 mb-8">
                   <Link
-                    href="/pricing"
+                    href="https://app.whisprbill.com/login"
                     className="px-8 py-4 bg-primary text-white font-bold rounded-xl hover:bg-blue-600 transition-colors shadow-lg text-center"
                   >
-                    Start Free Trial
+                    Start Free Forever
                   </Link>
                   <a
                     href="#how-it-works"
@@ -444,10 +444,10 @@ export default function GSTCompliancePage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
               <Link
-                href="/pricing"
+                href="https://app.whisprbill.com/login"
                 className="px-8 py-4 bg-white text-primary font-bold rounded-xl hover:bg-gray-100 transition-colors shadow-lg"
               >
-                Start Free Trial - No Credit Card Required
+                Start Free Forever - No Credit Card Required
               </Link>
               <Link
                 href="/features"
@@ -467,3 +467,5 @@ export default function GSTCompliancePage() {
     </>
   );
 }
+
+

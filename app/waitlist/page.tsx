@@ -35,13 +35,17 @@ export default function WaitlistPage() {
           <div className="relative mx-auto max-w-4xl px-4 sm:px-6">
             <div className="rounded-3xl border border-white/20 bg-white/10 p-8 text-white shadow-2xl backdrop-blur-md sm:p-10 lg:p-12">
               <p className="inline-flex items-center rounded-full border border-white/20 bg-white/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-blue-100">
-                Early Access
+                Beta Access
               </p>
               <h1 className="mt-5 text-4xl font-extrabold leading-tight sm:text-5xl">
-                Join the WhisprBill Waitlist
+                Premium Access for Early Users
               </h1>
               <p className="mt-4 max-w-2xl text-blue-100 sm:text-lg">
-                Be among the first to get updates, early feature access, and launch perks.
+                We are currently in beta access. Enter your details and our team
+                will reach out with premium access details.
+              </p>
+              <p className="mt-2 max-w-2xl text-xs text-blue-100/80 sm:text-sm">
+                Premium access is offered for one month.
               </p>
 
               {status !== "success" ? (
@@ -82,7 +86,7 @@ export default function WaitlistPage() {
                     disabled={status === "loading"}
                     className="inline-flex items-center justify-center rounded-xl bg-white px-8 py-3.5 text-sm font-bold text-secondary transition-all hover:-translate-y-0.5 hover:bg-blue-50 hover:shadow-xl sm:text-base"
                   >
-                    {status === "loading" ? "Joining..." : "Join Waitlist"}
+                    {status === "loading" ? "Submitting..." : "Get Premium Access"}
                   </button>
                   {status === "error" && (
                     <p className="rounded-xl border border-red-300/30 bg-red-400/15 px-4 py-3 text-sm text-red-100">
@@ -93,10 +97,13 @@ export default function WaitlistPage() {
               ) : (
                 <div className="mt-8 rounded-2xl border border-emerald-300/30 bg-emerald-400/15 p-6">
                   <p className="text-lg font-semibold text-emerald-100">
-                    {message || "You are on the waitlist."}
+                    {message || "Request received."}
                   </p>
                   <p className="mt-2 text-sm text-blue-100">
-                    We will reach out with updates and early access details.
+                    We will reach out with premium access details.
+                  </p>
+                  <p className="mt-2 text-xs text-blue-100/80">
+                    Premium access is for one month.
                   </p>
                 </div>
               )}

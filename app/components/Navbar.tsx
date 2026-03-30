@@ -106,10 +106,10 @@ export default function Navbar() {
           </Link>
         </div>
 
-        {/* Desktop Auth Buttons (disabled for now)
+        {/* Desktop Auth Buttons */}
         <div className="hidden lg:flex items-center gap-3">
           <Link
-            href="/app/login"
+            href="https://app.whisprbill.com/login"
             className={`relative group px-5 py-2.5 rounded-xl font-semibold text-sm transition-all duration-300
               ${isScrolled
                 ? "bg-white/60 backdrop-blur-sm border border-gray-200/70 hover:bg-white hover:border-primary/30 text-secondary hover:text-primary"
@@ -138,7 +138,7 @@ export default function Navbar() {
           </Link>
 
           <Link
-            href="/app/signup"
+            href="https://app.whisprbill.com/signup"
             className="relative group px-6 py-2.5 rounded-xl font-bold text-sm transition-all duration-300
               bg-gradient-to-r from-primary to-blue-600
               text-white shadow-lg shadow-primary/30 
@@ -165,13 +165,12 @@ export default function Navbar() {
             </span>
           </Link>
         </div>
-        */}
 
         {/* Mobile: Auth + Hamburger */}
         <div className="flex lg:hidden items-center gap-3">
-          {/* Mobile Sign Up Button (disabled for now)
+          {/* Mobile Sign Up Button */}
           <Link
-            href="/app/signup"
+            href="https://app.whisprbill.com/signup"
             className="relative group px-4 py-2 rounded-lg font-bold text-xs sm:text-sm transition-all duration-300
               bg-gradient-to-r from-primary to-blue-600
               text-white shadow-md shadow-primary/30
@@ -181,7 +180,6 @@ export default function Navbar() {
             <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-500" />
             <span className="relative">Sign up</span>
           </Link>
-          */}
 
           {/* Hamburger Menu Button */}
           <button
@@ -286,16 +284,15 @@ export default function Navbar() {
             {/* Divider */}
             <div className="border-t border-gray-200 my-2"></div>
 
-            {/* Mobile Login Link (disabled for now)
+            {/* Mobile Login Link */}
             <Link
-              href="/app/login"
+              href="https://app.whisprbill.com/login"
               className="text-left font-semibold transition-all py-2.5 px-3 rounded-lg
                 text-text hover:text-primary hover:bg-gray-50"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               Log in
             </Link>
-            */}
           </div>
         </div>
       )}

@@ -42,15 +42,51 @@ function logActionError(
 }
 
 function createSheetsClient() {
+  const normalizedPrivateKey = normalizePrivateKey(process.env.GOOGLE_PRIVATE_KEY);
+
   const auth = new google.auth.GoogleAuth({
     credentials: {
       client_email: process.env.GOOGLE_CLIENT_EMAIL,
-      private_key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, "\n"),
+      private_key: normalizedPrivateKey,
     },
     scopes: ["https://www.googleapis.com/auth/spreadsheets"],
   });
 
   return google.sheets({ version: "v4", auth });
+}
+
+function normalizePrivateKey(rawKey?: string) {
+  if (!rawKey) return undefined;
+
+  let key = rawKey.trim();
+
+  // Some env panels store values wrapped in single/double quotes.
+  if (
+    (key.startsWith('"') && key.endsWith('"')) ||
+    (key.startsWith("'") && key.endsWith("'"))
+  ) {
+    key = key.slice(1, -1);
+  }
+
+  // Convert escaped newlines to actual newlines.
+  key = key.replace(/\\n/g, "\n").replace(/\r\n/g, "\n");
+
+  // Handle accidental base64 encoding.
+  if (!key.includes("BEGIN PRIVATE KEY") && !key.includes("BEGIN RSA PRIVATE KEY")) {
+    try {
+      const decoded = Buffer.from(key, "base64").toString("utf8");
+      if (
+        decoded.includes("BEGIN PRIVATE KEY") ||
+        decoded.includes("BEGIN RSA PRIVATE KEY")
+      ) {
+        key = decoded;
+      }
+    } catch {
+      // Keep original key if decoding fails.
+    }
+  }
+
+  return key;
 }
 
 export async function submitDemoRequest(formData: FormData) {
@@ -174,7 +210,7 @@ export async function submitWaitlistRequest(formData: FormData) {
 
     return {
       success: true,
-      message: "You are on the waitlist.",
+      message: "Request received. We will reach out with premium access details.",
     };
   } catch (error) {
     logActionError("submitWaitlistRequest", "SHEETS_APPEND", error, {
@@ -237,7 +273,7 @@ export async function submitWaitlistEmailOnly(formData: FormData) {
 
     return {
       success: true,
-      message: "You are on the waitlist.",
+      message: "Request received. We will reach out with premium access details.",
     };
   } catch (error) {
     logActionError("submitWaitlistEmailOnly", "SHEETS_APPEND", error, {

@@ -53,7 +53,7 @@ export const metadata: Metadata = {
         url: "/og-image.png", // Create this 1200x630px image
         width: 1200,
         height: 630,
-        alt: "WhisprBill AI Invoicing Dashboard",
+        alt: "WhisprBill AI Invoicing",
       },
     ],
   },
@@ -65,7 +65,7 @@ export const metadata: Metadata = {
     description:
       "Faster invoicing with AI, GST-ready billing, and workflow automation for MSMEs and growing teams.",
     creator: "@whisprbill", // Add your Twitter handle
-    images: ["/twitter-image.png"], // Create this 1200x630px image
+    images: ["/og-image.png"], // Create this 1200x630px image
   },
 
   // Verification tags (add when you have them)
