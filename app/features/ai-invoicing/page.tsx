@@ -178,10 +178,10 @@ export default function AIInvoicingPage() {
 
                 <div className="flex flex-col sm:flex-row gap-4 mb-8">
                   <Link
-                    href="/pricing"
+                    href="https://app.whisprbill.com/login"
                     className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-primary text-white font-bold rounded-xl hover:bg-blue-600 transition-all shadow-lg shadow-primary/25 hover:-translate-y-0.5 text-center"
                   >
-                    Start Free Trial
+                    Start Free Forever
                     <ArrowRight className="h-4 w-4" />
                   </Link>
                   <a
@@ -505,10 +505,10 @@ export default function AIInvoicingPage() {
 
               <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
                 <Link
-                  href="/pricing"
+                  href="https://app.whisprbill.com/login"
                   className="inline-flex items-center justify-center gap-2 rounded-xl bg-white px-8 py-4 font-bold text-primary shadow-lg transition-all hover:-translate-y-0.5 hover:bg-blue-50"
                 >
-                  Start Free Trial
+                  Start Free Forever
                   <ArrowRight className="h-4 w-4" />
                 </Link>
                 <Link
@@ -531,6 +531,8 @@ export default function AIInvoicingPage() {
     </>
   );
 }
+
+
 
 
 

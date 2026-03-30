@@ -32,7 +32,7 @@ export default function CTASection() {
               href="/waitlist"
               className="inline-flex items-center justify-center rounded-xl bg-white px-8 py-4 text-sm font-bold text-secondary transition-all hover:-translate-y-0.5 hover:bg-blue-50 hover:shadow-xl"
             >
-              Join the Waitlist
+              Get Premium Access
             </Link>
 
             <Link
@@ -69,3 +69,4 @@ export default function CTASection() {
     </section>
   );
 }
+

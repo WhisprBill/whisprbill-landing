@@ -185,7 +185,7 @@
                     href="/waitlist"
                     className="inline-flex items-center justify-center rounded-xl bg-white px-8 py-4 text-base font-bold text-secondary transition-all hover:-translate-y-0.5 hover:bg-blue-50 hover:shadow-xl"
                   >
-                    Join the Waitlist
+                    Get Premium Access
                   </Link>
                   <a
                     href="#interactive-demo"
@@ -440,7 +440,7 @@
                   href="/waitlist"
                   className="inline-flex items-center justify-center rounded-xl bg-white px-8 py-4 text-base font-bold text-primary transition-colors hover:bg-blue-50 hover:shadow-lg"
                 >
-                  Join the Waitlist
+                  Get Premium Access
                 </Link>
                 <Link
                   href="/features"
@@ -466,3 +466,4 @@
       </>
     );
   }
+

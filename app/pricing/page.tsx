@@ -79,7 +79,7 @@ const faqs = [
   },
   {
     q: "Can I try paid features before upgrading?",
-    a: "We're working on a trial experience. Join the waitlist and we'll notify you as soon as early access opens.",
+    a: "We're working on a trial experience. Get premium access and we'll notify you as soon as early access opens.",
   },
   {
     q: "Will my data be safe if I cancel?",
@@ -251,7 +251,7 @@ export default function PricingPage() {
               Ready to get started?
             </h2>
             <p className="mx-auto mt-4 mb-8 max-w-xl text-lg opacity-90">
-              Early access is open — join the waitlist and be among the first to use WhisprBill when we launch.
+              Early access is open - get premium access and be among the first to use WhisprBill when we launch.
             </p>
             <div className="flex flex-col justify-center gap-4 sm:flex-row">
               <Link
@@ -259,7 +259,7 @@ export default function PricingPage() {
                 className="inline-flex items-center justify-center gap-2 rounded-xl bg-white px-8 py-4 text-base font-bold text-primary transition-colors hover:bg-blue-50 hover:shadow-lg"
               >
                 <Zap className="h-4 w-4" />
-                Join the Waitlist
+                Get Premium Access
               </Link>
               <Link
                 href="/features"
@@ -286,3 +286,5 @@ export default function PricingPage() {
     </>
   );
 }
+
+

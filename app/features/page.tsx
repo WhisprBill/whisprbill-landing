@@ -181,10 +181,10 @@ export default function FeaturesPage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4 sm:px-0">
               <Link
-                href="/pricing"
+                href="https://app.whisprbill.com/login"
                 className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-primary text-white text-base sm:text-lg font-bold rounded-xl shadow-lg hover:bg-blue-600 transition-all hover:-translate-y-0.5"
               >
-                Start Free Trial
+                Start Free Forever
               </Link>
               <Link
                 href="/how-it-works"
@@ -467,10 +467,10 @@ export default function FeaturesPage() {
               Early access is open — no credit card, no setup, no learning curve.
             </p>
             <Link
-              href="/pricing"
+              href="https://app.whisprbill.com/login"
               className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-primary text-white text-base sm:text-lg font-bold rounded-xl hover:bg-blue-600 transition-all shadow-lg hover:-translate-y-0.5"
             >
-              Start Free Trial — No Credit Card Required
+              Start Free Forever — No Credit Card Required
               <ArrowRight className="h-5 w-5" strokeWidth={2.5} />
             </Link>
             <ul className="mt-6 flex flex-col items-center justify-center gap-3 text-sm text-accent/70 sm:flex-row sm:gap-6">
@@ -489,3 +489,5 @@ export default function FeaturesPage() {
     </>
   );
 }
+
+

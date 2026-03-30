@@ -11,7 +11,7 @@ const plans = [
     period: "forever",
     description: "Perfect for testing and small projects",
     features: ["Coming Soon"],
-    cta: "Start Free",
+    cta: "Start Free Forever",
     popular: false,
   },
   {
@@ -169,6 +169,12 @@ export default function Pricing() {
 
                 {/* CTA Button - Responsive */}
                 <button
+                  type="button"
+                  onClick={() => {
+                    if (plan.cta.toLowerCase().includes("start free")) {
+                      window.location.href = "https://app.whisprbill.com/login";
+                    }
+                  }}
                   className={`w-full py-2.5 sm:py-3 px-4 sm:px-6 rounded-xl font-bold text-sm sm:text-base transition-all ${
                     plan.popular
                       ? "bg-primary text-white hover:bg-blue-600 shadow-lg shadow-blue-200"
@@ -217,3 +223,4 @@ export default function Pricing() {
     </>
   );
 }
+

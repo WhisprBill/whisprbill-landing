@@ -67,7 +67,7 @@ export default function Hero() {
               href="/waitlist"
               className="inline-flex items-center justify-center rounded-xl bg-secondary px-7 py-3.5 text-base font-bold text-white shadow-[0_12px_28px_rgba(1,38,82,0.24)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-secondary/90"
             >
-              Join the Waitlist
+              Get Premium Access
               <svg className="ml-2 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
                 <path d="M5 12h14M13 6l6 6-6 6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
@@ -109,3 +109,4 @@ export default function Hero() {
     </section>
   );
 }
+

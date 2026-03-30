@@ -123,10 +123,10 @@ export default function Testimonials() {
           Join 500+ businesses already using WhisprBill
         </p>
         <a 
-          href="/app/signup" 
+          href="https://app.whisprbill.com/login" 
           className="inline-flex items-center gap-2 text-sm sm:text-base text-primary font-semibold hover:text-blue-700 transition-colors group"
         >
-          <span>Start your free trial</span>
+          <span>Start Free Forever</span>
           <svg className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
           </svg>
@@ -135,3 +135,5 @@ export default function Testimonials() {
     </section>
   );
 }
+
+

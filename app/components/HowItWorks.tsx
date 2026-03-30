@@ -193,8 +193,8 @@ export default function HowItWorks() {
 
         {/* CTA - Responsive */}
         <div className="text-center mt-12 sm:mt-16 lg:mt-20">
-          <a href="/app/signup" className="inline-flex items-center justify-center px-8 sm:px-10 py-3 sm:py-4 bg-secondary text-white font-bold text-sm sm:text-base rounded-xl hover:bg-opacity-90 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1 group">
-            Start creating invoices now
+          <a href="https://app.whisprbill.com/login" className="inline-flex items-center justify-center px-8 sm:px-10 py-3 sm:py-4 bg-secondary text-white font-bold text-sm sm:text-base rounded-xl hover:bg-opacity-90 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1 group">
+            Start Free Forever
             <svg className="w-4 h-4 sm:w-5 sm:h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
           </a>
         </div>
@@ -203,3 +203,5 @@ export default function HowItWorks() {
     </section>
   );
 }
+
+
