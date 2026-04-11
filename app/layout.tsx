@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Script from "next/script";
@@ -75,13 +75,6 @@ export const metadata: Metadata = {
     // bing: "your-bing-verification-code",
   },
 
-  // Mobile optimization
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 5,
-  },
-
   // robots control
   robots: {
     index: true,
@@ -99,6 +92,12 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://whisprbill.com",
   },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
 };
 
 export default function RootLayout({

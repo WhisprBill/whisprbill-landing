@@ -1,7 +1,7 @@
 // app/components/ChatWidget.tsx
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface Message {
   id: string;
@@ -9,6 +9,11 @@ interface Message {
   sender: "user" | "bot";
   timestamp: Date;
 }
+
+const createMessageId = () =>
+  typeof crypto !== "undefined" && typeof crypto.randomUUID === "function"
+    ? crypto.randomUUID()
+    : `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
 
 export default function ChatWidget() {
   const [isOpen, setIsOpen] = useState(false);
@@ -19,7 +24,6 @@ export default function ChatWidget() {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // Auto-scroll to bottom when new messages arrive
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
@@ -28,32 +32,30 @@ export default function ChatWidget() {
     scrollToBottom();
   }, [messages, isLoading]);
 
-  // Focus input when chat opens
   useEffect(() => {
     if (isOpen) {
       inputRef.current?.focus();
     }
   }, [isOpen]);
 
-  // Add welcome message when chat opens for first time
   useEffect(() => {
     if (isOpen && messages.length === 0) {
       setMessages([
         {
           id: "welcome",
-          text: "Hey there! 👋 I'm WhisprBot, your AI assistant.\n\nI can help you with:\n✓ Pricing & plans\n✓ Features & capabilities\n✓ GST compliance\n✓ Getting started\n\nWhat would you like to know?",
+          text: "Hey there! \u{1F44B} I'm WhisprBot, your AI assistant.\n\nI can help you with:\n\u2713 Pricing & plans\n\u2713 Features & capabilities\n\u2713 GST compliance\n\u2713 Getting started\n\nWhat would you like to know?",
           sender: "bot",
           timestamp: new Date(),
         },
       ]);
     }
-  }, [isOpen]);
+  }, [isOpen, messages.length]);
 
   const handleSendMessage = async () => {
     if (!inputValue.trim() || isLoading) return;
 
     const userMessage: Message = {
-      id: Date.now().toString(),
+      id: createMessageId(),
       text: inputValue.trim(),
       sender: "user",
       timestamp: new Date(),
@@ -82,7 +84,7 @@ export default function ChatWidget() {
       }
 
       const botMessage: Message = {
-        id: (Date.now() + 1).toString(),
+        id: createMessageId(),
         text: data.response,
         sender: "bot",
         timestamp: new Date(),
@@ -90,42 +92,52 @@ export default function ChatWidget() {
 
       setMessages((prev) => [...prev, botMessage]);
     } catch (err: any) {
-      setError(
-        err.message || "Failed to send message. Please try again."
-      );
+      setError(err.message || "Failed to send message. Please try again.");
     } finally {
       setIsLoading(false);
     }
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       handleSendMessage();
     }
   };
 
-  // Convert markdown-style links [text](#anchor) to clickable links
   const renderMessageText = (text: string) => {
-    const parts = text.split(/(\[.*?\]\(#.*?\))/g);
+    const parts = text.split(
+      /(\[[^\]]+?\]\((?:#|\/|https?:\/\/|mailto:)[^)]+?\))/g
+    );
+
     return parts.map((part, index) => {
-      const linkMatch = part.match(/\[(.*?)\]\((#.*?)\)/);
+      const linkMatch = part.match(
+        /\[([^\]]+?)\]\(((?:#|\/|https?:\/\/|mailto:)[^)]+?)\)/
+      );
+
       if (linkMatch) {
+        const href = linkMatch[2];
+        const isExternal = /^https?:\/\//i.test(href);
+
         return (
           <a
             key={index}
-            href={linkMatch[2]}
+            href={href}
             className="text-blue-600 hover:text-blue-800 underline"
             onClick={() => setIsOpen(false)}
+            target={isExternal ? "_blank" : undefined}
+            rel={isExternal ? "noopener noreferrer" : undefined}
           >
             {linkMatch[1]}
           </a>
         );
       }
-      return part.split("\n").map((line, i) => (
+
+      const lines = part.split("\n");
+      return lines.map((line, i) => (
         <span key={`${index}-${i}`}>
           {line}
-          {i < part.split("\n").length - 1 && <br />}
+          {i < lines.length - 1 && <br />}
         </span>
       ));
     });
@@ -133,7 +145,6 @@ export default function ChatWidget() {
 
   return (
     <>
-      {/* Floating Chat Bubble - Responsive */}
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
@@ -153,15 +164,12 @@ export default function ChatWidget() {
               d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"
             />
           </svg>
-          {/* Pulse animation */}
           <span className="absolute w-full h-full rounded-full bg-blue-600 opacity-75 animate-ping"></span>
         </button>
       )}
 
-      {/* Chat Window - Fully Responsive */}
       {isOpen && (
-        <div className="fixed inset-4 sm:inset-auto sm:bottom-4 sm:right-4 sm:w-[380px] md:w-96 sm:h-[500px] md:h-[600px] bg-white rounded-2xl sm:rounded-2xl shadow-2xl flex flex-col z-50 border border-gray-200">
-          {/* Header - Responsive */}
+        <div className="fixed inset-4 sm:inset-auto sm:bottom-4 sm:right-4 sm:w-[380px] md:w-96 sm:h-[500px] md:h-[600px] bg-white rounded-2xl shadow-2xl flex flex-col z-50 border border-gray-200">
           <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-3 sm:p-4 rounded-t-2xl flex justify-between items-center shrink-0">
             <div className="flex items-center gap-2 sm:gap-3">
               <div className="w-8 h-8 sm:w-10 sm:h-10 bg-white/20 rounded-full flex items-center justify-center shrink-0">
@@ -205,8 +213,11 @@ export default function ChatWidget() {
             </button>
           </div>
 
-          {/* Messages Container - Responsive */}
-          <div className="flex-1 overflow-y-auto p-3 sm:p-4 space-y-3 sm:space-y-4 bg-gray-50">
+          <div
+            className="flex-1 overflow-y-auto p-3 sm:p-4 space-y-3 sm:space-y-4 bg-gray-50"
+            aria-live="polite"
+            aria-label="Chat messages"
+          >
             {messages.map((message) => (
               <div
                 key={message.id}
@@ -240,7 +251,6 @@ export default function ChatWidget() {
               </div>
             ))}
 
-            {/* Typing Indicator - Responsive */}
             {isLoading && (
               <div className="flex justify-start">
                 <div className="bg-white rounded-2xl px-3 py-2.5 sm:px-4 sm:py-3 shadow-sm border border-gray-200">
@@ -259,7 +269,6 @@ export default function ChatWidget() {
               </div>
             )}
 
-            {/* Error Message - Responsive */}
             {error && (
               <div className="bg-red-50 border border-red-200 rounded-xl p-2.5 sm:p-3">
                 <p className="text-xs sm:text-sm text-red-800">{error}</p>
@@ -269,7 +278,6 @@ export default function ChatWidget() {
             <div ref={messagesEndRef} />
           </div>
 
-          {/* Input Area - Responsive */}
           <div className="p-3 sm:p-4 border-t border-gray-200 bg-white rounded-b-2xl shrink-0">
             <div className="flex gap-2">
               <input
@@ -277,10 +285,11 @@ export default function ChatWidget() {
                 type="text"
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
-                onKeyPress={handleKeyPress}
+                onKeyDown={handleKeyDown}
                 placeholder="Ask about pricing, features..."
                 maxLength={500}
                 disabled={isLoading}
+                autoComplete="off"
                 className="flex-1 px-3 py-2 sm:px-4 sm:py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-100 disabled:cursor-not-allowed text-xs sm:text-sm"
               />
               <button
@@ -313,3 +322,4 @@ export default function ChatWidget() {
     </>
   );
 }
+
