@@ -13,13 +13,10 @@ import {
   ArrowRight,
   CheckCircle2,
   Zap,
-  Bell,
 } from "lucide-react";
 import Navbar from "../components/Navbar";
 import Pricing from "../components/Pricing";
 import Footer from "../components/Footer";
-
-// ─── Static Data ─────────────────────────────────────────────────────────────
 
 const benefits = [
   {
@@ -32,11 +29,11 @@ const benefits = [
     Icon: CreditCard,
     title: "No Credit Card Required",
     description:
-      "Try the Free plan with no upfront payment. Upgrade only when you're ready — no pressure.",
+      "Try the Free plan with no upfront payment. Upgrade only when you're ready with no pressure.",
   },
   {
     Icon: ShieldCheck,
-    title: "Secure & GST-Compliant",
+    title: "Secure and GST-Compliant",
     description:
       "Encrypted data storage, automated GST calculations, and compliant invoice formats included in all plans.",
   },
@@ -63,31 +60,25 @@ const benefits = [
 const faqs = [
   {
     q: "Is WhisprBill really free?",
-    a: "Yes. Our Free plan is free forever with no hidden charges — unlimited customers, basic invoicing, and GST compliance at no cost.",
+    a: "Yes. Our Free plan is free forever with no hidden charges, including unlimited customers and GST-ready invoices.",
   },
   {
     q: "Can I upgrade or downgrade my plan anytime?",
-    a: "Yes. You can upgrade, downgrade, or cancel at any time with no penalties or long-term contracts.",
+    a: "Yes. You can upgrade, downgrade, or cancel at any time with no penalties or lock-ins.",
   },
   {
     q: "What payment methods do you accept?",
-    a: "We accept major credit/debit cards, UPI, net banking, and digital wallets. All payments are processed securely.",
+    a: "We support major cards, UPI, net banking, and digital wallets for Indian businesses.",
   },
   {
     q: "What happens if I exceed my plan limits?",
-    a: "You'll receive a notification and can upgrade your plan. No surprise overage charges.",
-  },
-  {
-    q: "Can I try paid features before upgrading?",
-    a: "We're working on a trial experience. Get premium access and we'll notify you as soon as early access opens.",
+    a: "You will see an in-app notification and can upgrade anytime. We do not surprise you with hidden overage charges.",
   },
   {
     q: "Will my data be safe if I cancel?",
-    a: "Yes. You can export all your invoices, customer data, and reports before or after cancelling — your data always belongs to you.",
+    a: "Yes. You can export invoices, customer data, and reports before or after cancellation. Your data always belongs to you.",
   },
 ];
-
-// ─── Sub-components ───────────────────────────────────────────────────────────
 
 function FAQItem({ q, a }: { q: string; a: string }) {
   const [open, setOpen] = useState(false);
@@ -103,7 +94,9 @@ function FAQItem({ q, a }: { q: string; a: string }) {
         className="flex w-full items-center justify-between gap-4 text-left"
         onClick={() => setOpen(!open)}
       >
-        <span className="text-sm font-semibold text-secondary sm:text-base">{q}</span>
+        <span className="text-sm font-semibold text-secondary sm:text-base">
+          {q}
+        </span>
         <ChevronDown
           className={`h-4 w-4 flex-shrink-0 text-primary transition-transform duration-300 ${
             open ? "rotate-180" : ""
@@ -120,81 +113,80 @@ function FAQItem({ q, a }: { q: string; a: string }) {
   );
 }
 
-// ─── Page ─────────────────────────────────────────────────────────────────────
-
 export default function PricingPage() {
   return (
     <>
       <Navbar />
 
       <main className="min-h-screen bg-background">
-
-        {/* ── Pricing Coming Soon Banner ─────────────────────────────────── */}
-        <section className="relative overflow-hidden bg-gradient-to-br from-secondary via-blue-950 to-primary py-16 sm:py-20 lg:py-24">
+        <section className="relative overflow-hidden bg-gradient-to-br from-secondary via-blue-950 to-primary py-14 sm:py-16 lg:py-20">
           <div className="absolute -left-16 top-10 h-44 w-44 rounded-full bg-white/10 blur-3xl" />
           <div className="absolute right-0 top-20 h-56 w-56 rounded-full bg-cyan-300/10 blur-3xl" />
 
           <div className="relative mx-auto max-w-4xl px-4 sm:px-6 text-center text-white">
-            <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-blue-100">
-              <Bell className="h-3.5 w-3.5 text-yellow-300" />
-              Pricing Coming Soon
+            <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-blue-100">
+              Transparent Pricing
             </p>
-
             <h1 className="text-3xl font-extrabold leading-tight sm:text-4xl lg:text-5xl">
-              We're working on{" "}
+              Simple plans for{" "}
               <span className="bg-gradient-to-r from-blue-100 to-cyan-200 bg-clip-text text-transparent">
-                fair, simple pricing
+                powerful invoicing
               </span>
             </h1>
-
-            <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-blue-100 sm:text-lg">
-              WhisprBill is in early access. Pricing plans will be revealed soon — the Free plan stays free forever, and paid plans are being designed to be genuinely affordable for Indian MSMEs and freelancers.
+            <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-blue-100 sm:text-lg">
+              Start with Free and scale when you grow. Built for Indian
+              freelancers, MSMEs, and small teams that need fast GST-ready
+              billing.
             </p>
 
-            <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <Link
-                href="/waitlist"
+            <div className="mt-7 flex flex-col items-center justify-center gap-4 sm:flex-row">
+              <a
+                href="https://app.whisprbill.com/signup"
                 className="inline-flex items-center gap-2 rounded-xl bg-white px-8 py-4 text-base font-bold text-secondary transition-all hover:-translate-y-0.5 hover:bg-blue-50 hover:shadow-xl"
               >
                 <Zap className="h-4 w-4 text-primary" />
-                Get Early Access
-              </Link>
+                Start Free
+              </a>
               <Link
                 href="/features"
                 className="inline-flex items-center gap-2 rounded-xl border border-white/40 bg-white/5 px-8 py-4 text-base font-bold text-white transition-all hover:-translate-y-0.5 hover:bg-white/15"
               >
-                Explore Features
+                See Features
                 <ArrowRight className="h-4 w-4" strokeWidth={2.5} />
               </Link>
             </div>
 
-            <ul className="mt-7 flex flex-col items-center justify-center gap-3 text-sm text-blue-100 sm:flex-row sm:gap-6">
-              {["Free plan forever", "No credit card needed", "Early access open now"].map((item) => (
-                <li key={item} className="flex items-center gap-2">
-                  <CheckCircle2 className="h-4 w-4 text-emerald-300" strokeWidth={2} />
-                  {item}
-                </li>
-              ))}
+            <ul className="mt-6 flex flex-col items-center justify-center gap-3 text-sm text-blue-100 sm:flex-row sm:gap-6">
+              {["Free plan forever", "Instant activation", "Cancel anytime"].map(
+                (item) => (
+                  <li key={item} className="flex items-center gap-2">
+                    <CheckCircle2
+                      className="h-4 w-4 text-emerald-300"
+                      strokeWidth={2}
+                    />
+                    {item}
+                  </li>
+                )
+              )}
             </ul>
           </div>
         </section>
 
-        {/* ── Existing Pricing Component ─────────────────────────────────── */}
         <Pricing />
 
-        {/* ── Why WhisprBill ─────────────────────────────────────────────── */}
         <section className="bg-white py-16 sm:py-20 lg:py-24">
           <div className="mx-auto max-w-6xl px-4 sm:px-6">
             <div className="mx-auto mb-12 max-w-2xl text-center">
               <p className="inline-flex items-center rounded-full border border-primary/15 bg-primary/5 px-4 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-primary">
-                Why Choose Us
+                Why WhisprBill
               </p>
               <h2 className="mt-4 text-3xl font-extrabold text-secondary sm:text-4xl">
-                Built different, priced{" "}
-                <span className="text-primary">honestly</span>
+                Built for real billing work,{" "}
+                <span className="text-primary">not bloated dashboards</span>
               </h2>
               <p className="mt-3 text-sm text-accent/70 sm:text-base">
-                No inflated feature lists, no gotcha tiers. Here's what every plan actually gives you.
+                WhisprBill helps you invoice faster, stay GST-ready, and reduce
+                manual billing effort every day.
               </p>
             </div>
 
@@ -222,7 +214,6 @@ export default function PricingPage() {
           </div>
         </section>
 
-        {/* ── FAQ ────────────────────────────────────────────────────────── */}
         <section className="bg-gradient-to-b from-slate-50 to-background py-16 sm:py-20 lg:py-24">
           <div className="mx-auto max-w-3xl px-4 sm:px-6">
             <div className="mb-10 text-center">
@@ -241,26 +232,26 @@ export default function PricingPage() {
           </div>
         </section>
 
-        {/* ── Final CTA ──────────────────────────────────────────────────── */}
         <section className="relative overflow-hidden bg-gradient-to-br from-primary to-blue-600 py-16 sm:py-20 text-white">
           <div className="absolute -left-16 top-0 h-48 w-48 rounded-full bg-white/10 blur-3xl" />
           <div className="absolute bottom-0 right-0 h-48 w-48 rounded-full bg-cyan-300/10 blur-3xl" />
 
           <div className="relative mx-auto max-w-4xl px-4 sm:px-6 text-center">
             <h2 className="text-3xl font-extrabold lg:text-4xl">
-              Ready to get started?
+              Ready to streamline invoicing?
             </h2>
             <p className="mx-auto mt-4 mb-8 max-w-xl text-lg opacity-90">
-              Early access is open - get premium access and be among the first to use WhisprBill when we launch.
+              Launch with the Free plan and upgrade only when your invoice
+              volume grows.
             </p>
             <div className="flex flex-col justify-center gap-4 sm:flex-row">
-              <Link
-                href="/waitlist"
+              <a
+                href="https://app.whisprbill.com/signup"
                 className="inline-flex items-center justify-center gap-2 rounded-xl bg-white px-8 py-4 text-base font-bold text-primary transition-colors hover:bg-blue-50 hover:shadow-lg"
               >
                 <Zap className="h-4 w-4" />
-                Get Premium Access
-              </Link>
+                Start Free
+              </a>
               <Link
                 href="/features"
                 className="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-white/60 bg-transparent px-8 py-4 text-base font-bold text-white transition-colors hover:bg-white/10"
@@ -270,21 +261,24 @@ export default function PricingPage() {
               </Link>
             </div>
             <ul className="mt-6 flex flex-col items-center justify-center gap-3 text-sm opacity-80 sm:flex-row sm:gap-6">
-              {["Free plan forever", "No credit card needed", "GST-ready invoicing"].map((item) => (
-                <li key={item} className="flex items-center gap-2">
-                  <CheckCircle2 className="h-4 w-4 text-emerald-300" strokeWidth={2} />
-                  {item}
-                </li>
-              ))}
+              {["Free plan forever", "No credit card needed", "GST-ready invoicing"].map(
+                (item) => (
+                  <li key={item} className="flex items-center gap-2">
+                    <CheckCircle2
+                      className="h-4 w-4 text-emerald-300"
+                      strokeWidth={2}
+                    />
+                    {item}
+                  </li>
+                )
+              )}
             </ul>
           </div>
         </section>
-
       </main>
 
       <Footer />
     </>
   );
 }
-
 
