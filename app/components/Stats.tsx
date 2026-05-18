@@ -1,35 +1,98 @@
+"use client";
+
 import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
+
+type StatItem = {
+  value: number;
+  suffix: string;
+  label: string;
+  subtitle: string;
+  valueTone: string;
+};
+
+function CountUp({
+  end,
+  suffix,
+  duration = 1500,
+}: {
+  end: number;
+  suffix: string;
+  duration?: number;
+}) {
+  const [value, setValue] = useState(0);
+  const ref = useRef<HTMLSpanElement | null>(null);
+  const startedRef = useRef(false);
+
+  useEffect(() => {
+    const node = ref.current;
+    if (!node) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting || startedRef.current) return;
+        startedRef.current = true;
+
+        const start = performance.now();
+        const animate = (now: number) => {
+          const progress = Math.min((now - start) / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          setValue(Math.floor(eased * end));
+          if (progress < 1) requestAnimationFrame(animate);
+        };
+
+        requestAnimationFrame(animate);
+      },
+      { threshold: 0.35 }
+    );
+
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [duration, end]);
+
+  return (
+    <span ref={ref}>
+      {value}
+      {suffix}
+    </span>
+  );
+}
 
 export default function Stats() {
-  const stats = [
+  const stats: StatItem[] = [
     {
-      value: "15 hrs",
-      label: "Average time saved per week",
-      detail: "Automated capture, draft, and send flow.",
+      value: 15,
+      suffix: "h",
+      label: "Time Saved Weekly",
+      subtitle: "Less manual billing work.",
       valueTone: "from-primary to-blue-500",
     },
     {
-      value: "95%",
-      label: "Fewer manual invoicing errors",
-      detail: "Structured AI parsing reduces entry mistakes.",
+      value: 95,
+      suffix: "%",
+      label: "Fewer Invoice Errors",
+      subtitle: "Cleaner data, fewer mistakes.",
       valueTone: "from-secondary to-primary",
     },
     {
-      value: "100%",
-      label: "GST-ready invoice structure",
-      detail: "Consistent format prepared for compliance.",
-      valueTone: "from-primary to-cyan-500",
+      value: 100,
+      suffix: "%",
+      label: "GST-Ready Format",
+      subtitle: "Consistent, compliant structure.",
+    valueTone: "from-primary to-cyan-500",
     },
     {
-      value: "Secure",
-      label: "Privacy-first data handling",
-      detail: "Access controls and protected invoice workflows.",
+      value: 24,
+      suffix: "/7",
+      label: "Secure Access",
+      subtitle: "Protected workflows by default.",
       valueTone: "from-secondary to-primary",
     },
   ];
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-background via-white to-background py-14 sm:py-16">
+    <section className="relative isolate overflow-hidden py-14 sm:py-16">
+      <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_18%_20%,rgba(196,181,253,0.2),transparent_38%),radial-gradient(circle_at_82%_18%,rgba(153,246,228,0.2),transparent_36%),linear-gradient(to_bottom,#f7fbff,#fffdfb_50%,#f7fbff)]" />
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute left-10 top-6 h-44 w-44 rounded-full bg-primary/12 blur-3xl" />
         <div className="absolute right-12 top-16 h-40 w-40 rounded-full bg-secondary/10 blur-3xl" />
@@ -83,10 +146,10 @@ export default function Stats() {
                 <p
                   className={`bg-gradient-to-r ${stat.valueTone} bg-clip-text text-4xl font-extrabold tracking-tight text-transparent transition-all duration-300 group-hover:brightness-110 sm:text-5xl`}
                 >
-                  {stat.value}
+                  <CountUp end={stat.value} suffix={stat.suffix} />
                 </p>
-                <p className="mt-3 text-sm font-semibold text-secondary">{stat.label}</p>
-                <p className="mt-2 text-xs leading-relaxed text-accent/75 sm:text-sm">{stat.detail}</p>
+                <p className="mt-3 text-base font-extrabold text-secondary">{stat.label}</p>
+                <p className="mt-1 text-xs leading-relaxed text-accent/75 sm:text-sm">{stat.subtitle}</p>
               </article>
             ))}
           </div>

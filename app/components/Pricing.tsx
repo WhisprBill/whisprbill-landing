@@ -64,14 +64,22 @@ const FREE_PLAN = {
     { label: "AI Invoices", value: "5 per month", status: "included" },
     { label: "Manual Invoices", value: "Unlimited", status: "included" },
     { label: "GST Invoice Templates", value: "1 template", status: "included" },
-    { label: "Inventory Management", value: "Unlimited items", status: "included" },
+    {
+      label: "Inventory Management",
+      value: "Unlimited items",
+      status: "included",
+    },
     { label: "Customer Management", value: "Unlimited", status: "included" },
     { label: "Custom Invoice Number", status: "included" },
     { label: "Dashboard & Analytics", status: "included" },
     { label: "Bulk Upload / Export", status: "locked" },
     { label: "Variants & Price Lists", status: "locked" },
   ],
-  lockedTeaser: ["Priority support", "WhatsApp invoicing", "Team scaling tools"],
+  lockedTeaser: [
+    "Priority support",
+    "WhatsApp invoicing",
+    "Team scaling tools",
+  ],
 } as const;
 
 const PLAN_FEATURES: Record<PlanKey, FeatureItem[]> = {
@@ -89,7 +97,11 @@ const PLAN_FEATURES: Record<PlanKey, FeatureItem[]> = {
     { label: "Templates", value: "5", status: "included" },
     { label: "Business Profiles", value: "2", status: "included" },
     { label: "Priority Support", value: "Included", status: "included" },
-    { label: "WhatsApp Invoicing", value: "Coming Soon", status: "coming_soon" },
+    {
+      label: "WhatsApp Invoicing",
+      value: "Coming Soon",
+      status: "coming_soon",
+    },
   ],
   premium: [
     { label: "AI Invoices / Month", value: "200", status: "included" },
@@ -97,16 +109,15 @@ const PLAN_FEATURES: Record<PlanKey, FeatureItem[]> = {
     { label: "Templates", value: "10", status: "included" },
     { label: "Business Profiles", value: "5", status: "included" },
     { label: "Priority Support", value: "Included", status: "included" },
-    { label: "WhatsApp Invoicing", value: "Coming Soon", status: "coming_soon" },
+    {
+      label: "WhatsApp Invoicing",
+      value: "Coming Soon",
+      status: "coming_soon",
+    },
   ],
 };
 
 const PLAN_ORDER = ["basic", "pro", "premium"] as const;
-const TARGET_PACKS = [
-  { price: 49, invoiceCount: 25, label: "Starter Value" },
-  { price: 99, invoiceCount: 60, label: "Most Popular" },
-  { price: 149, invoiceCount: 100, label: "Max Value" },
-] as const;
 
 type PlanKey = (typeof PLAN_ORDER)[number];
 type BillingInterval = "month" | "year";
@@ -146,6 +157,62 @@ const getMonthlyOriginalPrice = (price: number) => {
   return Math.round(multiplied / 10) * 10;
 };
 
+function FeatureRow({
+  item,
+  isFeatured,
+}: {
+  item: FeatureItem;
+  isFeatured: boolean;
+}) {
+  const status = item?.status || "included";
+
+  if (status === "locked") {
+    return (
+      <li className="flex items-center gap-2.5 opacity-40">
+        <div className="w-4 h-4 rounded-full border border-current shrink-0" />
+        <span className="text-[13px]">{item.label}</span>
+      </li>
+    );
+  }
+
+  if (status === "coming_soon") {
+    return (
+      <li className="flex items-center gap-2.5">
+        <Clock3 className="w-4 h-4 text-amber-400 shrink-0" />
+        <span className="text-[13px]">{item.label}</span>
+        <span className="ml-auto text-[10px] font-semibold bg-amber-400/15 text-amber-600 px-2 py-0.5 rounded-full">
+          Soon
+        </span>
+      </li>
+    );
+  }
+
+  return (
+    <li className="flex items-center gap-2.5">
+      <div
+        className={`w-4 h-4 rounded-full shrink-0 flex items-center justify-center ${
+          isFeatured ? "bg-white/25" : "bg-primary/10"
+        }`}
+      >
+        <svg
+          viewBox="0 0 10 8"
+          className={`w-2.5 h-2.5 fill-none stroke-[2.5] ${isFeatured ? "stroke-white" : "stroke-primary"}`}
+        >
+          <polyline points="1,4 3.5,6.5 9,1" />
+        </svg>
+      </div>
+      <span className="text-[13px] font-medium">{item.label}</span>
+      {item.value && (
+        <span
+          className={`ml-auto text-[12px] font-bold ${isFeatured ? "text-white/70" : "text-slate-400"}`}
+        >
+          {item.value}
+        </span>
+      )}
+    </li>
+  );
+}
+
 function PlanCard({
   plan,
   isFeatured,
@@ -156,7 +223,6 @@ function PlanCard({
   const isFreeCard = Boolean(plan.isFreeCard);
   const price = Number(plan.priceINR || 0);
   const isYearly = plan.billingInterval === "year";
-  const monthlyEquivalent = isYearly ? Math.round(price / 12) : price;
   const originalPrice = isFreeCard
     ? null
     : isYearly
@@ -174,229 +240,134 @@ function PlanCard({
     window.location.href = "#demo-form";
   };
 
-  const getFeatureMeta = (feature: FeatureItem) => {
-    const status = feature?.status || "included";
-
-    if (status === "coming_soon") {
-      return {
-        icon: <Clock3 className="w-3.5 h-3.5 text-amber-400 shrink-0" />,
-        textColor: "text-[#7A8F9E]",
-      };
-    }
-
-    if (status === "locked") {
-      return {
-        icon: (
-          <div className="w-3.5 h-3.5 rounded-full border-2 border-[#D5E3EC] shrink-0" />
-        ),
-        textColor: "text-[#B8CCDA]",
-      };
-    }
-
-    return {
-      icon: (
-        <div
-          className={`w-3.5 h-3.5 rounded-full shrink-0 flex items-center justify-center ${
-            isFeatured ? "bg-[#0072E9]" : "bg-[#22A559]"
-          }`}
-        >
-          <svg
-            viewBox="0 0 10 8"
-            className="w-2 h-2 fill-none stroke-white stroke-[2]"
-          >
-            <polyline points="1,4 3.5,6.5 9,1" />
-          </svg>
-        </div>
-      ),
-      textColor: "text-[#1A2B36]",
-    };
-  };
-
   return (
-    <div className="relative w-full">
-      {(isFeatured || plan.badge) && (
-        <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-20 whitespace-nowrap">
-          <span
-            className={`text-[11px] font-bold px-3.5 py-1 rounded-full inline-flex items-center gap-1.5 shadow-md ${
-              isFeatured
-                ? "bg-gradient-to-r from-[#0055CC] to-[#0080FF] text-white"
-                : "bg-[#0E4A8A] text-white"
-            }`}
-          >
-            {isFeatured ? (
-              <>
-                <Sparkles className="w-3 h-3" />
-                {plan.badge || "Most Popular"}
-              </>
-            ) : (
-              plan.badge
-            )}
+    <div className="relative flex flex-col">
+      {/* Popular badge */}
+      {isFeatured && (
+        <div className="absolute -top-3.5 inset-x-0 flex justify-center z-10">
+          <span className="inline-flex items-center gap-1.5 bg-primary text-white text-[11px] font-bold px-3.5 py-1 rounded-full shadow-lg shadow-primary/30">
+            <Sparkles className="w-3 h-3" />
+            Most Popular
+          </span>
+        </div>
+      )}
+      {!isFeatured && plan.badge && (
+        <div className="absolute -top-3.5 inset-x-0 flex justify-center z-10">
+          <span className="inline-flex items-center gap-1.5 bg-slate-700 text-white text-[11px] font-bold px-3.5 py-1 rounded-full">
+            {plan.badge}
           </span>
         </div>
       )}
 
       <div
-        className={`relative h-full rounded-2xl flex flex-col overflow-hidden transition-all duration-200 hover:shadow-2xl hover:-translate-y-1 ${
+        className={`relative flex flex-col flex-1 rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1 ${
           isFeatured
-            ? "border-2 border-[#0072E9] shadow-xl shadow-[#0072E9]/15"
-            : "border border-[#DDE7F1] shadow-md"
+            ? "bg-primary shadow-2xl shadow-primary/20 ring-2 ring-primary"
+            : "bg-white border border-slate-200 shadow-sm hover:shadow-lg hover:border-slate-300"
         }`}
       >
+        {/* Header */}
         <div
-          className={`px-6 pt-7 pb-6 ${
-            isFeatured
-              ? "bg-gradient-to-br from-[#0055CC] to-[#0080FF]"
-              : "bg-gradient-to-br from-[#1A2B36] to-[#2A3F52]"
-          }`}
+          className={`px-6 pt-7 pb-6 ${isFeatured ? "text-white" : "text-secondary"}`}
         >
-          <div className="flex items-start justify-between mb-4">
-            <div>
-              <h3 className="text-xl font-extrabold text-white tracking-tight">
-                {plan.name}
-              </h3>
-              <p className="text-xs text-white/60 mt-0.5 leading-snug">
-                {plan.description}
-              </p>
-            </div>
+          <p
+            className={`text-xs font-bold uppercase tracking-widest mb-1 ${isFeatured ? "text-white/60" : "text-slate-400"}`}
+          >
+            {plan.name}
+          </p>
 
-            {isYearly && !isFreeCard && (
-              <span className="text-[11px] font-bold px-2.5 py-1 rounded-lg bg-white/15 text-white/90 border border-white/20 whitespace-nowrap shrink-0">
-                Yearly
+          {/* Price */}
+          <div className="mt-3 mb-1 flex items-end gap-1">
+            {originalPrice && (
+              <span
+                className={`text-base font-semibold line-through mr-1 ${isFeatured ? "text-white/30" : "text-slate-300"}`}
+              >
+                ₹{originalPrice}
               </span>
             )}
+            <span className="text-5xl font-black tracking-tight leading-none">
+              {isFreeCard ? "₹0" : `₹${price}`}
+            </span>
+            <span
+              className={`text-sm mb-1 ml-1 ${isFeatured ? "text-white/50" : "text-slate-400"}`}
+            >
+              /{isFreeCard ? "forever" : isYearly ? "yr" : "mo"}
+            </span>
           </div>
 
-          {isFreeCard ? (
-            <div>
-              <div className="flex items-baseline gap-2">
-                <span className="text-5xl font-black text-white tracking-tight">
-                  {"\u20B9"}0
-                </span>
-                <span className="text-sm text-white/50 font-medium">
-                  / forever
-                </span>
-              </div>
-              <p className="text-xs text-white/40 mt-1.5">
-                No credit card needed
-              </p>
-            </div>
-          ) : (
-            <div>
-              {originalPrice && (
-                <div className="flex items-center gap-2.5 mb-2">
-                  <span className="text-base text-white/40 font-semibold relative">
-                    {"\u20B9"}
-                    {originalPrice}
-                    <span className="absolute inset-0 flex items-center">
-                      <span className="w-full h-[2px] bg-red-400/70 block rotate-[-8deg]" />
-                    </span>
-                  </span>
-
-                  {savingsPct && (
-                    <span className="inline-flex items-center gap-1 text-[12px] font-extrabold px-2.5 py-0.5 rounded-lg bg-[#FFE066] text-[#7A4F00]">
-                      <Tag className="w-3 h-3" />
-                      Save {savingsPct}%
-                    </span>
-                  )}
-                </div>
-              )}
-
-              <div className="flex items-baseline gap-2">
-                <span className="text-5xl font-black text-white tracking-tight">
-                  {"\u20B9"}
-                  {price}
-                </span>
-                <span className="text-sm text-white/50 font-medium">
-                  /{isYearly ? "year" : "month"}
-                </span>
-              </div>
-
-              {isYearly ? (
-                <p className="text-xs text-white/50 mt-1.5">
-                  {"\u2248"} {"\u20B9"}
-                  {monthlyEquivalent} / month - billed annually
-                </p>
-              ) : (
-                <p className="text-xs text-white/40 mt-1.5">
-                  Billed monthly - cancel anytime
-                </p>
-              )}
-            </div>
+          {savingsPct && (
+            <span className="inline-flex items-center gap-1 text-[11px] font-bold px-2 py-0.5 rounded-lg bg-amber-400/20 text-amber-300 mt-2">
+              <Tag className="w-3 h-3" />
+              Save {savingsPct}%
+            </span>
           )}
+
+          <p
+            className={`text-[12px] mt-3 ${isFeatured ? "text-white/50" : "text-slate-400"}`}
+          >
+            {isFreeCard
+              ? "No credit card needed"
+              : isYearly
+                ? "Billed annually"
+                : "Cancel anytime"}
+          </p>
         </div>
 
-        <div className="bg-white flex flex-col flex-grow px-6 py-5">
-          <ul className="space-y-2 flex-grow mb-5">
-            {plan.coreHighlights.map((item, idx) => {
-              const meta = getFeatureMeta(item);
-              const isLocked = item?.status === "locked";
+        {/* Divider */}
+        <div
+          className={`mx-6 h-px ${isFeatured ? "bg-white/10" : "bg-slate-100"}`}
+        />
 
-              return (
-                <li
-                  key={idx}
-                  className={`flex items-center gap-2.5 ${
-                    isLocked ? "opacity-55" : ""
-                  }`}
-                >
-                  {meta.icon}
-                  <div className="min-w-0 flex-1 py-1.5 border-b border-[#EEF3F8] last:border-b-0">
-                    <span
-                      className={`text-[14px] font-semibold leading-tight ${meta.textColor}`}
-                    >
-                      {item?.label || ""}
-                    </span>
-                    {item?.value && (
-                      <span className="text-[12px] text-[#6E90A5] font-semibold block mt-1">
-                        {item.value}
-                      </span>
-                    )}
-                  </div>
-                </li>
-              );
-            })}
+        {/* Features */}
+        <div
+          className={`px-6 py-5 flex flex-col flex-1 ${isFeatured ? "text-white" : "text-slate-600"}`}
+        >
+          <ul className="space-y-3 flex-1">
+            {plan.coreHighlights.map((item, idx) => (
+              <FeatureRow key={idx} item={item} isFeatured={isFeatured} />
+            ))}
           </ul>
 
+          {/* Locked teaser */}
           {isFreeCard && plan.lockedTeaser.length > 0 && (
-            <div className="mb-5 rounded-xl border border-dashed border-[#C8DCEF] bg-[#F7FAFD] px-3 py-3">
-              <p className="text-[10px] font-bold text-[#9BB5C4] uppercase tracking-widest mb-2">
+            <div
+              className={`mt-5 rounded-xl border border-dashed px-4 py-3 ${isFeatured ? "border-white/15 bg-white/5" : "border-slate-200 bg-slate-50"}`}
+            >
+              <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-2">
                 Unlock with paid plans
               </p>
               <ul className="space-y-1.5">
                 {plan.lockedTeaser.map((feat, i) => (
                   <li key={i} className="flex items-center gap-2">
-                    <Lock className="w-3 h-3 text-[#C0D4E0] shrink-0" />
-                    <span className="text-[11px] text-[#9BB5C4]">{feat}</span>
+                    <Lock className="w-3 h-3 text-slate-300 shrink-0" />
+                    <span className="text-[12px] text-slate-400">{feat}</span>
                   </li>
                 ))}
               </ul>
             </div>
           )}
 
-          <div className="space-y-2">
-            <button
-              onClick={handleCTA}
-              className={`w-full py-3 px-6 rounded-xl font-bold text-sm transition-all flex items-center justify-center gap-2 active:scale-[0.98] ${
-                isFreeCard
-                  ? "bg-white text-[#0072E9] border-2 border-[#0072E9] hover:bg-[#EBF4FF]"
-                  : isFeatured
-                    ? "bg-[#0072E9] text-white hover:bg-[#005EC2] shadow-lg shadow-[#0072E9]/25"
-                    : "bg-[#1A2B36] text-white hover:bg-[#243546]"
-              }`}
-            >
-              {isFreeCard
-                ? "Get Started Free"
-                : isYearly
-                  ? "Start Yearly Plan"
-                  : "Start Monthly Plan"}
-              <ArrowRight className="w-4 h-4" />
-            </button>
-
-            <p className="text-[11px] text-center text-[#A8BECB]">
-              {isFreeCard
-                ? "No credit card - Instant access"
-                : "Instant activation - GST invoice included"}
-            </p>
-          </div>
+          {/* CTA */}
+          <button
+            onClick={handleCTA}
+            className={`mt-6 w-full py-3 rounded-xl text-sm font-bold flex items-center justify-center gap-2 transition-all duration-200 active:scale-[0.98] ${
+              isFeatured
+                ? "bg-white text-primary hover:bg-white/90 shadow-lg"
+                : isFreeCard
+                  ? "bg-slate-50 text-secondary border border-slate-200 hover:bg-slate-100"
+                  : "bg-secondary text-white hover:bg-secondary/90"
+            }`}
+          >
+            {isFreeCard ? "Get started free" : `Start ${plan.name}`}
+            <ArrowRight className="w-4 h-4" />
+          </button>
+          <p
+            className={`text-[11px] text-center mt-2 ${isFeatured ? "text-white/40" : "text-slate-400"}`}
+          >
+            {isFreeCard
+              ? "Instant access"
+              : "Instant activation · GST invoice included"}
+          </p>
         </div>
       </div>
     </div>
@@ -405,16 +376,16 @@ function PlanCard({
 
 export default function Pricing() {
   const [showComparison, setShowComparison] = useState(false);
-  const [billingInterval, setBillingInterval] = useState<BillingInterval>(
-    "month"
-  );
+  const [billingInterval, setBillingInterval] =
+    useState<BillingInterval>("month");
 
   const cards = useMemo<CardPlan[]>(() => {
     const paidPlans: CardPlan[] = PLAN_ORDER.map((planKey) => {
       const planData = BASE_PLANS_FALLBACK[`${planKey}-${billingInterval}`];
-        const monthPrice = BASE_PLANS_FALLBACK[`${planKey}-month`].priceINR;
-        const yearPrice = BASE_PLANS_FALLBACK[`${planKey}-year`].priceINR;
-        const yearlySavingsPct = getSavingsPercent(monthPrice * 12, yearPrice) || 0;
+      const monthPrice = BASE_PLANS_FALLBACK[`${planKey}-month`].priceINR;
+      const yearPrice = BASE_PLANS_FALLBACK[`${planKey}-year`].priceINR;
+      const yearlySavingsPct =
+        getSavingsPercent(monthPrice * 12, yearPrice) || 0;
 
       return {
         id: `${planKey}-${billingInterval}`,
@@ -460,31 +431,36 @@ export default function Pricing() {
 
   return (
     <>
-      <section
-        id="pricing"
-        className="py-12 sm:py-16 lg:py-20 xl:py-24 bg-gradient-to-b from-white to-gray-50 relative overflow-hidden"
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
-          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
-            <h2 className="text-primary font-bold tracking-wide uppercase text-xs sm:text-sm mb-2 sm:mb-3">
-              Pricing Plans
-            </h2>
-            <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-secondary leading-tight mb-4 sm:mb-6 px-4 sm:px-0">
-              Choose the plan that{" "}
-              <span className="text-primary">fits your business</span>
-            </h3>
-            <p className="text-base sm:text-lg text-accent/70 leading-relaxed mb-6 sm:mb-8 px-4 sm:px-0">
-              Start free, upgrade when you grow. No hidden fees. Cancel anytime.
+      <section id="pricing" className="relative isolate overflow-hidden py-16 sm:py-20 lg:py-28">
+        <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_9%_22%,rgba(186,230,253,0.34),transparent_36%),radial-gradient(circle_at_90%_25%,rgba(253,224,71,0.16),transparent_34%),radial-gradient(circle_at_48%_92%,rgba(254,205,211,0.26),transparent_38%),linear-gradient(to_bottom,#f7fbff,#fffefb_48%,#f8fbff)]" />
+        <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6">
+          {/* Header */}
+          <div className="mb-12 lg:mb-16">
+            <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-3">
+              Pricing
             </p>
+            <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6">
+              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-secondary leading-[1.05] tracking-tight">
+                Start free.
+                <br />
+                <span className="text-primary">Upgrade when ready.</span>
+              </h2>
+              <p className="text-sm text-slate-400 max-w-xs leading-relaxed">
+                No hidden fees. Cancel anytime. Your free plan never expires.
+              </p>
+            </div>
+          </div>
 
-            <div className="inline-flex items-center bg-gray-100 rounded-2xl p-1.5 mb-4 sm:mb-5 shadow-sm border border-gray-200/70">
+          {/* Billing toggle */}
+          <div className="flex items-center gap-4 mb-10">
+            <div className="inline-flex items-center bg-slate-100 rounded-xl p-1">
               <button
                 type="button"
                 onClick={() => setBillingInterval("month")}
-                className={`px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-semibold transition-colors ${
+                className={`px-5 py-2 rounded-lg text-sm font-semibold transition-all duration-200 ${
                   billingInterval === "month"
                     ? "bg-white text-secondary shadow-sm"
-                    : "text-accent/70 hover:text-secondary"
+                    : "text-slate-400 hover:text-secondary"
                 }`}
               >
                 Monthly
@@ -492,23 +468,22 @@ export default function Pricing() {
               <button
                 type="button"
                 onClick={() => setBillingInterval("year")}
-                className={`px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-semibold transition-colors ${
+                className={`px-5 py-2 rounded-lg text-sm font-semibold transition-all duration-200 ${
                   billingInterval === "year"
                     ? "bg-white text-secondary shadow-sm"
-                    : "text-accent/70 hover:text-secondary"
+                    : "text-slate-400 hover:text-secondary"
                 }`}
               >
                 Yearly
               </button>
             </div>
-            <div className="mb-6 sm:mb-8">
-              <span className="inline-flex items-center px-3 py-1 rounded-full text-[12px] font-semibold bg-blue-50 text-blue-700 border border-blue-200">
-                Save up to {yearlyDiscountLabel}% with yearly billing
-              </span>
-            </div>
+            <span className="text-xs font-semibold bg-primary/8 text-primary border border-primary/15 px-3 py-1.5 rounded-full">
+              Save up to {yearlyDiscountLabel}% yearly
+            </span>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
+          {/* Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5 items-start pt-5">
             {cards.map((plan) => (
               <PlanCard
                 key={plan.id}
@@ -518,90 +493,56 @@ export default function Pricing() {
             ))}
           </div>
 
-          <div className="text-center mt-8 sm:mt-10">
+          {/* Compare link */}
+          <div className="mt-8 flex justify-center">
             <button
               onClick={() => setShowComparison(true)}
-              className="inline-flex items-center gap-2 text-sm sm:text-base text-primary font-semibold hover:text-blue-700 transition-colors group"
+              className="group inline-flex items-center gap-2 text-sm font-semibold text-slate-400 hover:text-primary transition-colors duration-200"
             >
-              <span>Compare all plans</span>
-              <svg
-                className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M9 5l7 7-7 7"
-                ></path>
-              </svg>
+              Compare all plans in detail
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform duration-200" />
             </button>
           </div>
 
-          <div className="mt-14 sm:mt-16 lg:mt-20 rounded-3xl border border-[#DCE8F4] bg-gradient-to-br from-[#F8FBFF] via-white to-[#F3F8FF] p-6 sm:p-8 lg:p-10">
-            <div className="text-center max-w-3xl mx-auto">
-              <h4 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-secondary">
-                Add-On Packs
-              </h4>
-              <p className="text-sm sm:text-base text-accent/70 mt-3 leading-relaxed">
-                Run out of AI invoices? No worries. We&apos;ve got affordable
-                add-ons that don&apos;t expire. Buy once, use anytime.
+          {/* Add-ons */}
+          <div className="mt-16 lg:mt-20 rounded-2xl border border-slate-100 bg-slate-50 p-8 lg:p-10 flex flex-col lg:flex-row items-center gap-8 lg:gap-14">
+            <div className="flex-1">
+              <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-3">
+                Need more?
+              </p>
+              <h3 className="text-2xl sm:text-3xl font-extrabold text-secondary tracking-tight leading-tight mb-3">
+                Top up anytime.
+                <br />
+                No plan change needed.
+              </h3>
+              <p className="text-sm text-slate-400 leading-relaxed max-w-sm">
+                Run out of AI invoices mid-month? Grab an add-on pack for a
+                fraction of the cost — no expiry, no fuss, works with any paid
+                plan.
               </p>
             </div>
-
-            <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
-              {TARGET_PACKS.map((pack) => (
-                <div
-                  key={`${pack.price}-${pack.invoiceCount}`}
-                  className={`relative rounded-2xl border bg-white p-5 sm:p-6 shadow-sm hover:shadow-lg transition-all duration-200 hover:-translate-y-1 ${
-                    pack.label === "Most Popular"
-                      ? "border-[#0072E9] ring-2 ring-[#0072E9]/15"
-                      : "border-[#DDE7F1]"
-                  }`}
-                >
-                  <div className="flex items-center justify-between mb-4">
-                    <span
-                      className={`text-[11px] font-bold px-2.5 py-1 rounded-full ${
-                        pack.label === "Most Popular"
-                          ? "bg-[#EAF4FF] text-[#005EC2]"
-                          : "bg-[#F1F5F9] text-[#4E6778]"
-                      }`}
-                    >
-                      {pack.label}
-                    </span>
-                    <span className="text-xs font-semibold text-[#6E90A5]">
-                      Non-expiring
-                    </span>
-                  </div>
-
-                  <div className="mb-4">
-                    <p className="text-4xl font-black tracking-tight text-[#1A2B36]">
-                      {"\u20B9"}
-                      {pack.price}
-                    </p>
-                    <p className="text-sm font-semibold text-[#4E6778] mt-1">
-                      {pack.invoiceCount} AI invoices
-                    </p>
-                  </div>
-
-                  <ul className="space-y-2.5">
-                    <li className="flex items-center gap-2.5 text-[13px] text-[#3B5566] font-medium">
-                      <span className="w-2 h-2 rounded-full bg-[#22A559]" />
-                      Use whenever you need extra invoices
-                    </li>
-                    <li className="flex items-center gap-2.5 text-[13px] text-[#3B5566] font-medium">
-                      <span className="w-2 h-2 rounded-full bg-[#22A559]" />
-                      Works with any paid plan
-                    </li>
-                    <li className="flex items-center gap-2.5 text-[13px] text-[#3B5566] font-medium">
-                      <span className="w-2 h-2 rounded-full bg-[#22A559]" />
-                      Available inside app after signup
-                    </li>
-                  </ul>
-                </div>
-              ))}
+            <div className="flex-shrink-0 flex flex-col items-center gap-3 text-center">
+              <div className="w-16 h-16 rounded-2xl bg-primary/8 border border-primary/15 flex items-center justify-center">
+                <Sparkles className="w-7 h-7 text-primary" />
+              </div>
+              <p className="text-xs text-slate-400 font-medium">
+                Starting at just
+              </p>
+              <p className="text-4xl font-black text-secondary tracking-tight">
+                ₹49
+              </p>
+              <p className="text-xs text-slate-400">
+                per invoice pack · never expires
+              </p>
+              <button
+                onClick={() =>
+                  (window.location.href = "https://app.whisprbill.com/login")
+                }
+                className="mt-2 inline-flex items-center gap-2 bg-secondary text-white text-sm font-bold px-5 py-2.5 rounded-xl hover:bg-secondary/90 transition-all duration-200"
+              >
+                View packs
+                <ArrowRight className="w-4 h-4" />
+              </button>
             </div>
           </div>
         </div>

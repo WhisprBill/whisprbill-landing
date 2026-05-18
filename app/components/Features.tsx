@@ -2,175 +2,188 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import type { ReactNode } from "react";
 
-type SpotlightFeature = {
+type BentoFeature = {
   title: string;
   description: string;
-  icon: ReactNode;
   image: string;
   link: string;
-  chip: string;
+  tile: string;
+  span: string;
+  imageMode?: "contain" | "cover";
+  layout?: "bottom" | "side";
 };
 
-const spotlightFeatures: SpotlightFeature[] = [
+const bentoFeatures: BentoFeature[] = [
   {
-    title: "Your AI Invoice Assistant That Speaks Your Language",
-    description:
-      "Forget navigating through endless menus and forms. Simply chat naturally: 'Create an invoice for Sharma Enterprises for INR 45,000 with 18% GST' and watch your invoice appear instantly. It's invoicing that feels like texting a colleague.",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5" aria-hidden="true">
-        <path
-          d="M5 7.5A2.5 2.5 0 0 1 7.5 5h9A2.5 2.5 0 0 1 19 7.5v7A2.5 2.5 0 0 1 16.5 17H9l-4 3.5V17A2.5 2.5 0 0 1 2.5 14V7.5A2.5 2.5 0 0 1 5 5.5"
-          stroke="currentColor"
-          strokeWidth="1.8"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path d="M8 10h8M8 13.5h5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-      </svg>
-    ),
-    image: "/wbill-chatwithai.png",
+    title: "Invoice by Voice or Chat",
+    description: "Create GST-ready invoices from a simple prompt in seconds.",
+    image: "/chat_with_ai.svg",
     link: "/features/ai-invoicing",
-    chip: "AI Assistant",
+    tile: "bg-[#e9e8ff]",
+    span: "md:col-span-2 md:row-span-2",
+    imageMode: "contain",
+    layout: "bottom",
   },
   {
-    title: "Professional Templates for Every Business Type",
-    description:
-      "Choose from 50+ beautifully designed invoice templates spanning every industry - from minimalist designs for tech startups to detailed formats for construction firms. Each template is GST-compliant, fully customizable, and looks stunning on any device or printer.",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5" aria-hidden="true">
-        <path
-          d="M7 3h7l5 5v13H7V3Z"
-          stroke="currentColor"
-          strokeWidth="1.8"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path d="M14 3v5h5M10 12h6M10 15h6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-      </svg>
-    ),
+    title: "Smart Templates",
+    description: "Choose from professional layouts and adapt them instantly.",
     image: "/Wbill-Templates.png",
     link: "/features/templates",
-    chip: "Templates",
+    tile: "bg-[#ffe7f1]",
+    span: "md:col-span-2",
+    imageMode: "contain",
+    layout: "side",
   },
   {
-    title: "100% GST Compliant",
-    description:
-      "Stay fully compliant with Indian tax regulations. Auto-calculate CGST, SGST, IGST based on buyer location. Generate GSTR-1, GSTR-3B reconciliation reports instantly. Supports reverse charge, e-invoicing, and E-way bills.",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5" aria-hidden="true">
-        <path
-          d="M12 3 5 6v6c0 5 3.4 8.3 7 9 3.6-.7 7-4 7-9V6l-7-3Z"
-          stroke="currentColor"
-          strokeWidth="1.8"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path d="m9 12 2 2 4-4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-      </svg>
-    ),
-    image: "/wbill-gstcompliance.jpeg",
+    title: "GST Accuracy",
+    description: "Auto-handles CGST, SGST, and IGST by invoice context.",
+    image: "/gst_accuracy.png",
     link: "/features/gst-compliance",
-    chip: "Compliance",
+    tile: "bg-[#fff4dc]",
+    span: "md:col-span-1",
+    imageMode: "contain",
+    layout: "bottom",
+  },
+  {
+    title: "Client Tracking",
+    description: "Track invoice status, follow-ups, and payment history.",
+    image: "/client_tracking.svg",
+    link: "/features/customer-management",
+    tile: "bg-[#e8f7ec]",
+    span: "md:col-span-1",
+    imageMode: "contain",
+    layout: "bottom",
+  },
+  {
+    title: "Invoice Analytics",
+    description: "See trends, top customers, and monthly revenue snapshots.",
+    image: "/invoice_analytics.svg",
+    link: "/features/dashboard-analytics",
+    tile: "bg-[#ffece1]",
+    span: "md:col-span-2",
+    imageMode: "contain",
+    layout: "side",
+  },
+  {
+    title: "Fast Share & Export",
+    description: "Send invoices by PDF, link, or WhatsApp-ready workflows.",
+    image: "/fast_share_and_export.svg",
+    link: "/features/invoice-sharing",
+    tile: "bg-[#e8f1ff]",
+    span: "md:col-span-2",
+    imageMode: "contain",
+    layout: "side",
   },
 ];
 
 export default function Features() {
   return (
-    <section
-      id="features"
-      className="relative overflow-hidden bg-gradient-to-b from-white via-[#f9fbff] to-background py-14 sm:py-16 lg:py-20"
-    >
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute left-8 top-8 h-44 w-44 rounded-full bg-primary/10 blur-3xl" />
-        <div className="absolute right-8 top-20 h-40 w-40 rounded-full bg-secondary/10 blur-3xl" />
-      </div>
+    <section id="features" className="relative isolate overflow-hidden py-16 sm:py-20 lg:py-28">
+      <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_12%_16%,rgba(236,72,153,0.16),transparent_42%),radial-gradient(circle_at_88%_20%,rgba(59,130,246,0.22),transparent_40%),radial-gradient(circle_at_50%_88%,rgba(16,185,129,0.14),transparent_42%),linear-gradient(to_bottom,#f9fbff,#fffdfb_48%,#f7fbff)]" />
 
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
-        <div className="mx-auto mb-10 max-w-3xl text-center sm:mb-12 lg:mb-14">
-          <h2 className="mb-2 text-xs font-bold uppercase tracking-wide text-primary sm:mb-3 sm:text-sm">
-            Core Features
+      <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6">
+        <div className="mb-10 lg:mb-14">
+          <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-primary">Core Features</p>
+          <h2 className="max-w-3xl text-4xl font-extrabold leading-[1.06] tracking-tight text-secondary sm:text-5xl lg:text-6xl">
+            A smarter billing stack.
+            <span className="text-primary"> Built for speed and clarity.</span>
           </h2>
-          <h3 className="mb-4 px-4 text-2xl font-extrabold leading-tight text-secondary sm:mb-6 sm:px-0 sm:text-3xl md:text-4xl lg:text-5xl">
-            The tools that make <span className="text-primary">invoicing effortless</span>
-          </h3>
-          <p className="px-4 text-base leading-relaxed text-accent/70 sm:px-0 sm:text-lg">
-            AI-powered automation, professional design, and complete GST compliance - everything you need in one platform.
-          </p>
         </div>
 
-        <div className="space-y-6 sm:space-y-7 lg:space-y-8">
-          {spotlightFeatures.map((feature, index) => (
-            <article
-              key={index}
-              className="group overflow-hidden rounded-2xl border border-primary/15 bg-white shadow-[0_14px_35px_rgba(1,38,82,0.08)] transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/25 hover:shadow-[0_20px_45px_rgba(1,38,82,0.14)]"
+        <div className="grid grid-cols-1 gap-4 sm:gap-5 md:grid-cols-4 auto-rows-[220px]">
+          {bentoFeatures.map((feature, index) => (
+            // Tune small 1x1 tiles so illustration cards stay readable.
+            // Only applies to GST Accuracy and Client Tracking.
+            (() => {
+              const isSmallIllustrationTile =
+                feature.title === "GST Accuracy" || feature.title === "Client Tracking";
+
+              return (
+            <Link
+              key={feature.title}
+              href={feature.link}
+              className={`group relative overflow-hidden rounded-3xl border border-primary/15 ${feature.tile} p-5 shadow-[0_10px_30px_rgba(1,38,82,0.08)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_42px_rgba(1,38,82,0.16)] ${feature.span}`}
             >
-              <div className="grid gap-0 lg:grid-cols-[1.1fr_0.9fr]">
-                <div className={`relative min-h-[260px] sm:min-h-[320px] lg:min-h-[360px] ${index % 2 === 1 ? "lg:order-2" : ""}`}>
-                  <Image
-                    src={feature.image}
-                    alt={feature.title}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-                  />
-                </div>
-
-                <div className={`flex flex-col p-5 sm:p-6 lg:p-7 ${index % 2 === 1 ? "lg:order-1" : ""}`}>
-                  <div className="mb-4 flex items-center justify-between">
-                    <span className="rounded-full border border-primary/20 bg-primary/5 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.1em] text-primary">
-                      {feature.chip}
-                    </span>
-                    <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-primary/20 bg-white text-primary shadow-sm">
-                      {feature.icon}
-                    </span>
+              <div className="relative z-10 h-full">
+                {feature.layout === "side" ? (
+                  <div className="grid h-full grid-cols-12 gap-4">
+                    <div className="col-span-7 flex flex-col justify-start">
+                      <h3 className="text-2xl font-extrabold leading-[1.08] tracking-tight text-secondary sm:text-3xl">
+                        {feature.title}
+                      </h3>
+                      <p className="mt-2 text-sm leading-relaxed text-secondary/75 sm:text-base">
+                        {feature.description}
+                      </p>
+                    </div>
+                    <div className="relative col-span-5 min-h-[140px]">
+                      <Image
+                        src={feature.image}
+                        alt={feature.title}
+                        fill
+                        className="object-contain object-center p-1 transition-transform duration-300 group-hover:scale-[1.03]"
+                      />
+                    </div>
                   </div>
+                ) : (
+                  <div className="flex h-full flex-col justify-between gap-4">
+                    <div>
+                      <h3
+                        className={`font-extrabold leading-[1.08] tracking-tight text-secondary ${
+                          isSmallIllustrationTile ? "text-[2.05rem] sm:text-[2.35rem]" : "text-2xl sm:text-3xl"
+                        }`}
+                      >
+                        {feature.title}
+                      </h3>
+                      <p
+                        className={`mt-2 leading-relaxed text-secondary/75 ${
+                          isSmallIllustrationTile ? "max-w-none text-[1.02rem] sm:text-[1.08rem]" : "max-w-sm text-sm sm:text-base"
+                        }`}
+                      >
+                        {feature.description}
+                      </p>
+                    </div>
 
-                  <h4 className="mb-3 text-xl font-bold text-secondary sm:text-2xl">
-                    {feature.title}
-                  </h4>
-                  <p className="text-sm leading-relaxed text-accent/80">
-                    {feature.description}
-                  </p>
-
-                  <div className="mt-5">
-                    <Link
-                      href={feature.link}
-                      className="inline-flex items-center gap-2 text-sm font-semibold text-primary transition-colors hover:text-blue-700 group/link"
+                    <div
+                      className={`relative ${
+                        index === 0
+                          ? "h-[220px] sm:h-[280px]"
+                          : isSmallIllustrationTile
+                            ? "h-[150px] sm:h-[170px]"
+                            : "h-[120px] sm:h-[140px]"
+                      }`}
                     >
-                      <span>Learn more</span>
-                      <span className="transition-transform group-hover/link:translate-x-1">-&gt;</span>
-                    </Link>
+                      <Image
+                        src={feature.image}
+                        alt={feature.title}
+                        fill
+                        className={`${
+                          feature.imageMode === "contain"
+                            ? index === 0
+                              ? "object-contain object-center p-2 sm:p-4"
+                              : isSmallIllustrationTile
+                                ? "object-contain object-center p-1"
+                                : "object-contain object-center p-2"
+                            : "object-cover object-center"
+                        } transition-transform duration-300 group-hover:scale-[1.03]`}
+                      />
+                    </div>
                   </div>
-                </div>
+                )}
               </div>
-            </article>
+            </Link>
+              );
+            })()
           ))}
         </div>
 
-        <div className="mt-10 text-center sm:mt-12">
+        <div className="mt-10 text-center">
           <Link
             href="/features"
-            className="group inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-secondary to-primary px-7 py-3.5 text-base font-bold text-white shadow-[0_16px_35px_rgba(1,38,82,0.28)] ring-1 ring-primary/20 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_22px_45px_rgba(1,38,82,0.35)] sm:px-10 sm:py-4 sm:text-lg"
+            className="inline-flex items-center gap-2 rounded-xl bg-secondary px-7 py-3 text-sm font-bold text-white shadow-[0_14px_32px_rgba(1,38,82,0.24)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-secondary/90"
           >
-            <span>Explore All Features</span>
-            <svg
-              className="h-5 w-5 transition-transform group-hover:translate-x-1"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M17 8l4 4m0 0l-4 4m4-4H3"
-              />
-            </svg>
+            Explore all features
           </Link>
-          <p className="mt-3 text-xs font-medium text-accent/65 sm:text-sm">
-            View detailed walkthroughs, workflows, and use-case pages.
-          </p>
         </div>
       </div>
     </section>
