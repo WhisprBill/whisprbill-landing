@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
-import Link from "next/link"; // ADD THIS
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
-import FeaturesOverview from "./components/FeaturesOverview";
 import Stats from "./components/Stats";
 import CTASection from "./components/CTASection";
 import Footer from "./components/Footer";
@@ -11,6 +9,7 @@ import Pricing from "./components/Pricing";
 import HowItWorksInteractive from "./components/HowItWorksInteractive";
 import Features from "./components/Features";
 import DemoForm from "./components/DemoForm";
+import HomeFAQ from "./components/HomeFAQ";
 import ComingSoonModal from "./components/ComingSoonModal";
 
 export const metadata: Metadata = {
@@ -78,6 +77,8 @@ export default function Home() {
        <Features />
 
         <Pricing />
+
+        <HomeFAQ />
 
         
       

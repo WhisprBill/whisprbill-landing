@@ -9,9 +9,10 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative overflow-hidden bg-background pb-12 pt-28 sm:pb-16 sm:pt-32 lg:pb-20 lg:pt-36">
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-[62%] bg-gradient-to-br from-secondary via-blue-950 to-primary" />
-      <div className="pointer-events-none absolute inset-x-0 top-[50%] h-40 bg-gradient-to-b from-transparent to-background" />
+    <section className="relative overflow-hidden bg-background pb-16 pt-28 sm:pb-20 sm:pt-32 lg:pb-28 lg:pt-36">
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#041936] via-[#08264c] to-[#0d315f]" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-[82%] bg-gradient-to-br from-secondary/90 via-blue-950/85 to-primary/80" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-44 bg-gradient-to-b from-transparent via-background/70 to-background" />
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute -top-16 left-[-6rem] h-72 w-72 rounded-full bg-primary/15 blur-3xl animate-blob" />
         <div className="absolute right-[-4rem] top-8 h-72 w-72 rounded-full bg-secondary/15 blur-3xl animate-blob animation-delay-2000" />
