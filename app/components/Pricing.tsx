@@ -432,7 +432,6 @@ export default function Pricing() {
   return (
     <>
       <section id="pricing" className="relative isolate overflow-hidden py-16 sm:py-20 lg:py-28">
-        <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_9%_22%,rgba(186,230,253,0.34),transparent_36%),radial-gradient(circle_at_90%_25%,rgba(253,224,71,0.16),transparent_34%),radial-gradient(circle_at_48%_92%,rgba(254,205,211,0.26),transparent_38%),linear-gradient(to_bottom,#f7fbff,#fffefb_48%,#f8fbff)]" />
         <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6">
           {/* Header */}
           <div className="mb-12 lg:mb-16">

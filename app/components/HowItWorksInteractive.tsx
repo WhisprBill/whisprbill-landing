@@ -36,7 +36,6 @@ export default function HowItWorksInteractive() {
 
   return (
     <section className="relative isolate overflow-hidden py-20 sm:py-24 lg:py-32">
-      <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_84%_12%,rgba(254,215,170,0.3),transparent_38%),radial-gradient(circle_at_14%_34%,rgba(196,181,253,0.24),transparent_40%),linear-gradient(to_bottom,#f8fbff,#fffefd_42%,#f7fbff)]" />
       <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6">
 
         {/* Section header */}

@@ -26,8 +26,6 @@ const homeFaqs = [
 export default function HomeFAQ() {
   return (
     <section className="relative isolate overflow-hidden py-16 sm:py-20 lg:py-24">
-      <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_15%_20%,rgba(59,130,246,0.16),transparent_42%),radial-gradient(circle_at_85%_16%,rgba(16,185,129,0.12),transparent_40%),linear-gradient(to_bottom,#f8fbff,#fffefc_55%,#f7fbff)]" />
-
       <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6">
         <div className="mb-10 text-center lg:mb-12">
           <p className="mb-3 inline-flex items-center rounded-full border border-primary/15 bg-primary/5 px-4 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-primary">

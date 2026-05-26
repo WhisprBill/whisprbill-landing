@@ -80,7 +80,6 @@ const bentoFeatures: BentoFeature[] = [
 export default function Features() {
   return (
     <section id="features" className="relative isolate overflow-hidden py-16 sm:py-20 lg:py-28">
-      <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_12%_16%,rgba(236,72,153,0.16),transparent_42%),radial-gradient(circle_at_88%_20%,rgba(59,130,246,0.22),transparent_40%),radial-gradient(circle_at_50%_88%,rgba(16,185,129,0.14),transparent_42%),linear-gradient(to_bottom,#f9fbff,#fffdfb_48%,#f7fbff)]" />
 
       <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6">
         <div className="mb-10 lg:mb-14">
